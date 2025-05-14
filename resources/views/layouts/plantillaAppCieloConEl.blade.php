@@ -27,7 +27,11 @@
     </section>
     
     @yield('image2')
-
+    
+    @yield('image3')
+    
+    @yield('image4')
+    
     <footer class="bg-[#8C52FF] flex items-center justify-center">
         <section class="text-center p-[2rem] w-full max-w-4xl text-lg">
             <div class="flex items-center justify-between gap-4">
