@@ -25,7 +25,7 @@
     <section class="w-full h-[25vh] md:h-[50vh] lg:h-[75vh] bg-yellow-400 bg-no-repeat bg-cover bg-center"  style="background-image: url(img/HEADER_ENLACE_HERMANDADES.jpg);"> <!-- La imagen estaría en el fondo de pantalla -->
         <div class="flex flex-col items-center justify-center gap-8 text-center h-full text-[#FFC060] text-2xl md:text-4xl p-[2rem] md:p-[4rem] lg:p-[8rem]">
             <h1>ÉCHALE UN VISTAZO A NUESTRAS HERMANDADES</h1>
-            <a href="{{ route('login') }}" class="bg-[#FFC060] text-black hover:bg-[#F9D193] py-2 px-4 rounded">ACCEDER</a>
+            <a href="{{ route('principal') }}" class="bg-[#FFC060] text-black hover:bg-[#F9D193] py-2 px-4 rounded">ACCEDER</a>
         </div>
     </section>
 @endsection

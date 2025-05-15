@@ -14,16 +14,22 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
+// Route::get('/principal', function () {
+//     return view('principal.index');
+// })->middleware(['auth', 'verified'])->name('principal');
+
+// Route::get('/principal', [PrincipalController::class, 'index'])->middleware(['auth', 'verified'])->name('principal');return view('principal.index');
+
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-    Route::get('/principal', [PrincipalController::class, 'index']);
+    Route::get('/principal', [PrincipalController::class, 'index'])->name('principal');
     Route::get('/hermandades/{hermandad}', [HermandadController::class, 'show']);
-    Route::get('/consejo', [ConsejoController::class, 'index']);
-    Route::get('/consejo/carteles', [ConsejoController::class, 'carteles']);
-    Route::get('/consejo/itinerarios', [ConsejoController::class, 'itinerarios']);
-    Route::get('/consejo/pregones', [ConsejoController::class, 'pregones']);
+    Route::get('/consejo', [ConsejoController::class, 'index'])->name('consejo');
+    Route::get('/consejo/carteles', [ConsejoController::class, 'carteles'])->name('consejo.carteles');
+    Route::get('/consejo/itinerarios', [ConsejoController::class, 'itinerarios'])->name('consejo.itinerarios');
+    Route::get('/consejo/pregones', [ConsejoController::class, 'pregones'])->name('consejo.pregones');
 });
 
 require __DIR__.'/auth.php';
