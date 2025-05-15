@@ -14,7 +14,7 @@
 
         <!-- Password -->
         <div class="mt-4">
-            <x-input-label for="password" :value="__('Password')" />
+            <x-input-label for="password" :value="__('Contraseña')" />
 
             <x-text-input id="password" class="block mt-1 w-full"
                             type="password"
@@ -33,7 +33,7 @@
         </div>
 
         <div class="flex items-center justify-between text-center mt-4">
-            <x-primary-button class="ms-3">
+            <x-primary-button>
                 {{ __('ACCEDER') }}
             </x-primary-button>
 
@@ -43,8 +43,7 @@
                 </a>
             @endif
             
-            <a class="underline text-sm text-gray-900 dark:text-gray-400 hover:text-black dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800" href="{{ route('register') }}">
-                {{-- {{ __('¿No tienes cuenta?') }} --}}
+            <a class="underline font-bold text-sm text-gray-900 dark:text-gray-400 hover:text-black dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800" href="{{ route('register') }}">
                 {{ __('Regístrate Aquí') }}
             </a>
         </div>
