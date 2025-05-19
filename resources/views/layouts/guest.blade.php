@@ -1,3 +1,5 @@
+@props(['bodyClass' => '', 'bodyStyle' => ''])
+
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
@@ -14,7 +16,7 @@
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
-    <body class="bg-cover bg-no-repeat bg-center font-sans text-gray-900 antialiased" style="background-image: url(img/FONDO_INICIO_SESION.jpg)">
+    <body class="{{ $bodyClass }} bg-no-repeat bg-cover font-sans text-gray-900 antialiased" style="{{ $bodyStyle }}"> <!--  style="background-image: url(img/FONDO_INICIO_SESION.jpg)" -->
         <div class="backdrop-blur-sm min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0">
             <div>
                 <a href="/">
