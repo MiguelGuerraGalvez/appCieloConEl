@@ -1,14 +1,3 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-@layer utilities {
-  .login-background {
-    background-image: url('/img/FONDO_INICIO_SESION.jpg');
-    /* @apply bg-cover bg-center min-h-screen; */
-  }
-
-  .register-background {
-    @apply bg-[url('/img/FONDO_REGISTRO.jpg')] bg-cover bg-center min-h-screen;
-  }
-}
