@@ -15,6 +15,7 @@ class HermandadSeeder extends Seeder
     {
         $h1 = new Hermandade();
 
+        $h1->id_usuario = 0;
         $h1->nombre = "Vera+Cruz";
         $h1->nombre_completo = "Muy Antigua Hdad. y Archicofradía de Nazarenos de la Santa Vera-Cruz, Ntro Padre Jesús Atado a la Columna, Purísima Inmaculada Concepción, San Sebastián, Santo Entierro del Stmo. Cristo Yacente, Ntra Sra. de los Dolores y en Soledad";
         $h1->escudo = "Escudo_VeraCruz.png";
@@ -26,6 +27,7 @@ class HermandadSeeder extends Seeder
 
         $h2 = new Hermandade();
 
+        $h2->id_usuario = 0;
         $h2->nombre = "Jesús Nazareno";
         $h2->nombre_completo = "Real e Ilustre Hermandad de Ntro Padre Jesús Nazareno, Sta Cruz de Jerusalén, Sagrada Oración de Ntro. Señor Jesucristo en el Huerto y Ntra. Sra de las Angustias";
         $h2->escudo = "Escudo_Jesus_Nazareno.png";
@@ -37,6 +39,7 @@ class HermandadSeeder extends Seeder
 
         $h3 = new Hermandade();
 
+        $h3->id_usuario = 0;
         $h3->nombre = "Trinidad";
         $h3->nombre_completo = "Fervorosa, Ilustre y Antigua Hermandad del Rosario de la Santísima Trinidad y Cofradía de Nazarenos del Stmo. Cristo de los Afligidos, Ntro Padre Jesús en su Entrada en Jerusalén y Ntra Sra. de los Desamparados.";
         $h3->escudo = "Escudo_Trinidad.png";
@@ -48,6 +51,7 @@ class HermandadSeeder extends Seeder
 
         $h4 = new Hermandade();
 
+        $h4->id_usuario = 0;
         $h4->nombre = "Cautivo";
         $h4->nombre_completo = "Pontificia e Ilustre Hdad. Sacramental de la Inmaculada Concepción y Ánimas Benditas, y Cofradía de Nazarenos del Stmo. Cristo de Santiago, Ntro Padre Jesús Redentor Cautivo y Ntra Sra de las Lágrimas";
         $h4->escudo = "Escudo_.png";
@@ -59,6 +63,7 @@ class HermandadSeeder extends Seeder
 
         $h5 = new Hermandade();
 
+        $h5->id_usuario = 0;
         $h5->nombre = "Muchachos de Consolación";
         $h5->nombre_completo = "Hermandad Obrera de Apostolado y Penitencia del Santísimo Cristo del Perdón y María Santísima de la Amargura";
         $h5->escudo = "Escudo_Muchachos.png";
@@ -70,6 +75,7 @@ class HermandadSeeder extends Seeder
 
         $h6 = new Hermandade();
 
+        $h6->id_usuario = 0;
         $h6->nombre = "Gitanos";
         $h6->nombre_completo = "Real, Fervorosa e Ilustre Hdad. de Penitencia del Stmo. Cristo de la Buena Muerte, Ntra Sra. de la Esperanza, Ntra. Sra. del Rosario y Beato Ceferino, Mártir";
         $h6->escudo = "Escudo_Gitanos.png";
@@ -81,6 +87,7 @@ class HermandadSeeder extends Seeder
 
         $h7 = new Hermandade();
 
+        $h7->id_usuario = 0;
         $h7->nombre = "Aceituneros";
         $h7->nombre_completo = "Ilustre Hermandad de Ntro Padre Jesús Atado a la Columna, María Santísima de la Paz, y San Pedro Príncipe de los Apóstoles";
         $h7->escudo = "Escudo_Aceituneros.png";
@@ -92,6 +99,7 @@ class HermandadSeeder extends Seeder
 
         $h8 = new Hermandade();
 
+        $h8->id_usuario = 0;
         $h8->nombre = "Estudiantes";
         $h8->nombre_completo = "Hermandad Salesiana y Cofradía de Nazarenos del Stmo. Cristo del Amor y Ntra. Sra. de las Veredas, María Auxilio de los Cristianos y San Juan Bosco.";
         $h8->escudo = "Escudo_Estudiantes.png";
@@ -103,10 +111,11 @@ class HermandadSeeder extends Seeder
 
         $h9 = new Hermandade();
 
+        $h9->id_usuario = 0;
         $h9->nombre = "Quinta Angustia";
         $h9->nombre_completo = "Real e Ilustre Hdad. de Penitencia del Stmo. Cristo de la Caridad en su Sagrado Descendimiento, María Stma. de la Piedad en su Quinta Angustia, Ntra. Sra. de los Ángeles en su Soledad y Sta Ángela de la Cruz";
-        $h9->escudo = "Escudo_.png";
-        $h9->header = "HEADER_.jpg";
+        $h9->escudo = "Escudo_Quinta_Angustia.png";
+        $h9->header = "HEADER_QUINTA_ANGUSTIA.jpg";
         $h9->hermanos = 650;
         $h9->cuota = 25;
 
@@ -114,10 +123,11 @@ class HermandadSeeder extends Seeder
 
         $h10 = new Hermandade();
 
-        $h10->nombre = "Milagros";
+        $h10->id_usuario = 0;
+        $h10->nombre = "Los Milagros";
         $h10->nombre_completo = "Hermandad de Penitencia y Cofradía de Nazarenos del Santo Crucifijo de los Milagros, María Santísima de la Concepción y San Miguel Arcángel";
-        $h10->escudo = "Escudo_Milagros.png";
-        $h10->header = "HEADER_MILAGROS.jpg";
+        $h10->escudo = "Escudo_Los_Milagros.png";
+        $h10->header = "HEADER_LOS_MILAGROS.jpg";
         $h10->hermanos = 300;
         $h10->cuota = 20;
 
