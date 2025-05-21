@@ -2,6 +2,8 @@
 
 @section('title', 'Pregones')
 
+@section('logo', '../')
+
 @section('image1')
     <section class="bg-no-repeat bg-cover bg-center w-full h-[25vh] md:h-[50vh] lg:h-[75vh]" style="background-image: url(../img/HEADER_PREGONES.jpg);"> <!-- La imagen estaría en el fondo de pantalla -->
     </section>

@@ -11,6 +11,8 @@ class HermandadController extends Controller
     public function show($hermandad){
         $hermandades = Hermandade::all();
         $titulares = Titulare::all();
+        $her = new Hermandade();
+        $titul = [];
 
         foreach ($hermandades as $h) {
             if ($h->nombre == $hermandad) {

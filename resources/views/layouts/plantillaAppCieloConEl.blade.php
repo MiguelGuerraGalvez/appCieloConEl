@@ -12,7 +12,7 @@
     <header class="bg-[#8C52FF] flex items-center justify-between w-full py-[2rem] lg:py-[2rem] px-[2rem] md:px-[4rem] lg:px-[8rem]">
         <a href="{{ route('principal') }}"> <!-- Llevaría a la página principal -->
             <figure class="flex flex-col items-center w-[10rem]">
-                <img class="max-w-full h-auto" src="img/LOGO.png" alt="Logo">
+                <img class="max-w-full h-auto" src="@yield('logo')img/LOGO.png" alt="Logo">
             </figure>
         </a>
 
