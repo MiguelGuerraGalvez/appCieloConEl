@@ -18,7 +18,7 @@
         @foreach ($consejos as $consejo)
             <a href="{{ route('consejo') }}">
                 <article class="text-center flex flex-col items-center justify-center">
-                    <figure class="flex items-center justify-center w-40 h-40 lg:w-60 lg:h-60">
+                    <figure class="w-40 h-40 lg:w-60 lg:h-60">
                         <img class="w-full h-[10rem] lg:h-[15rem] object-contain" src="img/{{$consejo->escudo}}" alt="Escudo Consejo">
                     </figure>
 
@@ -32,7 +32,7 @@
         @foreach ($hermandades as $hermandad)
             <a href="{{ route('hermandad', $hermandad->nombre) }}">
                 <article class="text-center flex flex-col items-center justify-center">
-                    <figure class="flex items-center justify-center w-40 h-40 lg:w-60 lg:h-60">
+                    <figure class="w-40 h-40 lg:w-60 lg:h-60">
                         <img class="w-full h-[10rem] lg:h-[15rem] object-contain" src="img/{{$hermandad->escudo}}" alt="Escudo Hermandad {{$hermandad->nombre}}">
                     </figure>
 

@@ -8,7 +8,13 @@
 @endsection
 
 @section('content')
-    <h1>Bienvenido a la página del consejo.</h1>
+    <div class="w-full flex flex-col lg:flex-row items-center justify-evenly text-center gap-4 lg:gap-0">
+        <figure class="w-40 h-40 lg:w-60 lg:h-60">
+            <img class="w-full h-[10rem] lg:h-[15rem] object-contain" src="img/{{$consejo->escudo}}" alt="Escudo Consejo">
+        </figure>
+
+        <h1 class="lg:text-3xl">{{$consejo->nombre_completo}}</h1>
+    </div>
 @endsection
 
 @section('image2')

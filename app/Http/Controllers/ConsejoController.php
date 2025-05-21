@@ -2,12 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Consejo;
 use Illuminate\Http\Request;
 
 class ConsejoController extends Controller
 {
     public function index(){
-        return view('consejo.index');
+        $consejos = Consejo::all();
+        $consejo = $consejos[0];
+
+        return view('consejo.index', compact('consejo'));
     }
 
     public function carteles() {
