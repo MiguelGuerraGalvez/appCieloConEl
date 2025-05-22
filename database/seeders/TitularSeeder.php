@@ -206,7 +206,7 @@ class TitularSeeder extends Seeder
         $t19 = new Titulare();
 
         $t19->id_hermandad = 9;
-        $t19->nombre_completo = 'Santísimo Cristo de la Caridad en si Sagrado Descendimiento y María Santísima de la Piedad';
+        $t19->nombre_completo = 'Santísimo Cristo de la Caridad en su Sagrado Descendimiento y María Santísima de la Piedad';
         $t19->nombre_corto = 'Cristo de la Caridad y Virgen de la Piedad';
         $t19->banda = 'Banda de Cornetas y Tambores Jesús Nazareno de Utrera';
         $t19->imagen = 'Carrusel_Caridad_Piedad.jpg';
