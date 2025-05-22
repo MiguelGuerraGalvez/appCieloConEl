@@ -35,7 +35,7 @@
         <?php endfor; ?>
     </div>
 
-    <!-- Indicators -->
+    <!-- Indicadores -->
     <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2 z-10">
         <?php for ($i = 0; $i < count($titul); $i++): ?>
             <button 
@@ -45,7 +45,7 @@
         <?php endfor; ?>
     </div>
 
-    <!-- Controls -->
+    <!-- Controles -->
     <button id="prevBtn" class="absolute left-4 top-1/2 -translate-y-1/2 bg-black/50 text-white p-2 rounded-full z-10">
         ‹
     </button>
