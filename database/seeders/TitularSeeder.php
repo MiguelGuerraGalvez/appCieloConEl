@@ -14,17 +14,17 @@ class TitularSeeder extends Seeder
     public function run(): void
     {
         $t1 = new Titulare();
-
+        
         $t1->id_hermandad = 1;
-        $t1->nombre_completo = 'Nuestra Señora de los Dolores y en Soledad';
-        $t1->nombre_corto = 'Virgen de los Dolores';
-        $t1->banda = 'Asociación Musical de La Algaba';
-        $t1->imagen = 'Carrusel_Dolores.jpg';
+        $t1->nombre_completo = 'Nuestro Padre Jesús Atado a la Columna';
+        $t1->nombre_corto = 'Atado a la Columna';
+        $t1->banda = 'Banda de Cornetas y Tambores Vera Cruz de Utrera';
+        $t1->imagen = 'Carrusel_Atado.jpg';
         
         $t1->save();
-
+        
         $t2 = new Titulare();
-
+        
         $t2->id_hermandad = 1;
         $t2->nombre_completo = 'Santísimo Cristo Yacente';
         $t2->nombre_corto = 'Yacente';
@@ -32,17 +32,17 @@ class TitularSeeder extends Seeder
         $t2->imagen = 'Carrusel_Yacente.jpg';
         
         $t2->save();
-
+        
         $t3 = new Titulare();
 
         $t3->id_hermandad = 1;
-        $t3->nombre_completo = 'Nuestro Padre Jesús Atado a la Columna';
-        $t3->nombre_corto = 'Atado a la Columna';
-        $t3->banda = 'Banda de Cornetas y Tambores Vera Cruz de Utrera';
-        $t3->imagen = 'Carrusel_Atado.jpg';
+        $t3->nombre_completo = 'Nuestra Señora de los Dolores y en Soledad';
+        $t3->nombre_corto = 'Virgen de los Dolores';
+        $t3->banda = 'Asociación Musical de La Algaba';
+        $t3->imagen = 'Carrusel_Dolores.jpg';
         
         $t3->save();
-
+        
         $t4 = new Titulare();
 
         $t4->id_hermandad = 2;
