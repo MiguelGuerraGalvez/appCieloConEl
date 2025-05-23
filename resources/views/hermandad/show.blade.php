@@ -51,55 +51,68 @@
     </button>
     <button id="nextBtn" class="absolute right-4 top-1/2 -translate-y-1/2 bg-black/50 text-white p-2 rounded-full z-10">
         ›
-    </button>
+    </button>    
+</div>
 
+<div>
+    <h2>ITINERARIOS</h2>
+
+    <?php 
+        foreach ($itin as $itinerario) {
+    ?>
+
+            <p><span class="underline"><?= $itinerario->dia ?>:</span> <?= $itinerario->recorrido ?></p>
+
+    <?php 
+        }
+    ?>
 </div>
 
 <script>
-  const slides = document.querySelectorAll("#slides > div");
-const indicators = document.querySelectorAll(".indicator");
-const nextBtn = document.getElementById("nextBtn");
-const prevBtn = document.getElementById("prevBtn");
+    const slides = document.querySelectorAll("#slides > div");
+    const indicators = document.querySelectorAll(".indicator");
+    const nextBtn = document.getElementById("nextBtn");
+    const prevBtn = document.getElementById("prevBtn");
 
-let activeSlide = 0;
-const totalSlides = slides.length;
+    let activeSlide = 0;
+    const totalSlides = slides.length;
 
-function showSlide(index) {
-    slides.forEach((slide, i) => {
-        slide.classList.toggle("opacity-100", i === index);
-        slide.classList.toggle("opacity-0", i !== index);
-        slide.classList.toggle("z-10", i === index);
-        slide.classList.toggle("z-0", i !== index);
+    function showSlide(index) {
+        slides.forEach((slide, i) => {
+            slide.classList.toggle("opacity-100", i === index);
+            slide.classList.toggle("opacity-0", i !== index);
+            slide.classList.toggle("z-10", i === index);
+            slide.classList.toggle("z-0", i !== index);
+        });
+        indicators.forEach((dot, i) => {
+            dot.classList.toggle("bg-white", i === index);
+            dot.classList.toggle("bg-white/50", i !== index);
+        });
+        activeSlide = index;
+    }
+
+    nextBtn.addEventListener("click", () => {
+        const next = (activeSlide + 1) % totalSlides;
+        showSlide(next);
     });
-    indicators.forEach((dot, i) => {
-        dot.classList.toggle("bg-white", i === index);
-        dot.classList.toggle("bg-white/50", i !== index);
+
+    prevBtn.addEventListener("click", () => {
+        const prev = (activeSlide - 1 + totalSlides) % totalSlides;
+        showSlide(prev);
     });
-    activeSlide = index;
-}
 
-nextBtn.addEventListener("click", () => {
-    const next = (activeSlide + 1) % totalSlides;
-    showSlide(next);
-});
-
-prevBtn.addEventListener("click", () => {
-    const prev = (activeSlide - 1 + totalSlides) % totalSlides;
-    showSlide(prev);
-});
-
-indicators.forEach(dot => {
-    dot.addEventListener("click", () => {
-        const index = parseInt(dot.getAttribute("data-slide"));
-        showSlide(index);
+    indicators.forEach(dot => {
+        dot.addEventListener("click", () => {
+            const index = parseInt(dot.getAttribute("data-slide"));
+            showSlide(index);
+        });
     });
-});
 
-// Auto-slide opcional
-// setInterval(() => {
-//     const next = (activeSlide + 1) % totalSlides;
-//     showSlide(next);
-// }, 5000);
+    // Auto-slide opcional
+    setInterval(() => {
+        const next = (activeSlide + 1) % totalSlides;
+        showSlide(next);
+    }, 5000);
 
 </script>
 
