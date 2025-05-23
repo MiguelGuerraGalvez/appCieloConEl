@@ -27,7 +27,7 @@ class ItinerarioSeeder extends Seeder
 
         $i2->id_hermandad = 1;
         $i2->dia = 'Sábado Santo';
-        $i2->recorrido = 'SALIDA (Capilla de San Francisco 18:30), Clemente de la Cuadra, Plaza de Gibaxa, AYUNTAMIENTO, Álvarez Quintero, Sevilla, Fajardo, Maestro Bernabé García, La Corredera, Plaza Santa Ana, La Fuente Vieja,  CARRERA OFICIAL (18:30), Plaza del Altozano, Clemente de la Cuadra – Canalejas – Rueda – Ramón y Cajal – Alcalde Vicente Giráldez – Virgen de Consolación RECOGIDA (Capilla de San Francisco 23:45)';
+        $i2->recorrido = 'SALIDA (Capilla de San Francisco 18:30), Clemente de la Cuadra, Plaza de Gibaxa, AYUNTAMIENTO, Álvarez Quintero, Sevilla, Fajardo, Maestro Bernabé García, La Corredera, Plaza Santa Ana, La Fuente Vieja,  CARRERA OFICIAL (18:30), Plaza del Altozano, Clemente de la Cuadra, Canalejas, Rueda, Ramón y Cajal, Alcalde Vicente Giráldez, Virgen de Consolación, RECOGIDA (Capilla de San Francisco 23:45)';
         $i2->imagen = 'Itinerario_Vera_Cruz_Sabado.jpg';
         $i2->aceptado = true;
 
