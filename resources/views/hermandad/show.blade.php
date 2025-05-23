@@ -11,15 +11,15 @@
 
 @section('content')
 
-    <div class="w-full flex flex-col lg:flex-row items-center justify-evenly text-center gap-4 lg:gap-0">
+    <div class="w-full flex flex-col lg:flex-row items-center justify-evenly text-center gap-4 mb-32">
         <figure class="w-40 h-40 lg:w-60 lg:h-60">
             <img class="w-full h-[10rem] lg:h-[15rem] object-contain" src="../img/{{$her->escudo}}" alt="Escudo Hermandad {{$her->nombre}}">
         </figure>
 
-        <p>{{$her->nombre_completo}}</p>
+        <p class="w-[90%] lg:text-3xl">{{$her->nombre_completo}}</p>
     </div>
 
-    <div id="carousel" class="relative overflow-hidden w-full h-[500px] reveal">
+    <div id="carousel" class="relative overflow-hidden w-full h-[500px] reveal mb-32">
 
     <!-- Slides -->
     <div id="slides" class="relative w-full h-full">
@@ -55,13 +55,13 @@
 </div>
 
 <div>
-    <h2>ITINERARIOS</h2>
+    <h3 class="text-[FFC060] text-2xl text-center mb-8">ITINERARIOS</h3>
 
     <?php 
         foreach ($itin as $itinerario) {
     ?>
 
-            <p><span class="underline"><?= $itinerario->dia ?>:</span> <?= $itinerario->recorrido ?></p>
+            <p class="mt-4"><span class="font-bold underline"><?= $itinerario->dia ?>:</span> <?= $itinerario->recorrido ?></p>
 
     <?php 
         }
