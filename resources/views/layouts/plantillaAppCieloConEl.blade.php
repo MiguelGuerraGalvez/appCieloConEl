@@ -7,11 +7,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>@yield('title')</title>
-    <!--<script>
-        $( ".busqueda" ).autocomplete({
-        source: [ "Trinidad", "java", "php", "coldfusion", "javascript", "asp", "ruby" ]
-        });
-    </script> -->
 </head>
 <body class="bg-[#EBEBEB]">
     <header class="bg-[#8C52FF] flex items-center justify-between w-full py-[2rem] lg:py-[2rem] px-[2rem] md:px-[4rem] lg:px-[8rem]">
@@ -20,8 +15,6 @@
                 <img class="max-w-full h-auto" src="@yield('logo')img/LOGO.png" alt="Logo">
             </figure>
         </a>
-
-
         @yield('session')
     </header>
 
@@ -54,4 +47,5 @@
     </footer>
 </body>
 <script src="https://code.jquery.com/ui/1.14.1/jquery-ui.js" integrity="sha256-9zljDKpE/mQxmaR4V2cGVaQ7arF3CcXxarvgr7Sj8Uc=" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 </html>

@@ -12,7 +12,7 @@
 
     <h1>Buscador</h1>
 
-    <input type="search" name="busqueda" id="busqueda">
+    <input type="search" name="buscador" id="buscador">
 
     <div class="mt-24">
         @foreach ($consejos as $consejo)

@@ -23,5 +23,6 @@ class DatabaseSeeder extends Seeder
         $this->call(HermandadSeeder::class);
         $this->call(ConsejoSeeder::class);
         $this->call(TitularSeeder::class);
+        $this->call(ItinerarioSeeder::class);
     }
 }
