@@ -5,7 +5,7 @@
 @section('logo', '../')
 
 @section('image1')
-    <section class="bg-no-repeat bg-cover bg-[position:0_20%] w-full h-[25vh] md:h-[50vh] lg:h-[75vh]" style="background-image: url(../img/{{$her->header}})"> <!-- La imagen estaría en el fondo de pantalla -->
+    <section class="bg-no-repeat bg-cover bg-center w-full h-[25vh] md:h-[50vh] lg:h-[75vh]" style="background-image: url(../img/{{$her->header}})"> <!-- La imagen estaría en el fondo de pantalla -->
     </section>
 @endsection
 
