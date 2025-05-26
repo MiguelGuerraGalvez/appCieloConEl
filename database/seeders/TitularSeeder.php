@@ -86,7 +86,7 @@ class TitularSeeder extends Seeder
         $t8 = new Titulare();
 
         $t8->id_hermandad = 3;
-        $t8->nombre_completo = 'Sabtísimo Cristo de los Afligidos';
+        $t8->nombre_completo = 'Santísimo Cristo de los Afligidos';
         $t8->nombre_corto = 'Cristo de los Afligidos';
         $t8->banda = 'Agrupación Musical La Expiración de Salamanca';
         $t8->imagen = 'Carrusel_Afligidos.jpg';

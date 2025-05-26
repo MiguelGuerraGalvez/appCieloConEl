@@ -17,6 +17,7 @@ class UserSeeder extends Seeder
 
         $u1->name = 'Miguel';
         $u1->email = 'miguel.guerra-galvez@iesruizgijon.com';
+        $u1->tel_number = 722783138;
         $u1->password = '12345678';
 
         $u1->save();
@@ -25,6 +26,7 @@ class UserSeeder extends Seeder
 
         $u2->name = 'Jesús';
         $u2->email = 'jesus.gomez-garcia@iesruizgijon.com';
+        $u2->tel_number = 687080187;
         $u2->password = '12345678';
 
         $u2->save();
