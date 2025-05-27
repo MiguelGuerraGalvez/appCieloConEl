@@ -25,10 +25,12 @@
             <div id="plantillaModal" class="fixed inset-0 bg-black/50 flex items-center justify-center z-50 hidden">
                 <div class="bg-[#8C52FF] text-white p-8 rounded-lg max-w-lg w-[90%] relative">
                     <button id="closeModal" class="absolute top-2 right-2 text-white hover:text-gray-300 text-xl">&times;</button>
-                        <form method="POST" action="{{ route('logout') }}">
+                    <img class="w-full h-[10rem] lg:h-[15rem] object-contain" src="@yield('logo')img/ICONO_USUARIO.png" alt="Usuario">
+                    <h2 class="text-2xl font-bold mb-4 text-center">{{ Auth::user()->name }}</h2>
+                    <form method="POST" action="{{ route('logout') }}">
                             @csrf
 
-                            <x-dropdown-link :href="route('logout')"
+                            <x-dropdown-link class="text-white hover:text-gray-600" :href="route('logout')"
                                     onclick="event.preventDefault();
                                                 this.closest('form').submit();">
                                 {{ __('Log Out') }}

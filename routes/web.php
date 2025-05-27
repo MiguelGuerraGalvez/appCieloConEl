@@ -2,23 +2,18 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
-//use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PrincipalController;
 use App\Http\Controllers\HermandadController;
 use App\Http\Controllers\ConsejoController;
 use App\Http\Controllers\HomeController;
 
-Route::get('/', [HomeController::class, 'index'])->name('welcome');
+Route::middleware('guest')->group(function () {
+    Route::get('/', [HomeController::class, 'index'])->name('welcome');
+});
 
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
-
-// Route::get('/principal', function () {
-//     return view('principal.index');
-// })->middleware(['auth', 'verified'])->name('principal');
-
-// Route::get('/principal', [PrincipalController::class, 'index'])->middleware(['auth', 'verified'])->name('principal');return view('principal.index');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
