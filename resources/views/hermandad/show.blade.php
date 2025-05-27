@@ -61,10 +61,10 @@
 
     <!-- MODAL -->
     <div id="escudoModal" class="fixed inset-0 bg-black/50 flex items-center justify-center z-50 hidden">
-        <div class="bg-white p-8 rounded-lg max-w-lg w-[90%] relative">
-            <button id="closeModal" class="absolute top-2 right-2 text-gray-500 hover:text-gray-700 text-xl">&times;</button>
+        <div class="bg-[#8C52FF] text-white p-8 rounded-lg max-w-lg w-[90%] relative">
+            <button id="closeModal" class="absolute top-2 right-2 text-white hover:text-gray-300 text-xl">&times;</button>
             <img class="w-full h-[10rem] lg:h-[15rem] object-contain" src="../img/{{$her->escudo}}" alt="Escudo Hermandad {{$her->nombre}}">
-            <h2 class="text-2xl font-bold mb-4 text-center">Titulares:</h2>
+            <h2 class="text-2xl font-bold mb-4">Titulares:</h2>
             <?php for ($i = 0; $i < count($titul); $i++): ?>
                     <p><?=$titul[$i]->nombre_completo?></p>
             <?php endfor; ?>        
