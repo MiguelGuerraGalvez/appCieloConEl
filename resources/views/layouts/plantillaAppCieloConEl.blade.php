@@ -15,6 +15,28 @@
                 <img class="max-w-full h-auto" src="@yield('logo')img/LOGO.png" alt="Logo">
             </figure>
         </a>
+        @if (Route::currentRouteName() !== 'welcome')
+        <figure class="w-[7rem] h-[7rem]">
+            <button id="openModal" class="focus:outline-none">
+                <img class="w-full h-full object-contain" src="@yield('logo')img/ICONO_USUARIO.png" alt="Usuario">
+            </button>
+        </figure>
+            <!-- MODAL -->
+            <div id="plantillaModal" class="fixed inset-0 bg-black/50 flex items-center justify-center z-50 hidden">
+                <div class="bg-[#8C52FF] text-white p-8 rounded-lg max-w-lg w-[90%] relative">
+                    <button id="closeModal" class="absolute top-2 right-2 text-white hover:text-gray-300 text-xl">&times;</button>
+                        <form method="POST" action="{{ route('logout') }}">
+                            @csrf
+
+                            <x-dropdown-link :href="route('logout')"
+                                    onclick="event.preventDefault();
+                                                this.closest('form').submit();">
+                                {{ __('Log Out') }}
+                            </x-dropdown-link>
+                        </form>
+                </div>
+            </div>
+        @endif
         @yield('session')
     </header>
 
@@ -48,4 +70,25 @@
 </body>
 <script src="https://code.jquery.com/ui/1.14.1/jquery-ui.js" integrity="sha256-9zljDKpE/mQxmaR4V2cGVaQ7arF3CcXxarvgr7Sj8Uc=" crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <!-- SCRIPTS -->
+    <script>
+        // Modal
+        const openModal = document.getElementById('openModal');
+        const closeModal = document.getElementById('closeModal');
+        const modal = document.getElementById('plantillaModal');
+
+        openModal.addEventListener('click', () => {
+            modal.classList.remove('hidden');
+        });
+
+        closeModal.addEventListener('click', () => {
+            modal.classList.add('hidden');
+        });
+
+        window.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                modal.classList.add('hidden');
+            }
+        });
+    </script>
 </html>

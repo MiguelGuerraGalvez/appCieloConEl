@@ -8,7 +8,7 @@ use App\Http\Controllers\HermandadController;
 use App\Http\Controllers\ConsejoController;
 use App\Http\Controllers\HomeController;
 
-Route::get('/', [HomeController::class, 'index']);
+Route::get('/', [HomeController::class, 'index'])->name('welcome');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
