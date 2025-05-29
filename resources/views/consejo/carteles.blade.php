@@ -10,5 +10,17 @@
 @endsection
 
 @section('content')
-    <h1>Bienvenido a la página del los carteles del consejo.</h1>
+
+    <article class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-8 gap-y-24 mt-8 w-[80vw] text-center">
+        @foreach ($carteles as $cartel)
+            <a href="../img/{{$cartel->imagen}}">
+                <div class="bg-no-repeat bg-cover bg-center h-[20rem] lg:h-[30rem]" style="background-image: url(../img/{{$cartel->imagen}});"></div>
+                <p class="mt-8">Año: {{$cartel->anio}}</p>
+                <p>Autor: {{$cartel->autor}}</p>
+            </a>
+        @endforeach
+    </article>
+    
+    <a class="mt-8 lg:mt-24 text-3xl underline" href="{{ route('consejo') }}">VOLVER ATRÁS</a>
+
 @endsection

@@ -5,15 +5,10 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PrincipalController;
 use App\Http\Controllers\HermandadController;
 use App\Http\Controllers\ConsejoController;
-use App\Http\Controllers\HomeController;
-
-Route::middleware('guest')->group(function () {
-    Route::get('/', [HomeController::class, 'index'])->name('welcome');
-});
-
+use App\Http\Controllers\VolverController;
 
 Route::middleware('auth')->group(function () {
-    // Route::get('/', [PrincipalController::class, 'index'])->name('principal');
+    Route::get('/', [VolverController::class, 'index'])->name('volver');
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');

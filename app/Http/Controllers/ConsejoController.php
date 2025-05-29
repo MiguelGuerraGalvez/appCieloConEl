@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cartele;
 use App\Models\Consejo;
 use Illuminate\Http\Request;
 
@@ -15,7 +16,8 @@ class ConsejoController extends Controller
     }
 
     public function carteles() {
-        return view('consejo.carteles');
+        $carteles = Cartele::orderBy('anio', 'desc')->get();
+        return view('consejo.carteles', compact('carteles'));
     }
 
     public function itinerarios() {
