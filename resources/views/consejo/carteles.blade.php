@@ -11,6 +11,8 @@
 
 @section('content')
 
+    <h3 class="text-[FFC060] text-3xl md:text-5xl lg:text-7xl text-center md:mb-8 lg:mb-24">CARTELES</h3>
+
     <article class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-8 gap-y-24 mt-8 w-[80vw] text-center">
         @foreach ($carteles as $cartel)
             <a href="../img/{{$cartel->imagen}}">
