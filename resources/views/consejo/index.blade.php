@@ -10,7 +10,7 @@
 @section('content')
     <div class="w-full flex flex-col lg:flex-row items-center justify-evenly text-center gap-4 lg:gap-0">
         <figure class="w-40 h-40 lg:w-60 lg:h-60">
-        <button id="openModal" class="w-40 h-40 lg:w-60 lg:h-60 focus:outline-none">
+        <button id="openModal2" class="w-40 h-40 lg:w-60 lg:h-60 focus:outline-none">
             <img class="w-full h-[10rem] lg:h-[15rem] object-contain" src="img/{{$consejo->escudo}}" alt="Escudo Consejo">
         </button>
         </figure>
@@ -20,7 +20,7 @@
     <!-- MODAL -->
     <div id="consejoModal" class="fixed inset-0 bg-black/50 flex items-center justify-center z-50 hidden">
             <div class="bg-[#8C52FF] text-white p-8 rounded-lg max-w-lg w-[90%] relative">
-            <button id="closeModal" class="absolute top-2 right-2 text-white hover:text-gray-300 text-xl">&times;</button>
+            <button id="closeModal2" class="absolute top-2 right-2 text-white hover:text-gray-300 text-xl">&times;</button>
             <img class="w-full h-[10rem] lg:h-[15rem] object-contain" src="img/{{$consejo->escudo}}" alt="Escudo Consejo">        
         </div>
     </div>
@@ -28,21 +28,21 @@
     <!-- SCRIPTS -->
     <script>
         // Modal
-        const openModal = document.getElementById('openModal');
-        const closeModal = document.getElementById('closeModal');
-        const modal = document.getElementById('consejoModal');
+        const openModal2 = document.getElementById('openModal2');
+        const closeModal2 = document.getElementById('closeModal2');
+        const modal2 = document.getElementById('consejoModal');
 
-        openModal.addEventListener('click', () => {
-            modal.classList.remove('hidden');
+        openModal2.addEventListener('click', () => {
+            modal2.classList.remove('hidden');
         });
 
-        closeModal.addEventListener('click', () => {
-            modal.classList.add('hidden');
+        closeModal2.addEventListener('click', () => {
+            modal2.classList.add('hidden');
         });
 
         window.addEventListener('click', (e) => {
-            if (e.target === modal) {
-                modal.classList.add('hidden');
+            if (e.target === modal2) {
+                modal2.classList.add('hidden');
             }
         });
     </script>

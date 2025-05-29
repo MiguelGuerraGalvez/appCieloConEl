@@ -34,7 +34,7 @@ class ConsejoController extends Controller
         $itinerarios[] = Itinerario::where('dia', 'Sábado Santo')->get();
         $itinerarios[] = Itinerario::where('dia', 'Domingo de Resurrección')->get();
 
-        return view('consejo.itinerarios');
+        return view('consejo.itinerarios', compact('itinerarios'));
     }
 
     public function pregones() {
