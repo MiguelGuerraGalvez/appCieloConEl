@@ -32,15 +32,15 @@ class ConsejoController extends Controller
         $itinerarios = [];
         $hermandades = [];
 
-        $itinerarios[] = Itinerario::where('dia', 'Domingo de Ramos')->get();
-        $itinerarios[] = Itinerario::where('dia', 'Lunes Santo')->get();
-        $itinerarios[] = Itinerario::where('dia', 'Martes Santo')->get();
-        $itinerarios[] = Itinerario::where('dia', 'Miércoles Santo')->get();
-        $itinerarios[] = Itinerario::where('dia', 'Jueves Santo')->get();
-        $itinerarios[] = Itinerario::where('dia', 'Madrugá')->get();
-        $itinerarios[] = Itinerario::where('dia', 'Viernes Santo')->get();
-        $itinerarios[] = Itinerario::where('dia', 'Sábado Santo')->get();
-        $itinerarios[] = Itinerario::where('dia', 'Domingo de Resurrección')->get();
+        $itinerarios[] = Itinerario::where('dia', 'Domingo de Ramos')->orderBy('hora_salida', 'asc')->get();
+        $itinerarios[] = Itinerario::where('dia', 'Lunes Santo')->orderBy('hora_salida', 'asc')->get();
+        $itinerarios[] = Itinerario::where('dia', 'Martes Santo')->orderBy('hora_salida', 'asc')->get();
+        $itinerarios[] = Itinerario::where('dia', 'Miércoles Santo')->orderBy('hora_salida', 'asc')->get();
+        $itinerarios[] = Itinerario::where('dia', 'Jueves Santo')->orderBy('hora_salida', 'asc')->get();
+        $itinerarios[] = Itinerario::where('dia', 'Madrugá')->orderBy('hora_salida', 'asc')->get();
+        $itinerarios[] = Itinerario::where('dia', 'Viernes Santo')->orderBy('hora_salida', 'asc')->get();
+        $itinerarios[] = Itinerario::where('dia', 'Sábado Santo')->orderBy('hora_salida', 'asc')->get();
+        $itinerarios[] = Itinerario::where('dia', 'Domingo de Resurrección')->orderBy('hora_salida', 'asc')->get();
 
         $hermandades = Hermandade::all();
 
