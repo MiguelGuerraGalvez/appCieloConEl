@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Cartele;
 use App\Models\Consejo;
+use App\Models\Hermandade;
 use App\Models\Itinerario;
 use App\Models\Pregone;
 use Illuminate\Http\Request;
@@ -22,6 +23,11 @@ class ConsejoController extends Controller
         return view('consejo.carteles', compact('carteles'));
     }
 
+    public function pregones() {
+        $pregones = Pregone::orderBy('anio', 'desc')->get();
+        return view('consejo.pregones', compact('pregones'));
+    }
+
     public function itinerarios() {
         $itinerarios = [];
         $itinerarios[] = Itinerario::where('dia', 'Domingo de Ramos')->get();
@@ -37,8 +43,10 @@ class ConsejoController extends Controller
         return view('consejo.itinerarios', compact('itinerarios'));
     }
 
-    public function pregones() {
-        $pregones = Pregone::orderBy('anio', 'desc')->get();
-        return view('consejo.pregones', compact('pregones'));
+    public function show($itin) {
+        $itinerario = Itinerario::findOrFail($itin);
+        $hermandad = Hermandade::where('id', $itinerario->id_hermandad)->first();
+
+        return view('consejo.itinerario', compact('itinerario', 'hermandad'));
     }
 }

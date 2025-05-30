@@ -16,8 +16,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/hermandades/{hermandad}', [HermandadController::class, 'show'])->name('hermandad');
     Route::get('/consejo', [ConsejoController::class, 'index'])->name('consejo');
     Route::get('/consejo/carteles', [ConsejoController::class, 'carteles'])->name('consejo.carteles');
-    Route::get('/consejo/itinerarios', [ConsejoController::class, 'itinerarios'])->name('consejo.itinerarios');
     Route::get('/consejo/pregones', [ConsejoController::class, 'pregones'])->name('consejo.pregones');
+    Route::get('/consejo/itinerarios', [ConsejoController::class, 'itinerarios'])->name('consejo.itinerarios');
+    Route::get('/consejo/itinerarios/{itinerario}', [ConsejoController::class, 'show'])->name('consejo.itinerario');
 });
 
 require __DIR__.'/auth.php';
