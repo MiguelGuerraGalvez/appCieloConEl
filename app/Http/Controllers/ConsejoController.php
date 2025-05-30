@@ -30,6 +30,8 @@ class ConsejoController extends Controller
 
     public function itinerarios() {
         $itinerarios = [];
+        $hermandades = [];
+
         $itinerarios[] = Itinerario::where('dia', 'Domingo de Ramos')->get();
         $itinerarios[] = Itinerario::where('dia', 'Lunes Santo')->get();
         $itinerarios[] = Itinerario::where('dia', 'Martes Santo')->get();
@@ -40,13 +42,15 @@ class ConsejoController extends Controller
         $itinerarios[] = Itinerario::where('dia', 'Sábado Santo')->get();
         $itinerarios[] = Itinerario::where('dia', 'Domingo de Resurrección')->get();
 
-        return view('consejo.itinerarios', compact('itinerarios'));
+        $hermandades = Hermandade::all();
+
+        return view('consejo.itinerarios', compact('itinerarios', 'hermandades'));
     }
 
     public function show($itin) {
         $itinerario = Itinerario::findOrFail($itin);
         $hermandad = Hermandade::where('id', $itinerario->id_hermandad)->first();
 
-        return view('consejo.itinerario', compact('itinerario', 'hermandad'));
+        return view('consejo.show', compact('itinerario', 'hermandad'));
     }
 }

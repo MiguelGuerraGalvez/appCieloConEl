@@ -49,7 +49,7 @@
                             </article>
                         </div>
         
-                        <p class="text-center mt-8 text-xs md:text-sm lg:text-base">Nombre corto Hermandad</p>
+                        <p class="text-center mt-8 text-xs md:text-sm lg:text-base">{{$hermandades[$itinerario->id_hermandad - 1]->nombre}}</p>
                         <p class="text-center text-xs md:text-sm lg:text-base">{{$itinerario->dia}}</p>
                     </div>
                 </a>
