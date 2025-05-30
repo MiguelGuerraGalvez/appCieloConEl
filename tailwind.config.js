@@ -14,7 +14,7 @@ export default {
     theme: {
         extend: {
             fontFamily: {
-                sans: ['Figtree', ...defaultTheme.fontFamily.sans],
+                sans: ['"Special Gothic Condensed One"', ...defaultTheme.fontFamily.sans],
             },
         },
     },

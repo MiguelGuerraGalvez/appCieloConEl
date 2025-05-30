@@ -17,6 +17,7 @@
         @foreach ($itinerarios as $itin)
             @foreach ($itin as $itinerario)
                 <a href="{{ route('consejo.itinerario', $itinerario->id) }}">
+                    {{$titulares = Http::get(route('consejo.titulares', ['itinerario' => $itinerario->id]))}}
                     <div>
                         <div class="bg-white p-2 md:p-4 lg:p-8 lg:w-[17rem] h-[20rem] lg:h-[30rem] overflow-hidden">
                             <article class="flex flex-col justify-between md:gap-1 lg:gap-2">
@@ -24,16 +25,22 @@
                                 <h2 class="text-[5px] lg:text-[7px] text-center leading-[10px] md:leading-none">Nombre Hermandad y Escudo</h2><img>
                                 <div>
                                     <h3 class="font-bold text-[5px] lg:text-[7px] leading-[10px] md:leading-none">PASOS</h3>
-                                    <p class="text-[5px] lg:text-[7px] leading-[10px] md:leading-none"></p>
+                                    @foreach ($titulares as $titular)
+                                        <p class="text-[5px] lg:text-[7px] leading-[10px] md:leading-none">{{$titular->nombre_completo}}</p>
+                                    @endforeach
                                 </div>
                                 <div>
                                     <h3 class="font-bold text-[5px] lg:text-[7px] leading-[10px] md:leading-none">MÚSICA</h3>
-                                    <p class="text-[5px] lg:text-[7px] leading-[10px] md:leading-none"></p>
+                                    @foreach ($titulares as $titular)
+                                        <p class="text-[5px] lg:text-[7px] leading-[10px] md:leading-none">{{$titular->banda}}</p>
+                                    @endforeach
                                 </div>
                     
                                 <div>
                                     <h3 class="font-bold text-[5px] lg:text-[7px] leading-[10px] md:leading-none">NAZARENOS</h3>
-                                    <p class="text-[5px] lg:text-[7px] leading-[10px] md:leading-none"></p>
+                                    @foreach ($titulares as $titular)
+                                        <p class="text-[5px] lg:text-[7px] leading-[10px] md:leading-none">{{$titular->nazarenos}}</p>
+                                    @endforeach
                                 </div>
                     
                                 <div>

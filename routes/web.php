@@ -13,12 +13,14 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::get('/principal', [PrincipalController::class, 'index'])->name('principal');
+    Route::get('/busqueda', [PrincipalController::class, 'buscar']);
     Route::get('/hermandades/{hermandad}', [HermandadController::class, 'show'])->name('hermandad');
     Route::get('/consejo', [ConsejoController::class, 'index'])->name('consejo');
     Route::get('/consejo/carteles', [ConsejoController::class, 'carteles'])->name('consejo.carteles');
     Route::get('/consejo/pregones', [ConsejoController::class, 'pregones'])->name('consejo.pregones');
     Route::get('/consejo/itinerarios', [ConsejoController::class, 'itinerarios'])->name('consejo.itinerarios');
     Route::get('/consejo/itinerarios/{itinerario}', [ConsejoController::class, 'show'])->name('consejo.itinerario');
+    Route::get('/consejo/titulares/{itinerario}', [ConsejoController::class, 'titulares'])->name('consejo.titulares');
 });
 
 require __DIR__.'/auth.php';

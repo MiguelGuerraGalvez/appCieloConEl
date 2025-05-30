@@ -49,6 +49,16 @@ class ConsejoController extends Controller
         return view('consejo.itinerarios', compact('itinerarios', 'hermandades'));
     }
 
+    public function titulares($itinerario) {
+        $titulares_itinerario = Titulares_itinerario::where('id_itinerario', $itinerario)->get();
+        $titulares = [];
+        foreach ($titulares_itinerario as $ts) {
+            $titulares [] = Titulare::where('id', $ts->id_titular)->first();
+        }
+
+        return $titulares;
+    }
+
     public function show($itin) {
         $itinerario = Itinerario::findOrFail($itin);
         $hermandad = Hermandade::where('id', $itinerario->id_hermandad)->first();

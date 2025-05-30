@@ -14,5 +14,21 @@ class PrincipalController extends Controller
 
         return view('principal.index', compact('consejos', 'hermandades'));
     }
+
+    public function buscar(Request $request){
+        $busqueda = $request->get('buscar');
+
+        if ($busqueda) {
+            $hermandades = Hermandade::where('nombre', 'LIKE', "%$busqueda%")->get();
+        } else {
+            $hermandades = Hermandade::all();
+        }
+
+        $hermandades->each(function ($hermandad) {
+            $hermandad->url = route('hermandad', ['hermandad' => $hermandad->nombre]);
+        });
+
+        return response()->json($hermandades);
+    }
 }
 
