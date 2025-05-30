@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->integer('id_hermandad');
             $table->string('dia');
+            $table->string('nazarenos');
             $table->time('hora_salida');
             $table->text('recorrido');
             $table->text('imagen');

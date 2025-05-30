@@ -7,6 +7,8 @@ use App\Models\Consejo;
 use App\Models\Hermandade;
 use App\Models\Itinerario;
 use App\Models\Pregone;
+use App\Models\Titulare;
+use App\Models\Titulares_itinerario;
 use Illuminate\Http\Request;
 
 class ConsejoController extends Controller
@@ -50,7 +52,12 @@ class ConsejoController extends Controller
     public function show($itin) {
         $itinerario = Itinerario::findOrFail($itin);
         $hermandad = Hermandade::where('id', $itinerario->id_hermandad)->first();
+        $titulares_itinerario = Titulares_itinerario::where('id_itinerario', $itin)->get();
+        $titulares = [];
+        foreach ($titulares_itinerario as $ts) {
+            $titulares [] = Titulare::where('id', $ts->id_titular)->first();
+        }
 
-        return view('consejo.show', compact('itinerario', 'hermandad'));
+        return view('consejo.show', compact('itinerario', 'hermandad', 'titulares'));
     }
 }

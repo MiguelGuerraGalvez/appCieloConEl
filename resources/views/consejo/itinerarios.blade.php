@@ -32,7 +32,7 @@
                                 </div>
                     
                                 <div>
-                                    <h3 class="font-bold text-[5px] lg:text-[7px] leading-[10px] md:leading-none">¿NAZARENOS?</h3>
+                                    <h3 class="font-bold text-[5px] lg:text-[7px] leading-[10px] md:leading-none">NAZARENOS</h3>
                                     <p class="text-[5px] lg:text-[7px] leading-[10px] md:leading-none"></p>
                                 </div>
                     

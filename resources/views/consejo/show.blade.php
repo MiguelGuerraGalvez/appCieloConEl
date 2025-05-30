@@ -23,16 +23,20 @@
                 
                 <div>
                     <h3 class="font-bold text-xs md:text-base">PASOS</h3>
-                    <p class="text-xs md:text-base"></p>
+                    @foreach ($titulares as $titular)
+                        <p class="text-xs md:text-base">{{$titular->nombre_completo}}</p>
+                    @endforeach
                 </div>
                 <div>
                     <h3 class="font-bold text-xs md:text-base">MÚSICA</h3>
-                    <p class="text-xs md:text-base"></p>
+                    @foreach ($titulares as $titular)
+                        <p class="text-xs md:text-base">{{$titular->banda}}</p>
+                    @endforeach
                 </div>
     
                 <div>
-                    <h3 class="font-bold text-xs md:text-base">¿NAZARENOS?</h3>
-                    <p class="text-xs md:text-base"></p>
+                    <h3 class="font-bold text-xs md:text-base">NAZARENOS</h3>
+                    <p class="text-xs md:text-base">{{$itinerario->nazarenos}}</p>
                 </div>
     
                 <div>

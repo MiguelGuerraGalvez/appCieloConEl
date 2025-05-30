@@ -188,7 +188,7 @@ class TitularSeeder extends Seeder
         $t18->id_hermandad = 8;
         $t18->nombre_completo = 'Santísimo Cristo del Amor';
         $t18->nombre_corto = 'Cristo del Amor';
-        $t18->banda = 'Banda de Cornetas Coronación de Campillos';
+        $t18->banda = 'Banda de Cornetas y Tambores Coronación de Campillos';
         $t18->imagen = 'Carrusel_Amor.jpg';
         
         $t18->save();
@@ -238,7 +238,7 @@ class TitularSeeder extends Seeder
         $t23->id_hermandad = 10;
         $t23->nombre_completo = 'María Santísima de la Concepción';
         $t23->nombre_corto = 'Virgen de la Concepción';
-        $t23->banda = 'Grupo Vocal Profundis';
+        $t23->banda = 'Grupo Vocal De Profundis';
         $t23->imagen = 'Carrusel_Concepcion.jpg';
         
         $t23->save();
