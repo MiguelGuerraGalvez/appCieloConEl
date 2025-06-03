@@ -9,6 +9,7 @@ use App\Models\Itinerario;
 use App\Models\Pregone;
 use App\Models\Titulare;
 use App\Models\Titulares_itinerario;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
 class ConsejoController extends Controller
@@ -69,5 +70,14 @@ class ConsejoController extends Controller
         }
 
         return view('consejo.show', compact('itinerario', 'hermandad', 'titulares'));
+    }
+
+    public function create(){
+        $usuario = Auth::user();
+        $itinerariosNoAceptados = Itinerario::where('aceptado', 0)->get();
+        $nuevasHermandades = Hermandade::where('rol', 'nuevaHermandad');
+        $carteles = Cartele::all();
+        $pregones = Pregone::all();
+        
     }
 }
