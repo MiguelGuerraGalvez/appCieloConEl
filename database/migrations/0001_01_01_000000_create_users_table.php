@@ -19,6 +19,7 @@ return new class extends Migration
             $table->integer('tel_number');
             $table->string('password');
             $table->rememberToken();
+            $table->string('rol');
             $table->timestamps();
         });
 

@@ -15,7 +15,7 @@ class HermandadSeeder extends Seeder
     {
         $h1 = new Hermandade();
 
-        $h1->id_usuario = 0;
+        $h1->id_usuario = 3;
         $h1->nombre = "Vera+Cruz";
         $h1->nombre_completo = "Muy Antigua Hdad. y Archicofradía de Nazarenos de la Santa Vera-Cruz, Ntro Padre Jesús Atado a la Columna, Purísima Inmaculada Concepción, San Sebastián, Santo Entierro del Stmo. Cristo Yacente, Ntra Sra. de los Dolores y en Soledad";
         $h1->escudo = "Escudo_VeraCruz.png";

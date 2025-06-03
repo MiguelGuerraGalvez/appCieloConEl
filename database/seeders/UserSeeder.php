@@ -19,6 +19,7 @@ class UserSeeder extends Seeder
         $u1->email = 'miguel.guerra-galvez@iesruizgijon.com';
         $u1->tel_number = 722783138;
         $u1->password = '12345678';
+        $u1->rol = 'user';
 
         $u1->save();
 
@@ -28,7 +29,28 @@ class UserSeeder extends Seeder
         $u2->email = 'jesus.gomez-garcia@iesruizgijon.com';
         $u2->tel_number = 687080187;
         $u2->password = '12345678';
+        $u2->rol = 'user';
 
         $u2->save();
+
+        $u3 = new User();
+
+        $u3->name = 'Vera+Cruz';
+        $u3->email = 'vc@gmail.com';
+        $u3->tel_number = 642365412;
+        $u3->password = '12345678';
+        $u3->rol = 'hermandad';
+
+        $u3->save();
+
+        $u4 = new User();
+
+        $u4->name = 'Consejo';
+        $u4->email = 'consejo@gmail.com';
+        $u4->tel_number = 756362415;
+        $u4->password = '12345678';
+        $u4->rol = 'consejo';
+
+        $u4->save();
     }
 }
