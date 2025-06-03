@@ -28,5 +28,7 @@ class DatabaseSeeder extends Seeder
         $this->call(CartelSeeder::class);
         $this->call(PregonSeeder::class);
         $this->call(TitularesItinerariosSeeder::class);
+        $this->call(DiaSeeder::class);
+        $this->call(FormacionSeeder::class);
     }
 }
