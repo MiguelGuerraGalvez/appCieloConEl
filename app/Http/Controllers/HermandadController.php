@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Dia;
+use App\Models\Formacione;
 use App\Models\Hermandade;
 use App\Models\Itinerario;
 use App\Models\Titulare;
@@ -41,10 +43,13 @@ class HermandadController extends Controller
 
     public function create($h){
         $usuario = Auth::user();
-        $hermandad = Hermandade::where('id_usuario', $usuario->id)->get();
+        $hermandad = Hermandade::where('id_usuario', $usuario->id)->first();
         $titulares = Titulare::where('id_hermandad', $hermandad->id)->get();
-        $itinerarios = Itinerario::where('id_hermandad', $hermandad->id)->get();
+        $itinerarios_no_aceptados = Itinerario::where('id_hermandad', $hermandad->id)->where('aceptado', 0)->get();
+        $itinerarios_aceptados = Itinerario::where('id_hermandad', $hermandad->id)->where('aceptado', 1)->get();
+        $dias = Dia::all();
+        $formaciones = Formacione::all();
 
-        return view('hermandad.create', compact('hermandad', 'titulares', 'itinerarios'));
+        return view('hermandad.create', compact('hermandad', 'titulares', 'itinerarios_no_aceptados', 'itinerarios_aceptados', 'dias', 'formaciones'));
     }
 }

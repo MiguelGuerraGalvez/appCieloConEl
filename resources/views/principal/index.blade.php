@@ -35,11 +35,6 @@
         </div>
     </div>
 
-
-    <div class="absolute inset-y-0 right-4 flex items-center pointer-events-none">
-        <i class="fas fa-search text-black text-2xl"></i>
-    </div>
-
     <div class="absolute inset-y-0 right-4 flex items-center pointer-events-none">
         <img src="" alt="">
     </div>
