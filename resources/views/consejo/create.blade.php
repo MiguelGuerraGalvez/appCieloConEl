@@ -37,13 +37,15 @@
     <div class="bg-[#8C52FF] h-4 max-w-full"></div>
 
     <section>
+        <section>ADMINISTRACIÓN DE NUEVAS HERMANDADES</section>
+
         <div>
             @foreach ($nuevasHermandades as $hermandad)
                 <article>
                     <h3>{{ $hermandad->nombre }}</h3>
                     <h4>{{ $hermandad->nombre_completo }}</h4>
                     <figure>
-                        <img src="{{ route('../img/{{ $hermandad->escudo }}') }}" alt="Escudo Hermandad Nueva {{ $hermandad->nombre }}">
+                        <img src="../img/{{ $hermandad->escudo }}" alt="Escudo Hermandad Nueva {{ $hermandad->nombre }}">
                     </figure>
 
                     <form action="" method="post">

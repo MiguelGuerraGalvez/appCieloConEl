@@ -9,6 +9,7 @@ use App\Models\Itinerario;
 use App\Models\Pregone;
 use App\Models\Titulare;
 use App\Models\Titulares_itinerario;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
@@ -75,7 +76,13 @@ class ConsejoController extends Controller
     public function create(){
         $usuario = Auth::user();
         $itinerariosNoAceptados = Itinerario::where('aceptado', 0)->get();
-        $nuevasHermandades = Hermandade::where('rol', 'nuevaHermandad');
+        $usuariosNuevaHermandad = User::where('rol', 'nuevaHermandad')->get();
+        $nuevasHermandades = [];
+
+        foreach ($usuariosNuevaHermandad as $usuario) {
+            $nuevasHermandades [] = Hermandade::where('id_usuario', $usuario->id)->get();
+        }
+        
         $carteles = Cartele::all();
         $pregones = Pregone::all();
         
