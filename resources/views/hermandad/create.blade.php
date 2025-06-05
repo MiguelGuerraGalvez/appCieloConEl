@@ -162,20 +162,26 @@
         <section>
             <h1>IMÁGENES</h1>
 
-            <form action="{{ route('hermandad.administracion', ['hermandad' => $hermandad->nombre]) }}" method="post">
+            <form action="{{ route('hermandad.cambiarFotos') }}" method="post" enctype="multipart/form-data">
                 @csrf
+                <figure>
+                    <img src="../img/{{ $hermandad->header }}" alt="Imagen de cabecera">
+                </figure>
                 <label for="header">Imagen de cabecera</label>
-                <input type="file" name="header" id="header">
-                <input type="hidden" name="header_antiguo" id="header_antiguo" value="{{ $hermandad->imagen }}">
+                <input type="file" name="header" id="header" required>
+                <input type="hidden" name="header_antiguo" id="header_antiguo" value="{{ $hermandad->header }}">
                 <input type="submit" name="enviar_header" id="enviar_header" value="ENVIAR">
             </form>
 
             @foreach ($titulares as $titular)    
-                <form action="{{ route('hermandad.administracion', ['hermandad' => $hermandad->nombre]) }}" method="post">
+                <form action="{{ route('hermandad.cambiarFotos') }}" method="post" enctype="multipart/form-data">
                     @csrf
+                    <figure>
+                        <img src="../img/{{ $titular->imagen }}" alt="Imagen de {{$titular->nombre_completo}}">
+                    </figure>
                     <label for="imagen_{{ $titular->id }}">Imagen de {{$titular->nombre_completo}}</label>
-                    <input type="file" name="imagen_{{ $titular->id }}" id="imagen_{{ $titular->id }}">
-                    <input type="hidden" name="imagen_{{ $titular->id }}_antiguo" id="imagen_{{ $titular->id }}_antiguo" value="{{ $titular->imagen }}">
+                    <input type="file" name="imagen_{{ $titular->id }}" id="imagen_{{ $titular->id }}" required>
+                    <input type="hidden" name="id_titular_imagen_antiguo" id="id_titular_imagen_antiguo" value="{{ $titular->id }}">
                     <input type="submit" name="enviar_imagen_{{ $titular->id }}" id="enviar_imagen_{{ $titular->id }}" value="ENVIAR">
                 </form>
             @endforeach

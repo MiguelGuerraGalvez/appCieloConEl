@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
-
+use Illuminate\Support\Facades\File;
 
 class HermandadController extends Controller
 {
@@ -65,20 +65,24 @@ class HermandadController extends Controller
         $nazarenos = $request->input('nazarenos_itinerario_nuevo');
         $hora_salida = $request->input('hora_salida_itinerario_nuevo');
         $hora_salida = Carbon::createFromFormat('H:i', $hora_salida)->format('H:i:s');
+        $imagen = $request->file('imagen_itinerario_nuevo');
+
+        $nombreImagen = $imagen->getClientOriginalName();
+        $imagen->move(public_path('img'), $nombreImagen);
 
         $itinerario = $request->input('itinerario_nuevo');
         
-        Itinerario::insertar($hermandad->id, $dia->dia, $nazarenos, $hora_salida, $itinerario);
+        Itinerario::insertar($hermandad->id, $dia->dia, $nazarenos, $hora_salida, $itinerario, $nombreImagen);
         
-        // $titulares = Titulare::where('id_hermandad', $hermandad->id)->get();
-        // $ultimo_itinerario = Itinerario::orderBy('created_at', 'desc')->first();
+        $titulares = Titulare::where('id_hermandad', $hermandad->id)->get();
+        $ultimo_itinerario = Itinerario::orderBy('created_at', 'desc')->first();
 
 
-        // foreach ($titulares as $titular) {
-        //     if (!empty($_REQUEST['titular_'.$titular->id.'_itinerario_nuevo'])) {
-        //         Titulares_itinerario::insertar($titular->id, $ultimo_itinerario->id);
-        //     }
-        // }
+        foreach ($titulares as $titular) {
+            if (!empty($_REQUEST['titular_'.$titular->id.'_itinerario_nuevo'])) {
+                Titulares_itinerario::insertar($titular->id, $ultimo_itinerario->id);
+            }
+        }
 
         return redirect()->route('hermandad.administracion', ['hermandad' => $hermandad->nombre]);
     }
@@ -86,6 +90,11 @@ class HermandadController extends Controller
     public function eliminarItinerario(REQUEST $request) {
         $hermandad = Hermandade::where('id_usuario', Auth::user()->id)->first();
         $id_itinerario = $request->input('itinerario_eliminar');
+        $itinerario = Itinerario::findOrFail($id_itinerario);
+
+        if (File::exists(public_path('img/' . $itinerario->imagen))) {
+            File::delete(public_path('img/' . $itinerario->imagen));
+        }
 
         Itinerario::eliminar($id_itinerario);
 
@@ -125,6 +134,38 @@ class HermandadController extends Controller
         $nueva_cuota = $request->input('cuota');
 
         DB::table('hermandades')->where('id', $hermandad->id)->update(['cuota' => $nueva_cuota]);
+
+        return redirect()->route('hermandad.administracion', ['hermandad' => $hermandad->nombre]);
+    }
+
+    public function cambiarFotos(REQUEST $request) {
+        $hermandad = Hermandade::where('id_usuario', Auth::user()->id)->first();
+
+        if ($request->has('enviar_header')) {
+            $imagen = $request->file('header');
+
+            if ($imagen) {
+                if (File::exists(public_path('img/' . $hermandad->header))) {
+                    File::delete(public_path('img/' . $hermandad->header));
+                }
+            }
+            
+            
+            $nombreImagen = $imagen->getClientOriginalName();
+            $imagen->move(public_path('img'), $nombreImagen);
+            
+            DB::table('hermandades')->where('id', $hermandad->id)->update(['header' => $nombreImagen]);
+        } else {
+            $titular = Titulare::findOrFail($request->input('id_titular_imagen_antiguo'));
+            $imagen = $request->file('imagen_' . $titular->id);
+
+            if (File::exists(public_path('img/' . $titular->imagen))) {
+                File::delete(public_path('img/' . $titular->imagen));
+            }
+
+            $nombreImagen = $imagen->getClientOriginalName();
+            $imagen->move(public_path('img'), $nombreImagen);
+        }
 
         return redirect()->route('hermandad.administracion', ['hermandad' => $hermandad->nombre]);
     }
