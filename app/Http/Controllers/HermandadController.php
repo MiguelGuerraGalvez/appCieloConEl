@@ -89,6 +89,7 @@ class HermandadController extends Controller
 
         Itinerario::eliminar($id_itinerario);
 
+        Log::info("Redirigiendo a hermandad.administracion con: ".$hermandad->nombre);
         return redirect()->route('hermandad.administracion', ['hermandad' => $hermandad->nombre]);
     }
 
@@ -100,6 +101,30 @@ class HermandadController extends Controller
         $banda = $request->input('banda');
 
         DB::table('titulares')->where('id', $id_titular)->update(['banda' => $formacion->formacion." ".$banda]);
+
+        return redirect()->route('hermandad.administracion', ['hermandad' => $hermandad->nombre]);
+    }
+
+    public function gestionHermanos(REQUEST $request) {
+        $hermandad = Hermandade::where('id_usuario', Auth::user()->id)->first();
+        $cambio_hermanos = $request->input('cambio_hermanos');
+
+        if ($request->has('enviar_nuevos_hermanos')) {
+            $hermanos = $hermandad->hermanos + $cambio_hermanos;
+        } else {
+            $hermanos = $hermandad->hermanos - $cambio_hermanos;
+        }
+
+        DB::table('hermandades')->where('id', $hermandad->id)->update(['hermanos' => $hermanos]);
+
+        return redirect()->route('hermandad.administracion', ['hermandad' => $hermandad->nombre]);
+    }
+
+    public function gestionCuota(REQUEST $request) {
+        $hermandad = Hermandade::where('id_usuario', Auth::user()->id)->first();
+        $nueva_cuota = $request->input('cuota');
+
+        DB::table('hermandades')->where('id', $hermandad->id)->update(['cuota' => $nueva_cuota]);
 
         return redirect()->route('hermandad.administracion', ['hermandad' => $hermandad->nombre]);
     }

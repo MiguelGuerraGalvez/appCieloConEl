@@ -37,6 +37,8 @@ Route::middleware(['auth', CheckRole::class.':hermandad'])->group(function () {
     Route::post('administracion/nuevoItinerario', [HermandadController::class, 'nuevoItinerario'])->name('hermandad.nuevoItinerario');
     Route::post('administracion/eliminarItinerario', [HermandadController::class, 'eliminarItinerario'])->name('hermandad.eliminarItinerario');
     Route::post('administracion/contratarBanda', [HermandadController::class, 'contratarBanda'])->name('hermandad.contratarBanda');
+    Route::post('administracion/gestionHermanos', [HermandadController::class, 'gestionHermanos'])->name('hermandad.gestionHermanos');
+    Route::post('administracion/gestionCuota', [HermandadController::class, 'gestionCuota'])->name('hermandad.gestionCuota');
 });
 
 

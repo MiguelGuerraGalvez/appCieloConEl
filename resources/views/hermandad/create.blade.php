@@ -131,13 +131,15 @@
             <h1>ADMINISTRACIÓN DE HERMANOS</h1>
             <h3>{{ $hermandad->hermanos }} HERMANOS</h3>
 
-            <form action="{{ route('hermandad.administracion', ['hermandad' => $hermandad->nombre]) }}" method="post">
-                <input type="text" name="nuevos_hermanos" id="nuevos_hermanos" placeholder="Nº de nuevos hermanos">
+            <form action="{{ route('hermandad.gestionHermanos') }}" method="post">
+                @csrf
+                <input type="number" name="cambio_hermanos" id="cambio_hermanos" min="1" placeholder="Nº de nuevos hermanos" required>
                 <input type="submit" name="enviar_nuevos_hermanos" id="enviar_nuevos_hermanos" value="ALTA">
             </form>
 
-            <form action="{{ route('hermandad.administracion', ['hermandad' => $hermandad->nombre]) }}" method="post">
-                <input type="text" name="antiguos_hermanos" id="antiguos_hermanos" placeholder="Nº de antiguos hermanos">
+            <form action="{{ route('hermandad.gestionHermanos') }}" method="post">
+                @csrf
+                <input type="number" name="cambio_hermanos" id="cambio_hermanos" min="1" placeholder="Nº de antiguos hermanos" required>
                 <input type="submit" name="enviar_antiguos_hermanos" id="enviar_antiguos_hermanos" value="BAJA">
             </form>
         </section>
@@ -148,8 +150,9 @@
             <h1>ADMINISTRACIÓN DE LA CUOTA</h1>
             <h3>{{ $hermandad->cuota }}€</h3>
 
-            <form action="{{ route('hermandad.administracion', ['hermandad' => $hermandad->nombre]) }}" method="post">
-                <input type="text" name="cuota" id="cuota" placeholder="Introduce la nueva cuota de hermano...">
+            <form action="{{ route('hermandad.gestionCuota') }}" method="post">
+                @csrf
+                <input type="number" name="cuota" id="cuota" min="0" step="0.01" placeholder="Introduce la nueva cuota de hermano...">
                 <input type="submit" name="enviar_cuota" id="enviar_cuota" value="MODIFICAR">
             </form>
         </section>
@@ -160,18 +163,20 @@
             <h1>IMÁGENES</h1>
 
             <form action="{{ route('hermandad.administracion', ['hermandad' => $hermandad->nombre]) }}" method="post">
+                @csrf
                 <label for="header">Imagen de cabecera</label>
                 <input type="file" name="header" id="header">
                 <input type="hidden" name="header_antiguo" id="header_antiguo" value="{{ $hermandad->imagen }}">
-                <input type="submit" value="ENVIAR">
+                <input type="submit" name="enviar_header" id="enviar_header" value="ENVIAR">
             </form>
 
             @foreach ($titulares as $titular)    
-                <form action="" method="post">
+                <form action="{{ route('hermandad.administracion', ['hermandad' => $hermandad->nombre]) }}" method="post">
+                    @csrf
                     <label for="imagen_{{ $titular->id }}">Imagen de {{$titular->nombre_completo}}</label>
                     <input type="file" name="imagen_{{ $titular->id }}" id="imagen_{{ $titular->id }}">
                     <input type="hidden" name="imagen_{{ $titular->id }}_antiguo" id="imagen_{{ $titular->id }}_antiguo" value="{{ $titular->imagen }}">
-                    <input type="submit" value="ENVIAR">
+                    <input type="submit" name="enviar_imagen_{{ $titular->id }}" id="enviar_imagen_{{ $titular->id }}" value="ENVIAR">
                 </form>
             @endforeach
         </section>
