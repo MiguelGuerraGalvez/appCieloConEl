@@ -13,7 +13,9 @@
         <section>
             <h1>CREA EL ITINERARIO</h1>
 
-            <form action="" method="post">
+            <form id="itinerarioForm" action="{{ route('hermandad.nuevoItinerario') }}" method="post" enctype="multipart/form-data">
+                @csrf
+
                 <select name="dia_itinerario_nuevo" id="dia_itinerario_nuevo" required>
                     <option class="font-bold" value="">--SELECCIONE EL DÍA DE SALIDA--</option>
 
@@ -23,19 +25,22 @@
                 </select>
 
                 @foreach ($titulares as $titular)
-                    <input type="checkbox" name="titular_itinerario_nuevo" id="titular_{{ $titular->id }}_itinerario_nuevo" value="{{ $titular->id }}">
+                    <input type="checkbox" name="titular_{{ $titular->id }}_itinerario_nuevo" id="titular_{{ $titular->id }}_itinerario_nuevo" value="{{ $titular->id }}">
                     <label for="titular_{{ $titular->id }}_itinerario_nuevo">{{ $titular->nombre_corto }}</label>
                 @endforeach
                 
-                <label for="nazarenos">Ropa de nazareno: </label>
-                <input type="text" name="nazarenos" id="nazarenos">
+                <label for="nazarenos_itinerario_nuevo">Ropa de nazareno: </label>
+                <input type="text" name="nazarenos_itinerario_nuevo" id="nazarenos_itinerario_nuevo" required>
 
-                <textarea name="itinerario_nuevo" id="itinerario_nuevo" cols="30" rows="10" placeholder="Escriba aquí el itinerario..."></textarea>
-
-                <input type="submit" name="enviar_itinerario_nuevo" id="enviar_itinerario_nuevo" value="ENVIAR">
+                <label for="hora_salida_itinerario_nuevo">Hora de salida</label>
+                <input type="time" name="hora_salida_itinerario_nuevo" id="hora_salida_itinerario_nuevo" required>
 
                 <label for="imagen_itinerario_nuevo">Imagen para el itinerario</label>
-                <input type="file" name="imagen_itinerario_nuevo" id="imagen_itinerario_nuevo">
+                <input type="file" name="imagen_itinerario_nuevo" id="imagen_itinerario_nuevo" required>
+
+                <textarea name="itinerario_nuevo" id="itinerario_nuevo" cols="30" rows="10" placeholder="Escriba aquí el itinerario..." required></textarea>
+
+                <input type="submit" name="enviar_itinerario_nuevo" id="enviar_itinerario_nuevo" value="ENVIAR">
             </form>
         </section>
 
@@ -46,11 +51,12 @@
             
             @foreach ($itinerarios_aceptados as $itinerario)
                 <div>
-                    <form action="" method="post">
+                    <form action="{{ route('hermandad.eliminarItinerario') }}" method="post">
+                        @csrf
                         <h4>{{$itinerario->dia}}</h4>
                         <p>{{$itinerario->recorrido}}</p>
 
-                        <input type="hidden" name="itinerario_aceptado" value="{{ $itinerario->id }}">
+                        <input type="hidden" name="itinerario_eliminar" value="{{ $itinerario->id }}">
                         <input type="submit" value="ELIMINAR">
                     </form>
                 </div>
@@ -70,11 +76,12 @@
             
             @foreach ($itinerarios_no_aceptados as $itinerario)
                 <div>
-                    <form action="" method="post">
+                    <form action="{{ route('hermandad.eliminarItinerario') }}" method="post">
+                        @csrf
                         <h4>{{$itinerario->dia}}</h4>
                         <p>{{$itinerario->recorrido}}</p>
 
-                        <input type="hidden" name="itinerario_aceptado" value="{{ $itinerario->id }}">
+                        <input type="hidden" name="itinerario_eliminar" value="{{ $itinerario->id }}">
                         <input type="submit" value="ELIMINAR">
                     </form>
                 </div>
@@ -93,7 +100,9 @@
         <section>
             <h1>CONTRATA A LA BANDA</h1>
             
-            <form action="" method="post">
+            <form action="{{ route('hermandad.contratarBanda') }}" method="post">
+                @csrf
+                
                 <select name="titular_banda" id="titular_banda" required>
                     <option class="font-bold" value="">--SELECCIONE EL TITULAR--</option>
 
@@ -122,12 +131,12 @@
             <h1>ADMINISTRACIÓN DE HERMANOS</h1>
             <h3>{{ $hermandad->hermanos }} HERMANOS</h3>
 
-            <form action="" method="post">
+            <form action="{{ route('hermandad.administracion', ['hermandad' => $hermandad->nombre]) }}" method="post">
                 <input type="text" name="nuevos_hermanos" id="nuevos_hermanos" placeholder="Nº de nuevos hermanos">
                 <input type="submit" name="enviar_nuevos_hermanos" id="enviar_nuevos_hermanos" value="ALTA">
             </form>
 
-            <form action="" method="post">
+            <form action="{{ route('hermandad.administracion', ['hermandad' => $hermandad->nombre]) }}" method="post">
                 <input type="text" name="antiguos_hermanos" id="antiguos_hermanos" placeholder="Nº de antiguos hermanos">
                 <input type="submit" name="enviar_antiguos_hermanos" id="enviar_antiguos_hermanos" value="BAJA">
             </form>
@@ -139,7 +148,7 @@
             <h1>ADMINISTRACIÓN DE LA CUOTA</h1>
             <h3>{{ $hermandad->cuota }}€</h3>
 
-            <form action="" method="post">
+            <form action="{{ route('hermandad.administracion', ['hermandad' => $hermandad->nombre]) }}" method="post">
                 <input type="text" name="cuota" id="cuota" placeholder="Introduce la nueva cuota de hermano...">
                 <input type="submit" name="enviar_cuota" id="enviar_cuota" value="MODIFICAR">
             </form>
@@ -150,7 +159,7 @@
         <section>
             <h1>IMÁGENES</h1>
 
-            <form action="" method="post">
+            <form action="{{ route('hermandad.administracion', ['hermandad' => $hermandad->nombre]) }}" method="post">
                 <label for="header">Imagen de cabecera</label>
                 <input type="file" name="header" id="header">
                 <input type="hidden" name="header_antiguo" id="header_antiguo" value="{{ $hermandad->imagen }}">

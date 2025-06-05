@@ -7,8 +7,13 @@ use App\Models\Formacione;
 use App\Models\Hermandade;
 use App\Models\Itinerario;
 use App\Models\Titulare;
+use App\Models\Titulares_itinerario;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
+
 
 class HermandadController extends Controller
 {
@@ -51,5 +56,51 @@ class HermandadController extends Controller
         $formaciones = Formacione::all();
 
         return view('hermandad.create', compact('hermandad', 'titulares', 'itinerarios_no_aceptados', 'itinerarios_aceptados', 'dias', 'formaciones'));
+    }
+
+    public function nuevoItinerario(REQUEST $request) {
+        $hermandad = Hermandade::where('id_usuario', Auth::user()->id)->first();
+        $id_dia = $request->input('dia_itinerario_nuevo');
+        $dia = Dia::findOrFail($id_dia);
+        $nazarenos = $request->input('nazarenos_itinerario_nuevo');
+        $hora_salida = $request->input('hora_salida_itinerario_nuevo');
+        $hora_salida = Carbon::createFromFormat('H:i', $hora_salida)->format('H:i:s');
+
+        $itinerario = $request->input('itinerario_nuevo');
+        
+        Itinerario::insertar($hermandad->id, $dia->dia, $nazarenos, $hora_salida, $itinerario);
+        
+        // $titulares = Titulare::where('id_hermandad', $hermandad->id)->get();
+        // $ultimo_itinerario = Itinerario::orderBy('created_at', 'desc')->first();
+
+
+        // foreach ($titulares as $titular) {
+        //     if (!empty($_REQUEST['titular_'.$titular->id.'_itinerario_nuevo'])) {
+        //         Titulares_itinerario::insertar($titular->id, $ultimo_itinerario->id);
+        //     }
+        // }
+
+        return redirect()->route('hermandad.administracion', ['hermandad' => $hermandad->nombre]);
+    }
+
+    public function eliminarItinerario(REQUEST $request) {
+        $hermandad = Hermandade::where('id_usuario', Auth::user()->id)->first();
+        $id_itinerario = $request->input('itinerario_eliminar');
+
+        Itinerario::eliminar($id_itinerario);
+
+        return redirect()->route('hermandad.administracion', ['hermandad' => $hermandad->nombre]);
+    }
+
+    public function contratarBanda(REQUEST $request) {
+        $hermandad = Hermandade::where('id_usuario', Auth::user()->id)->first();
+        $id_titular = $request->input('titular_banda');
+        $id_formacion = $request->input('formacion_banda');
+        $formacion = Formacione::findOrFail($id_formacion);
+        $banda = $request->input('banda');
+
+        DB::table('titulares')->where('id', $id_titular)->update(['banda' => $formacion->formacion." ".$banda]);
+
+        return redirect()->route('hermandad.administracion', ['hermandad' => $hermandad->nombre]);
     }
 }

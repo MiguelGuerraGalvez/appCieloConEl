@@ -147,5 +147,6 @@
         </div>
     </section>
 
+    <a href="{{ route('principal') }}">VOLVER ATRÁS</a>
 </body>
 </html>
