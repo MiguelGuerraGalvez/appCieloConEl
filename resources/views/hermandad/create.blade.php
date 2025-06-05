@@ -33,6 +33,9 @@
                 <textarea name="itinerario_nuevo" id="itinerario_nuevo" cols="30" rows="10" placeholder="Escriba aquí el itinerario..."></textarea>
 
                 <input type="submit" name="enviar_itinerario_nuevo" id="enviar_itinerario_nuevo" value="ENVIAR">
+
+                <label for="imagen_itinerario_nuevo">Imagen para el itinerario</label>
+                <input type="file" name="imagen_itinerario_nuevo" id="imagen_itinerario_nuevo">
             </form>
         </section>
 

@@ -28,12 +28,12 @@ Route::middleware('auth')->group(function () {
     Route::get('/consejo/titulares/{itinerario}', [ConsejoController::class, 'titulares'])->name('consejo.titulares');
 });
 
-Route::middleware(['auth', CheckRole::class.':hermandad'])->group(function () {
-    Route::get('administracion/{hermandad}', [HermandadController::class, 'create'])->name('hermandad.administracion');
-});
-
 Route::middleware(['auth', CheckRole::class.':consejo'])->group(function () {
     Route::get('administracion/consejo', [ConsejoController::class, 'create'])->name('consejo.administracion');
+});
+
+Route::middleware(['auth', CheckRole::class.':hermandad'])->group(function () {
+    Route::get('administracion/{hermandad}', [HermandadController::class, 'create'])->name('hermandad.administracion');
 });
 
 

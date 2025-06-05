@@ -32,15 +32,13 @@
 
                     <h2 class="text-2xl font-bold mb-4 text-center">{{ Auth::user()->name }}</h2>
 
-                    @php
-                        if (Auth::user()->rol == 'hermandad') {
-                            echo '<a class="underline hover:text-gray-600" href="'. route('hermandad.administracion', ['hermandad' => Auth::user()->name]) .'">Panel de administración</a>';
-                        } else if (Auth::user()->rol == 'consejo') {
-                            echo '<a class="underline hover:text-gray-600" href="'. route('hermandad.consejo') .'">Panel de administración</a>';
-                        }
-                    @endphp
-
-                    
+                    @if (Auth::user()->rol == 'hermandad')
+                        <a class="underline hover:text-gray-600" href="{{ route('hermandad.administracion', ['hermandad' => Auth::user()->name]) }}">Panel de administración</a>
+                    @else
+                        @if (Auth::user()->rol == 'consejo')
+                            <a class="underline hover:text-gray-600" href="{{ route('consejo.administracion') }}">Panel de administración</a>
+                        @endif
+                    @endif
 
                     <form method="POST" action="{{ route('logout') }}">
                         @csrf

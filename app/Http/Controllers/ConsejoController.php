@@ -79,5 +79,6 @@ class ConsejoController extends Controller
         $carteles = Cartele::all();
         $pregones = Pregone::all();
         
+        return view('consejo.create', compact('itinerariosNoAceptados', 'nuevasHermandades', 'carteles', 'pregones'));
     }
 }
