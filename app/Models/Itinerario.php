@@ -9,7 +9,7 @@ class Itinerario extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['id', 'id_hermandad', 'dia', 'nazarenos', 'hora_salida', 'recorrido', 'imagen', 'aceptado'];
+    protected $fillable = ['id_hermandad', 'dia', 'nazarenos', 'hora_salida', 'recorrido', 'imagen', 'aceptado'];
 
 
     public static function insertar($id_hermandad, $dia, $nazarenos, $hora_salida, $recorrido, $imagen = '', $aceptado = 0) {

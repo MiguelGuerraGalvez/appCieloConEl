@@ -10,39 +10,54 @@
 </head>
 <body class="bg-[#EBEBEB] flex justify-center md:pt-8">
     <div class="w-[80vw] mt-8">
-        <section>
-            <h1>CREA EL ITINERARIO</h1>
+        <section id="crear_itinerario" class="flex flex-col items-center gap-6 text-center">
+            <h1 class="text-4xl font-bold">CREA EL ITINERARIO</h1>
 
-            <form id="itinerarioForm" action="{{ route('hermandad.nuevoItinerario') }}" method="post" enctype="multipart/form-data">
+            <form id="itinerarioForm" action="{{ route('hermandad.nuevoItinerario') }}" method="post" enctype="multipart/form-data" class="flex flex-col items-center gap-4 w-full max-w-md">
                 @csrf
 
-                <select name="dia_itinerario_nuevo" id="dia_itinerario_nuevo" required>
-                    <option class="font-bold" value="">--SELECCIONE EL DÍA DE SALIDA--</option>
-
+                <select name="dia_itinerario_nuevo" id="dia_itinerario_nuevo" required class="w-[60vw] px-3 py-2 border border-gray-300 text-xl rounded">
+                    <option class="w-full font-bold text-left" value="">--SELECCIONE EL DÍA DE SALIDA--</option>
                     @foreach ($dias as $dia)
-                        <option value="{{$dia->id}}">{{$dia->dia}}</option>
+                        <option value="{{ $dia->id }}">{{ $dia->dia }}</option>
                     @endforeach
                 </select>
 
-                @foreach ($titulares as $titular)
-                    <input type="checkbox" name="titular_{{ $titular->id }}_itinerario_nuevo" id="titular_{{ $titular->id }}_itinerario_nuevo" value="{{ $titular->id }}">
-                    <label for="titular_{{ $titular->id }}_itinerario_nuevo">{{ $titular->nombre_corto }}</label>
-                @endforeach
-                
-                <label for="nazarenos_itinerario_nuevo">Ropa de nazareno: </label>
-                <input type="text" name="nazarenos_itinerario_nuevo" id="nazarenos_itinerario_nuevo" required>
+                <div class="w-[60vw] flex flex-row gap-2 justify-evenly flex-wrap">
+                    @foreach ($titulares as $titular)
+                        <div>
+                            <input type="checkbox" name="titular_{{ $titular->id }}_itinerario_nuevo" id="titular_{{ $titular->id }}_itinerario_nuevo" value="{{ $titular->id }}">
+                            <label for="titular_{{ $titular->id }}_itinerario_nuevo" class="text-xl">{{ $titular->nombre_corto }}</label>
+                        </div>
+                    @endforeach
+                </div>
 
-                <label for="hora_salida_itinerario_nuevo">Hora de salida</label>
-                <input type="time" name="hora_salida_itinerario_nuevo" id="hora_salida_itinerario_nuevo" required>
+                <div class="flex flex-row gap-4 flex-wrap">
+                    <div class="w-[60vw] text-left">
+                        <label for="nazarenos_itinerario_nuevo" class="text-xl">Ropa de nazareno:</label>
+                        <input type="text" name="nazarenos_itinerario_nuevo" id="nazarenos_itinerario_nuevo" required class="w-full px-3 py-2 border border-gray-300 rounded mt-1">
+                </div>
 
-                <label for="imagen_itinerario_nuevo">Imagen para el itinerario</label>
-                <input type="file" name="imagen_itinerario_nuevo" id="imagen_itinerario_nuevo" required>
+                <div class="flex flex-row gap-4 items-end">
+                    <div class="w-[30vw] flex-1 text-left">
+                        <label for="hora_salida_itinerario_nuevo" class="text-xl">Hora de salida:</label>
+                        <input type="time" name="hora_salida_itinerario_nuevo" id="hora_salida_itinerario_nuevo" required class="w-full px-3 py-2 border border-gray-300 rounded mt-1">
+                    </div>
 
-                <textarea name="itinerario_nuevo" id="itinerario_nuevo" cols="30" rows="10" placeholder="Escriba aquí el itinerario..." required></textarea>
+                    <div class="flex-1 text-left">
+                        <label for="imagen_itinerario_nuevo" class="text-xl">Imagen para el itinerario:</label>
+                        <input type="file" name="imagen_itinerario_nuevo" id="imagen_itinerario_nuevo" required class="w-full px-3 py-2 border-none rounded mt-1">
+                    </div>
 
-                <input type="submit" name="enviar_itinerario_nuevo" id="enviar_itinerario_nuevo" value="ENVIAR">
+                </div>
+
+                <textarea name="itinerario_nuevo" id="itinerario_nuevo" cols="30" rows="6" placeholder="Escriba aquí el itinerario..." required class="text-xl w-full p-3 border border-gray-300 rounded"></textarea>
+                <div class="w-full flex justify-end">
+                    <input type="submit" name="enviar_itinerario_nuevo" id="enviar_itinerario_nuevo" value="ENVIAR" class="text-2xl bg-[#FFC060] text-black font-semibold px-12 py-4 rounded hover:bg-[#F9D193] cursor-pointer">
+                </div>
             </form>
         </section>
+
 
         <div class="bg-[#8C52FF] h-4 max-w-full"></div>
 
