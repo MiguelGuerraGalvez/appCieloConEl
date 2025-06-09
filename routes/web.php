@@ -35,11 +35,13 @@ Route::middleware(['auth', CheckRole::class.':consejo'])->group(function () {
     Route::post('administracion/aceptarHermandad', [ConsejoController::class, 'aceptarHermandad'])->name('consejo.aceptarHermandad');
     Route::post('administracion/declinarHermandad', [ConsejoController::class, 'declinarHermandad'])->name('consejo.declinarHermandad');
     Route::post('administracion/eliminarCarteles', [ConsejoController::class, 'eliminarCarteles'])->name('consejo.eliminarCarteles');
-    Route::post('administracion/eliminarPregoneros', [ConsejoController::class, 'eliminarPregoneros'])->name('consejo.eliminarPregoneros');
     Route::post('administracion/modificarCarteles', [ConsejoController::class, 'modificarCarteles'])->name('consejo.modificarCarteles');
+    Route::post('administracion/updateCarteles', [ConsejoController::class, 'updateCarteles'])->name('consejo.updateCarteles');
+    Route::post('administracion/insertarCarteles', [ConsejoController::class, 'insertarCarteles'])->name('consejo.insertarCarteles');
+    Route::post('administracion/eliminarPregoneros', [ConsejoController::class, 'eliminarPregoneros'])->name('consejo.eliminarPregoneros');
     Route::post('administracion/modificarPregoneros', [ConsejoController::class, 'modificarPregoneros'])->name('consejo.modificarPregoneros');
-    Route::post('administracion/nuevoCarteles', [ConsejoController::class, 'nuevoCarteles'])->name('consejo.nuevoCarteles');
-    Route::post('administracion/nuevoPregoneros', [ConsejoController::class, 'nuevoPregoneros'])->name('consejo.nuevoPregoneros');
+    Route::post('administracion/updatePregoneros', [ConsejoController::class, 'updatePregoneros'])->name('consejo.updatePregoneros');
+    Route::post('administracion/insertarPregoneros', [ConsejoController::class, 'insertarPregoneros'])->name('consejo.insertarPregoneros');
 });
 
 Route::middleware(['auth', CheckRole::class.':hermandad'])->group(function () {

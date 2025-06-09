@@ -116,13 +116,13 @@ class ConsejoController extends Controller
 
     public function aceptarHermandad(REQUEST $request) {
         $id_hermandad = $request->input('hermandad');
-
+        
         User::where('id', $id_hermandad)->update(['rol' => 'hermandad']);
-
+        
         Log::info("Redirigiendo a consejo.administracion.");
         return redirect()->route('consejo.administracion');
     }
-
+    
     public function declinarHermandad(REQUEST $request) {
         $id_hermandad = $request->input('hermandad');
 
@@ -131,13 +131,58 @@ class ConsejoController extends Controller
         Log::info("Redirigiendo a consejo.administracion.");
         return redirect()->route('consejo.administracion');
     }
-
+    
     public function eliminarCarteles(REQUEST $request) {
         $id_cartel = $request->input('cartel');
-
+        
         Cartele::eliminar($id_cartel);
-
+        
         Log::info("Redirigiendo a consejo.administracion.");
+        return redirect()->route('consejo.administracion');
+    }
+
+    public function modificarCarteles(REQUEST $request) {
+        $cartel = Cartele::findOrFail($request->input('cartel'));
+
+        return view('consejo.modificarCarteles', compact('cartel'));
+    }
+
+    public function updateCarteles(REQUEST $request) {
+        $id_cartel = $request->input('modificar_cartel_id');
+        $cartel = Cartele::findOrFail($id_cartel);
+        $autor = $request->input('modificar_cartel_autor');
+        $anio = $request->input('modificar_cartel_anio');
+
+        if ($request->has('modificar_cartel_imagen') && $request->file('modificar_cartel_imagen')->isValid()) {
+            $imagen = $request->file('modificar_cartel_imagen');
+            
+            if (File::exists(public_path('img/' . $cartel->imagen))) {
+                File::delete(public_path('img/' . $cartel->imagen));
+            }
+            
+            $nombreImagen = $imagen->getClientOriginalName();
+            $imagen->move(public_path('img'), $nombreImagen);
+            
+            Cartele::where('id', $id_cartel)->update(['imagen' => $nombreImagen, 'autor' => $autor, 'anio' => $anio]);
+        } else {
+            Cartele::where('id', $id_cartel)->update(['autor' => $autor, 'anio' => $anio]);
+        }
+
+        return redirect()->route('consejo.administracion');
+    }
+
+    public function insertarCarteles(REQUEST $request) {
+        $id_consejo = $request->input('nuevo_cartel_id_consejo');
+        $imagen = $request->file('nuevo_cartel_imagen');
+        
+        $nombreImagen = $imagen->getClientOriginalName();
+        $imagen->move(public_path('img'), $nombreImagen);
+
+        $autor = $request->input('nuevo_cartel_autor');
+        $anio = $request->input('nuevo_cartel_anio');
+
+        Cartele::insert(['id_consejo' => $id_consejo, 'imagen' => $nombreImagen, 'autor' => $autor, 'anio' => $anio]);
+
         return redirect()->route('consejo.administracion');
     }
 
@@ -147,6 +192,22 @@ class ConsejoController extends Controller
         Pregone::eliminar($id_pregon);
 
         Log::info("Redirigiendo a consejo.administracion.");
+        return redirect()->route('consejo.administracion');
+    }
+
+    public function modificarPregoneros(REQUEST $request) {
+        $cartel = Cartele::findOrFail($request->input('cartel'));
+
+        return view('consejo.modificarPregoneros', compact('cartel'));
+    }
+
+    public function updatePregoneros(REQUEST $request) {
+        $id_pregon = $request->input('modificar_pregon_id');
+        $pregonero = $request->input('modificar_pregon_pregonero');
+        $anio = $request->input('modificar_pregon_anio');
+
+        Pregone::where('id', $id_pregon)->update(['pregonero' => $pregonero, 'anio' => $anio]);
+
         return redirect()->route('consejo.administracion');
     }
 }

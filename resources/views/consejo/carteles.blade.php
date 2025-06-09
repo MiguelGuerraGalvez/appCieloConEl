@@ -15,8 +15,10 @@
 
     <article class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-8 gap-y-24 mt-8 w-[80vw] text-center">
         @foreach ($carteles as $cartel)
-            <a href="../img/{{$cartel->imagen}}">
-                <div class="bg-no-repeat bg-cover bg-center h-[20rem] lg:h-[30rem]" style="background-image: url(../img/{{$cartel->imagen}});"></div>
+            <a class="group block" href="../img/{{$cartel->imagen}}">
+                <div class="overflow-hidden">
+                    <div class="bg-no-repeat bg-cover bg-center h-[20rem] lg:h-[30rem] transition-transform duration-300 group-hover:scale-105" style="background-image: url(../img/{{$cartel->imagen}});"></div>
+                </div>
                 <p class="mt-8">Año: {{$cartel->anio}}</p>
                 <p>Autor: {{$cartel->autor}}</p>
             </a>

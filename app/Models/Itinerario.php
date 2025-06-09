@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Support\Facades\File;
 
 class Itinerario extends Model
 {
@@ -26,6 +27,9 @@ class Itinerario extends Model
 
     public static function eliminar($id) {
         $registro = parent::findOrFail($id);
+        if (File::exists(public_path('img/' . $registro->imagen))) {
+            File::delete(public_path('img/' . $registro->imagen));
+        }
         $registro->delete();
     }
 
