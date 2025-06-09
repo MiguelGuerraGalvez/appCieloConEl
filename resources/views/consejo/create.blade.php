@@ -116,7 +116,7 @@
     <div class="bg-[#8C52FF] h-4 max-w-full"></div>
 
     <section>
-        <h1>ADMINISTRACIÓN DE PREGONEROS</h1>
+        <h1>ADMINISTRACIÓN DE PREGONES</h1>
 
         <table>
             <tr>
@@ -130,7 +130,7 @@
                     <td>{{ $pregon->anio }}</td>
                     <td>{{ $pregon->pregonero }}</td>
                     <td>
-                        <form action="{{ route('consejo.modificarPregoneros') }}" method="post">
+                        <form action="{{ route('consejo.modificarPregones') }}" method="post">
                             @csrf
                             <input type="hidden" name="pregon" id="pregon" value="{{ $pregon->id }}">
                             <input type="submit" name="pregon_modificar" id="pregon_modificar" value="MODIFICAR">
@@ -138,7 +138,7 @@
                     </td>
 
                     <td>
-                        <form action="{{ route('consejo.eliminarPregoneros') }}" method="post">
+                        <form action="{{ route('consejo.eliminarPregones') }}" method="post">
                             @csrf
                             <input type="hidden" name="pregon" id="pregon" value="{{ $pregon->id }}">
                             <input type="submit" name="pregon_eliminar" id="pregon_eliminar" value="ELIMINAR">
@@ -149,10 +149,11 @@
         </table>
 
         <div>
-            <form action="{{ route('consejo.insertarPregoneros') }}" method="post">
+            <form action="{{ route('consejo.insertarPregones') }}" method="post">
                 @csrf
+                <input type="hidden" name="nuevo_pregon_id_consejo" id="nuevo_pregon_id_consejo" value="{{ Auth::user()->id }}">
                 <input type="text" name="nuevo_pregon_pregonero" id="nuevo_pregon_pregonero" placeholder="Escriba aquí el pregonero...">
-                <input type="text" name="nuevo_pregon_anio" id="nuevo_pregon_anio" placeholder="Escriba aquí el año...">
+                <input type="number" name="nuevo_pregon_anio" id="nuevo_pregon_anio" placeholder="Escriba aquí el año...">
                 <input type="submit" name="nuevo_pregon_insertar" id="nuevo_pregon_insertar" value="INSERTAR">
             </form>
         </div>

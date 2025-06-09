@@ -186,7 +186,7 @@ class ConsejoController extends Controller
         return redirect()->route('consejo.administracion');
     }
 
-    public function eliminarPregoneros(REQUEST $request) {
+    public function eliminarPregones(REQUEST $request) {
         $id_pregon = $request->input('pregon');
 
         Pregone::eliminar($id_pregon);
@@ -195,18 +195,29 @@ class ConsejoController extends Controller
         return redirect()->route('consejo.administracion');
     }
 
-    public function modificarPregoneros(REQUEST $request) {
-        $cartel = Cartele::findOrFail($request->input('cartel'));
+    public function modificarPregones(REQUEST $request) {
+        $pregon = Pregone::findOrFail($request->input('pregon'));
 
-        return view('consejo.modificarPregoneros', compact('cartel'));
+        return view('consejo.modificarPregones', compact('pregon'));
     }
 
-    public function updatePregoneros(REQUEST $request) {
+    public function updatePregones(REQUEST $request) {
         $id_pregon = $request->input('modificar_pregon_id');
         $pregonero = $request->input('modificar_pregon_pregonero');
         $anio = $request->input('modificar_pregon_anio');
 
         Pregone::where('id', $id_pregon)->update(['pregonero' => $pregonero, 'anio' => $anio]);
+
+        return redirect()->route('consejo.administracion');
+    }
+
+    public function insertarPregones(REQUEST $request) {
+        $id_consejo = $request->input('nuevo_pregon_id_consejo');
+
+        $pregonero = $request->input('nuevo_pregon_pregonero');
+        $anio = $request->input('nuevo_pregon_anio');
+
+        Pregone::insert(['id_consejo' => $id_consejo, 'pregonero' => $pregonero, 'anio' => $anio]);
 
         return redirect()->route('consejo.administracion');
     }
