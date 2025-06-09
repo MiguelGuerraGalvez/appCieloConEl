@@ -20,7 +20,7 @@
         @if (Route::currentRouteName() !== 'welcome')
         <figure class="w-[7rem] h-[7rem]">
             <button id="openModal" class="focus:outline-none">
-                <img class="w-full h-full object-contain" src="@yield('logo')img/ICONO_USUARIO.png" alt="Usuario">
+                <img class="w-full h-full object-contain" src="@yield('logo')img/{{ Auth::user()->icon }}" alt="Usuario">
             </button>
         </figure>
             <!-- MODAL -->
@@ -28,7 +28,7 @@
                 <div class="bg-[#8C52FF] text-center text-white p-8 rounded-lg max-w-lg w-[90%] relative">
                     <button id="closeModal" class="absolute top-2 right-2 text-white hover:text-gray-300 text-xl">&times;</button>
 
-                    <img class="w-full h-[10rem] lg:h-[15rem] object-contain" src="@yield('logo')img/ICONO_USUARIO.png" alt="Usuario">
+                    <img class="w-full h-[10rem] lg:h-[15rem] object-contain" src="@yield('logo')img/{{ Auth::user()->icon }}" alt="Usuario">
 
                     <h2 class="text-2xl font-bold mb-4 text-center">{{ Auth::user()->name }}</h2>
 
@@ -40,15 +40,17 @@
                         @endif
                     @endif
 
-                    <form method="POST" action="{{ route('logout') }}">
-                        @csrf
+                    <div class="flex justify-center mt-6">
+                        <form method="POST" action="{{ route('logout') }}">
+                            @csrf
+                            <button type="submit"
+                                onclick="event.preventDefault(); this.closest('form').submit();"
+                                class="text-white hover:text-gray-300 underline text-lg">
+                                {{ __('Cerrar Sesión') }}
+                            </button>
+                        </form>
+                    </div>
 
-                        <x-dropdown-link class="text-white hover:text-gray-600 underline" :href="route('logout')"
-                                onclick="event.preventDefault();
-                                            this.closest('form').submit();">
-                            {{ __('Cerrar Sesión') }}
-                        </x-dropdown-link>
-                    </form>
                 </div>
             </div>
         @endif
