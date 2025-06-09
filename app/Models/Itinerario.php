@@ -28,4 +28,5 @@ class Itinerario extends Model
         $registro = parent::findOrFail($id);
         $registro->delete();
     }
+
 }

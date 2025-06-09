@@ -48,4 +48,9 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public static function eliminar($id) {
+        $registro = parent::findOrFail($id);
+        $registro->delete();
+    }
 }

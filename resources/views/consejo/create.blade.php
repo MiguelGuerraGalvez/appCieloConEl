@@ -20,12 +20,14 @@
                     <p>{{ $itinerario->nazarenos }}</p>
                     <p>{{ $itinerario->recorrido }}</p>
 
-                    <form action="" method="post">
+                    <form action="{{ route('consejo.aceptarItinerario') }}" method="post">
+                        @csrf
                         <input type="hidden" name="itinerario" id="itinerario" value="{{ $itinerario->id }}">
                         <input type="submit" name="itinerario_aceptar" id="itinerario_aceptar" value="ACEPTAR">
                     </form>
 
-                    <form action="" method="post">
+                    <form action="{{ route('consejo.declinarItinerario') }}" method="post">
+                        @csrf
                         <input type="hidden" name="itinerario" id="itinerario" value="{{ $itinerario->id }}">
                         <input type="submit" name="itinerario_declinar" id="itinerario_declinar" value="DECLINAR">
                     </form>
@@ -48,12 +50,12 @@
                         <img src="../img/{{ $hermandad->escudo }}" alt="Escudo Hermandad Nueva {{ $hermandad->nombre }}">
                     </figure>
 
-                    <form action="" method="post">
+                    <form action="{{ route('consejo.aceptarHermandad') }}" method="post">
                         <input type="hidden" name="hermandad" id="hermandad" value="{{ $hermandad->id }}">
                         <input type="submit" name="hermandad_aceptar" id="hermandad_aceptar" value="ACEPTAR">
                     </form>
 
-                    <form action="" method="post">
+                    <form action="{{ route('consejo.declinarHermandad') }}" method="post">
                         <input type="hidden" name="hermandad" id="hermandad" value="{{ $hermandad->id }}">
                         <input type="submit" name="hermandad_declinar" id="hermandad_declinar" value="DECLINAR">
                     </form>
@@ -79,14 +81,14 @@
                     <td>{{ $cartel->anio }}</td>
                     <td>{{ $cartel->autor }}</td>
                     <td>
-                        <form action="" method="post">
+                        <form action="{{ route('consejo.modificarCarteles') }}" method="post">
                             <input type="hidden" name="cartel" id="cartel" value="{{ $cartel->id }}">
                             <input type="submit" name="cartel_modificar" id="cartel_modificar" value="MODIFICAR">
                         </form>
                     </td>
 
                     <td>
-                        <form action="" method="post">
+                        <form action="{{ route('consejo.eliminarCarteles') }}" method="post">
                             <input type="hidden" name="cartel" id="cartel" value="{{ $cartel->id }}">
                             <input type="submit" name="cartel_eliminar" id="cartel_eliminar" value="ELIMINAR">
                         </form>
@@ -96,7 +98,7 @@
         </table>
 
         <div>
-            <form action="" method="post">
+            <form action="{{ route('consejo.nuevoCarteles') }}" method="post">
                 <input type="file" name="nuevo_cartel_imagen" id="nuevo_cartel_imagen">
                 <input type="text" name="nuevo_cartel_autor" id="nuevo_cartel_autor" placeholder="Escriba aquí el autor...">
                 <input type="text" name="nuevo_cartel_anio" id="nuevo_cartel_anio" placeholder="Escriba aquí el año...">
@@ -122,14 +124,14 @@
                     <td>{{ $pregon->anio }}</td>
                     <td>{{ $pregon->pregonero }}</td>
                     <td>
-                        <form action="" method="post">
+                        <form action="{{ route('consejo.modificarPregoneros') }}" method="post">
                             <input type="hidden" name="pregon" id="pregon" value="{{ $pregon->id }}">
                             <input type="submit" name="pregon_modificar" id="pregon_modificar" value="MODIFICAR">
                         </form>
                     </td>
 
                     <td>
-                        <form action="" method="post">
+                        <form action="{{ route('consejo.eliminarPregoneros') }}" method="post">
                             <input type="hidden" name="pregon" id="pregon" value="{{ $pregon->id }}">
                             <input type="submit" name="pregon_eliminar" id="pregon_eliminar" value="ELIMINAR">
                         </form>
@@ -139,7 +141,7 @@
         </table>
 
         <div>
-            <form action="" method="post">
+            <form action="{{ route('consejo.nuevoPregoneros') }}" method="post">
                 <input type="text" name="nuevo_pregon_pregonero" id="nuevo_pregon_pregonero" placeholder="Escriba aquí el pregonero...">
                 <input type="text" name="nuevo_pregon_anio" id="nuevo_pregon_anio" placeholder="Escriba aquí el año...">
                 <input type="submit" name="nuevo_pregon_insertar" id="nuevo_pregon_insertar" value="INSERTAR">

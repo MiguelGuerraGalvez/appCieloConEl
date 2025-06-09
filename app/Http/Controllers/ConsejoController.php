@@ -12,6 +12,8 @@ use App\Models\Titulares_itinerario;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Log;
 
 class ConsejoController extends Controller
 {
@@ -87,5 +89,64 @@ class ConsejoController extends Controller
         $pregones = Pregone::all();
         
         return view('consejo.create', compact('itinerariosNoAceptados', 'nuevasHermandades', 'carteles', 'pregones'));
+    }
+
+    public function aceptarItinerario(REQUEST $request) {
+        $id_itinerario = $request->input('itinerario');
+
+        Itinerario::where('id', $id_itinerario)->update(['aceptado' => 1]);
+
+        Log::info("Redirigiendo a consejo.administracion.");
+        return redirect()->route('consejo.administracion');
+    }
+
+    public function declinarItinerario(REQUEST $request) {
+        $id_itinerario = $request->input('itinerario');
+        $itinerario = Itinerario::findOrFail($id_itinerario);
+
+        if (File::exists(public_path('img/' . $itinerario->imagen))) {
+            File::delete(public_path('img/' . $itinerario->imagen));
+        }
+
+        Itinerario::eliminar($id_itinerario);
+
+        Log::info("Redirigiendo a consejo.administracion con: ");
+        return redirect()->route('consejo.administracion');
+    }
+
+    public function aceptarHermandad(REQUEST $request) {
+        $id_hermandad = $request->input('hermandad');
+
+        User::where('id', $id_hermandad)->update(['rol' => 'hermandad']);
+
+        Log::info("Redirigiendo a consejo.administracion.");
+        return redirect()->route('consejo.administracion');
+    }
+
+    public function declinarHermandad(REQUEST $request) {
+        $id_hermandad = $request->input('hermandad');
+
+        User::eliminar($id_hermandad);
+
+        Log::info("Redirigiendo a consejo.administracion.");
+        return redirect()->route('consejo.administracion');
+    }
+
+    public function eliminarCarteles(REQUEST $request) {
+        $id_cartel = $request->input('cartel');
+
+        Cartele::eliminar($id_cartel);
+
+        Log::info("Redirigiendo a consejo.administracion.");
+        return redirect()->route('consejo.administracion');
+    }
+
+    public function eliminarPregoneros(REQUEST $request) {
+        $id_pregon = $request->input('pregon');
+
+        Pregone::eliminar($id_pregon);
+
+        Log::info("Redirigiendo a consejo.administracion.");
+        return redirect()->route('consejo.administracion');
     }
 }
