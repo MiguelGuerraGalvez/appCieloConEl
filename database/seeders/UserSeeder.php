@@ -17,7 +17,7 @@ class UserSeeder extends Seeder
 
         $u1->name = 'Miguel';
         $u1->email = 'miguel.guerra-galvez@iesruizgijon.com';
-        $u1->icon = 'Usuario_Default.png';
+        $u1->icon = 'HEADER_ENLACE_HERMANDADES.jpg';
         $u1->tel_number = 722783138;
         $u1->password = '12345678';
         $u1->rol = 'user';

@@ -18,17 +18,19 @@
             </figure>
         </a>
         @if (Route::currentRouteName() !== 'welcome')
-        <figure class="w-[7rem] h-[7rem]">
+        <figure class="w-[10rem] h-[10rem] rounded-full overflow-hidden">
             <button id="openModal" class="focus:outline-none">
-                <img class="w-full h-full object-contain" src="@yield('logo')img/{{ Auth::user()->icon }}" alt="Usuario">
+                <img class="w-full h-full object-cover" src="@yield('logo')img/{{ Auth::user()->icon }}" alt="Usuario">
             </button>
         </figure>
             <!-- MODAL -->
             <div id="plantillaModal" class="fixed inset-0 bg-black/50 flex items-center justify-center z-50 hidden">
-                <div class="bg-[#8C52FF] text-center text-white p-8 rounded-lg max-w-lg w-[90%] relative">
+                <div class="bg-[#8C52FF] flex flex-col items-center text-center text-white p-8 rounded-lg max-w-lg w-[90%] relative">
                     <button id="closeModal" class="absolute top-2 right-2 text-white hover:text-gray-300 text-xl">&times;</button>
-
-                    <img class="w-full h-[10rem] lg:h-[15rem] object-contain" src="@yield('logo')img/{{ Auth::user()->icon }}" alt="Usuario">
+                    
+                    <figure class="w-[10rem] h-[10rem] lg:w-[15rem] lg:h-[15rem] rounded-full overflow-hidden">
+                        <img class="w-full h-full object-cover" src="@yield('logo')img/{{ Auth::user()->icon }}" alt="Usuario">
+                    </figure>
 
                     <h2 class="text-2xl font-bold mb-4 text-center">{{ Auth::user()->name }}</h2>
 
