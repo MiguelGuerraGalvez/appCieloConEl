@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Hermandade;
+use App\Models\Titulare;
 use App\Models\User;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
@@ -36,15 +38,44 @@ class RegisteredUserController extends Controller
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
-        $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'tel_number' => str_replace(' ', '', $request->tel_number),
-            'password' => Hash::make($request->password),
-        ]);
+        if ($request->has('perfil_hermandad')){
+            $user = User::create([
+                'name' => $request->name,
+                'email' => $request->email,
+                'tel_number' => str_replace(' ', '', $request->tel_number),
+                'password' => Hash::make($request->password),
+                'rol' => 'nuevaHermandad',
+                'icon' => 'Usuario_Default.png',
+            ]);
+            $ultimo_usuario = User::orderBy('created_at', 'desc')->first();
+            $hermadad = Hermandade::create([
+                'id_usuario' => $ultimo_usuario->id,
+                'nombre_completo' => $request->nombre_completo,
+                'nombre' => $ultimo_usuario->name,
+                'escudo' => $ultimo_usuario->icon,
+            ]);
+            $ultima_hermandad = Hermandade::orderBy('created_at', 'desc')->first();
+            $titular_corto = $request->input('titular_corto');
+            $titular_completo = $request->input('titular_completo');
+            for ($i=0; $i<count($titular_corto)-1; $i++){
+                $titular = Titulare::create([
+                    'id_hermandad' => $ultima_hermandad->id,
+                    'nombre_completo' => $titular_completo[$i],
+                    'nombre_corto' => $titular_corto[$i],
+                ]);
+            }
+        }else{
+            $user = User::create([
+                'name' => $request->name,
+                'email' => $request->email,
+                'tel_number' => str_replace(' ', '', $request->tel_number),
+                'password' => Hash::make($request->password),
+                'rol' => 'user',
+                'icon' => 'Usuario_Default.png',
+            ]);
+        }
 
         event(new Registered($user));
-
         Auth::login($user);
 
         return redirect()->intended('/principal');
