@@ -53,14 +53,26 @@
             <x-input-error :messages="$errors->get('perfil_hermandad')" class="mt-2" />
         </div>
 
-        {{-- Nombre completo de Hermandad --}}
-        <div class="mt-4">
-            <x-input-label for="nombre_completo" :value="__('Nombre completo de la Hermandad')" />
-            <x-text-input id="nombre_completo" class="block mt-1 w-full" type="text" name="nombre_completo"/>
-            <x-input-error :messages="$errors->get('nombre_completo')" class="mt-2" />
-        </div>
+        {{-- Campos condicionales: Hermandad y Titulares --}}
+        <div id="hermandad-fields" style="display: none;">
+            {{-- Nombre completo de Hermandad --}}
+            <div class="mt-4">
+                <x-input-label for="nombre_completo" :value="__('Nombre completo de la Hermandad')" />
+                <x-text-input id="nombre_completo" class="block mt-1 w-full" type="text" name="nombre_completo" disabled/>
+                <x-input-error :messages="$errors->get('nombre_completo')" class="mt-2" />
+            </div>
 
-        {{-- Titulares --}}
+            {{-- Titulares --}}
+            <div id="titulares-wrapper" class="mt-6 space-y-4">
+                <div class="titular-group">
+                    <x-input-label :value="__('Nombre corto del Titular')" />
+                    <input class="border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm block mt-1 w-full titular-corto" type="text" name="titular_corto[]" disabled />
+
+                    <x-input-label class="mt-2" :value="__('Nombre completo del Titular')" />
+                    <input class="border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm block mt-1 w-full titular-completo" type="text" name="titular_completo[]" disabled />
+                </div>
+            </div>
+        </div>
 
         <div class="flex items-center justify-between text-center mt-4">
             <x-primary-button>
@@ -72,4 +84,94 @@
             </a>
         </div>
     </form>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const wrapper = document.getElementById('titulares-wrapper');
+        const hermandadFields = document.getElementById('hermandad-fields');
+        const checkbox = document.getElementById('perfil_hermandad');
+        const nombreCompletoInput = document.getElementById('nombre_completo');
+
+        function toggleHermandadFields() {
+            const enabled = checkbox.checked;
+            hermandadFields.style.display = enabled ? 'block' : 'none';
+            nombreCompletoInput.disabled = !enabled;
+
+            const inputs = hermandadFields.querySelectorAll('input');
+            inputs.forEach(input => {
+                input.disabled = !enabled;
+            });
+        }
+
+        checkbox.addEventListener('change', toggleHermandadFields);
+        toggleHermandadFields(); // Ejecutar al cargar la página
+
+        function createTitularGroup() {
+            const group = document.createElement('div');
+            group.classList.add('titular-group');
+
+            const labelCorto = document.createElement('label');
+            labelCorto.textContent = 'Nombre corto del Titular';
+            labelCorto.classList.add('block', 'mt-2', 'font-medium', 'text-sm', 'text-gray-700', 'dark:text-gray-300');
+            const inputCorto = document.createElement('input');
+            inputCorto.type = 'text';
+            inputCorto.name = 'titular_corto[]';
+            inputCorto.classList.add('border-gray-300', 'dark:border-gray-700', 'dark:bg-gray-900', 'dark:text-gray-300', 'focus:border-indigo-500', 'dark:focus:border-indigo-600', 'focus:ring-indigo-500', 'dark:focus:ring-indigo-600', 'rounded-md', 'shadow-sm', 'block', 'mt-1', 'w-full', 'titular-corto');
+
+            const labelCompleto = document.createElement('label');
+            labelCompleto.textContent = 'Nombre completo del Titular';
+            labelCompleto.classList.add('block', 'mt-2', 'font-medium', 'text-sm', 'text-gray-700', 'dark:text-gray-300');
+            const inputCompleto = document.createElement('input');
+            inputCompleto.type = 'text';
+            inputCompleto.name = 'titular_completo[]';
+            inputCompleto.classList.add('border-gray-300', 'dark:border-gray-700', 'dark:bg-gray-900', 'dark:text-gray-300', 'focus:border-indigo-500', 'dark:focus:border-indigo-600', 'focus:ring-indigo-500', 'dark:focus:ring-indigo-600', 'rounded-md', 'shadow-sm', 'block', 'mt-1', 'w-full', 'titular-completo');
+
+            inputCorto.addEventListener('input', checkAndAdd);
+            inputCompleto.addEventListener('input', checkAndAdd);
+
+            group.appendChild(labelCorto);
+            group.appendChild(inputCorto);
+            group.appendChild(labelCompleto);
+            group.appendChild(inputCompleto);
+
+            return group;
+        }
+
+        function checkAndAdd() {
+            const groups = wrapper.querySelectorAll('.titular-group');
+            const lastGroup = groups[groups.length - 1];
+            const corto = lastGroup.querySelector('.titular-corto').value.trim();
+            const completo = lastGroup.querySelector('.titular-completo').value.trim();
+
+            if ((corto !== '' || completo !== '') && groups.length === wrapper.querySelectorAll('.titular-group').length) {
+                const newGroup = createTitularGroup();
+                wrapper.appendChild(newGroup);
+
+                // Solo habilitar si el checkbox está marcado
+                if (checkbox.checked) {
+                    const newInputs = newGroup.querySelectorAll('input');
+                    newInputs.forEach(input => input.disabled = false);
+                }
+            }
+
+            // Eliminar grupos vacíos menos el último
+            groups.forEach((group, index) => {
+                if (index < groups.length - 1) {
+                    const cortoVal = group.querySelector('.titular-corto').value.trim();
+                    const completoVal = group.querySelector('.titular-completo').value.trim();
+                    if (cortoVal === '' && completoVal === '') {
+                        group.remove();
+                    }
+                }
+            });
+        }
+
+        // Añadir eventos iniciales al primer grupo
+        const initialGroup = wrapper.querySelector('.titular-group');
+        const inputCortoInit = initialGroup.querySelector('.titular-corto');
+        const inputCompletoInit = initialGroup.querySelector('.titular-completo');
+
+        inputCortoInit.addEventListener('input', checkAndAdd);
+        inputCompletoInit.addEventListener('input', checkAndAdd);
+    });
+</script>
 </x-guest-layout>
