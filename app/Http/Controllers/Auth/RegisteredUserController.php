@@ -65,12 +65,13 @@ class RegisteredUserController extends Controller
                 ]);
             }
         }else{
+
             $user = User::create([
                 'name' => $request->name,
                 'email' => $request->email,
                 'tel_number' => str_replace(' ', '', $request->tel_number),
                 'password' => Hash::make($request->password),
-                'rol' => 'user',
+                'rol' => 'user', // AÑADIDO
                 'icon' => 'Usuario_Default.png',
             ]);
         }
