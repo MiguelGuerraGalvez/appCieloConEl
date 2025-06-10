@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PrincipalController;
 use App\Http\Controllers\HermandadController;
 use App\Http\Controllers\ConsejoController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\VolverController;
 use App\Http\Middleware\CheckRole;
 
@@ -17,6 +18,8 @@ Route::middleware('auth')->group(function () {
     
     Route::get('/principal', [PrincipalController::class, 'index'])->name('principal');
     Route::get('/busqueda', [PrincipalController::class, 'buscar']);
+    Route::get('modificarUsuario', [PrincipalController::class, 'modificarUsuario'])->name('principal.modificarUsuario');
+    Route::post('updateUsuario', [PrincipalController::class, 'updateUsuario'])->name('principal.updateUsuario');
 
     Route::get('/hermandades/{hermandad}', [HermandadController::class, 'show'])->name('hermandad');
     

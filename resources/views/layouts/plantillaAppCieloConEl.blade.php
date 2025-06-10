@@ -29,7 +29,7 @@
                     <button id="closeModal" class="absolute top-2 right-2 text-white hover:text-gray-300 text-xl">&times;</button>
                     
                     <figure class="w-[10rem] h-[10rem] lg:w-[15rem] lg:h-[15rem] rounded-full overflow-hidden">
-                        <img class="w-full h-full object-cover" src="@yield('logo')img/{{ Auth::user()->icon }}" alt="Usuario">
+                        <a href="{{ route('principal.modificarUsuario') }}"><img class="w-full h-full object-cover" src="@yield('logo')img/{{ Auth::user()->icon }}" alt="Usuario"></a>
                     </figure>
 
                     <h2 class="text-2xl font-bold mb-4 text-center">{{ Auth::user()->name }}</h2>
