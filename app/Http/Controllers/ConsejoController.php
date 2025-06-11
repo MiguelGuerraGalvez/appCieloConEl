@@ -92,44 +92,68 @@ class ConsejoController extends Controller
     }
 
     public function aceptarItinerario(REQUEST $request) {
-        $id_itinerario = $request->input('itinerario');
+        try {
+            $id_itinerario = $request->input('itinerario');
 
-        Itinerario::where('id', $id_itinerario)->update(['aceptado' => 1]);
+            Itinerario::where('id', $id_itinerario)->update(['aceptado' => 1]);
 
-        Log::info("Redirigiendo a consejo.administracion.");
-        return redirect()->route('consejo.administracion');
+            Log::info("Redirigiendo a consejo.administracion.");
+            return redirect()->route('consejo.administracion');
+        } catch (\Exception $e) {
+            Log::error('Error al aceptar el itinerario: ' . $e->getMessage());
+
+            return redirect()->back()->withErrors(['error' => 'Ha ocurrido un error al aceptar el itinerario.']);
+        }
     }
 
     public function declinarItinerario(REQUEST $request) {
-        $id_itinerario = $request->input('itinerario');
-        $itinerario = Itinerario::findOrFail($id_itinerario);
+        try {
+            $id_itinerario = $request->input('itinerario');
+            $itinerario = Itinerario::findOrFail($id_itinerario);
 
-        if (File::exists(public_path('img/' . $itinerario->imagen))) {
-            File::delete(public_path('img/' . $itinerario->imagen));
+            if (File::exists(public_path('img/' . $itinerario->imagen))) {
+                File::delete(public_path('img/' . $itinerario->imagen));
+            }
+
+            Itinerario::eliminar($id_itinerario);
+
+            Log::info("Redirigiendo a consejo.administracion con: ");
+            return redirect()->route('consejo.administracion');
+        } catch (\Exception $e) {
+            Log::error('Error al declinar el itinerario: ' . $e->getMessage());
+
+            return redirect()->back()->withErrors(['error' => 'Ha ocurrido un error al declinar el itinerario.']);
         }
-
-        Itinerario::eliminar($id_itinerario);
-
-        Log::info("Redirigiendo a consejo.administracion con: ");
-        return redirect()->route('consejo.administracion');
     }
 
     public function aceptarHermandad(REQUEST $request) {
-        $id_hermandad = $request->input('hermandad');
-        
-        User::where('id', $id_hermandad)->update(['rol' => 'hermandad']);
-        
-        Log::info("Redirigiendo a consejo.administracion.");
-        return redirect()->route('consejo.administracion');
+        try {
+            $id_hermandad = $request->input('hermandad');
+            
+            User::where('id', $id_hermandad)->update(['rol' => 'hermandad']);
+            
+            Log::info("Redirigiendo a consejo.administracion.");
+            return redirect()->route('consejo.administracion');
+        } catch (\Exception $e) {
+            Log::error('Error al aceptar la hermandad: ' . $e->getMessage());
+
+            return redirect()->back()->withErrors(['error' => 'Ha ocurrido un error al aceptar la hermandad.']);
+        }
     }
     
     public function declinarHermandad(REQUEST $request) {
-        $id_hermandad = $request->input('hermandad');
+        try{
+            $id_hermandad = $request->input('hermandad');
 
-        User::eliminar($id_hermandad);
+            User::eliminar($id_hermandad);
 
-        Log::info("Redirigiendo a consejo.administracion.");
-        return redirect()->route('consejo.administracion');
+            Log::info("Redirigiendo a consejo.administracion.");
+            return redirect()->route('consejo.administracion');
+        } catch (\Exception $e) {
+            Log::error('Error al declinar la hermandad: ' . $e->getMessage());
+
+            return redirect()->back()->withErrors(['error' => 'Ha ocurrido un error al declinar la hermandad.']);
+        }
     }
     
     public function deleteCarteles(REQUEST $request) {

@@ -60,32 +60,32 @@ class HermandadController extends Controller
 
     public function nuevoItinerario(REQUEST $request) {
         try{
-        $hermandad = Hermandade::where('id_usuario', Auth::user()->id)->first();
-        $id_dia = $request->input('dia_itinerario_nuevo');
-        $dia = Dia::findOrFail($id_dia);
-        $nazarenos = $request->input('nazarenos_itinerario_nuevo');
-        $hora_salida = $request->input('hora_salida_itinerario_nuevo');
-        $hora_salida = Carbon::createFromFormat('H:i', $hora_salida)->format('H:i:s');
-        $imagen = $request->file('imagen_itinerario_nuevo');
+            $hermandad = Hermandade::where('id_usuario', Auth::user()->id)->first();
+            $id_dia = $request->input('dia_itinerario_nuevo');
+            $dia = Dia::findOrFail($id_dia);
+            $nazarenos = $request->input('nazarenos_itinerario_nuevo');
+            $hora_salida = $request->input('hora_salida_itinerario_nuevo');
+            $hora_salida = Carbon::createFromFormat('H:i', $hora_salida)->format('H:i:s');
+            $imagen = $request->file('imagen_itinerario_nuevo');
 
-        $nombreImagen = $imagen->getClientOriginalName();
-        $imagen->move(public_path('img'), $nombreImagen);
+            $nombreImagen = $imagen->getClientOriginalName();
+            $imagen->move(public_path('img'), $nombreImagen);
 
-        $itinerario = $request->input('itinerario_nuevo');
-        
-        Itinerario::insertar($hermandad->id, $dia->dia, $nazarenos, $hora_salida, $itinerario, $nombreImagen);
-        
-        $titulares = Titulare::where('id_hermandad', $hermandad->id)->get();
-        $ultimo_itinerario = Itinerario::orderBy('created_at', 'desc')->first();
+            $itinerario = $request->input('itinerario_nuevo');
+            
+            Itinerario::insertar($hermandad->id, $dia->dia, $nazarenos, $hora_salida, $itinerario, $nombreImagen);
+            
+            $titulares = Titulare::where('id_hermandad', $hermandad->id)->get();
+            $ultimo_itinerario = Itinerario::orderBy('created_at', 'desc')->first();
 
 
-        foreach ($titulares as $titular) {
-            if (!empty($_REQUEST['titular_'.$titular->id.'_itinerario_nuevo'])) {
-                Titulares_itinerario::insertar($titular->id, $ultimo_itinerario->id);
+            foreach ($titulares as $titular) {
+                if (!empty($_REQUEST['titular_'.$titular->id.'_itinerario_nuevo'])) {
+                    Titulares_itinerario::insertar($titular->id, $ultimo_itinerario->id);
+                }
             }
-        }
 
-        return redirect()->route('hermandad.administracion', ['hermandad' => $hermandad->nombre])->with('success', 'Itinerario insertado correctamente.');
+            return redirect()->route('hermandad.administracion', ['hermandad' => $hermandad->nombre])->with('success', 'Itinerario insertado correctamente.');
         } catch (\Exception $e) {
             Log::error('Error al insertar itinerario: ' . $e->getMessage());
 
@@ -101,12 +101,12 @@ class HermandadController extends Controller
 
     public function deleteItinerario(REQUEST $request) {
         try{
-        $hermandad = Hermandade::where('id_usuario', Auth::user()->id)->first();
-        $id_itinerario = $request->input('itinerario_eliminar');
+            $hermandad = Hermandade::where('id_usuario', Auth::user()->id)->first();
+            $id_itinerario = $request->input('itinerario_eliminar');
 
-        Itinerario::eliminar($id_itinerario);
+            Itinerario::eliminar($id_itinerario);
 
-        return redirect()->route('hermandad.administracion', ['hermandad' => $hermandad->nombre])->with('success', 'Itinerario borrado correctamente.');
+            return redirect()->route('hermandad.administracion', ['hermandad' => $hermandad->nombre])->with('success', 'Itinerario borrado correctamente.');
         } catch (\Exception $e) {
             Log::error('Error al borrar itinerario: ' . $e->getMessage());
 
@@ -115,85 +115,109 @@ class HermandadController extends Controller
     }
 
     public function contratarBanda(REQUEST $request) {
-        $hermandad = Hermandade::where('id_usuario', Auth::user()->id)->first();
-        $id_titular = $request->input('titular_banda');
-        $id_formacion = $request->input('formacion_banda');
-        $formacion = Formacione::findOrFail($id_formacion);
-        $banda = $request->input('banda');
+        try {
+            $hermandad = Hermandade::where('id_usuario', Auth::user()->id)->first();
+            $id_titular = $request->input('titular_banda');
+            $id_formacion = $request->input('formacion_banda');
+            $formacion = Formacione::findOrFail($id_formacion);
+            $banda = $request->input('banda');
 
-        DB::table('titulares')->where('id', $id_titular)->update(['banda' => $formacion->formacion." ".$banda]);
+            DB::table('titulares')->where('id', $id_titular)->update(['banda' => $formacion->formacion." ".$banda]);
 
-        return redirect()->route('hermandad.administracion', ['hermandad' => $hermandad->nombre]);
+            return redirect()->route('hermandad.administracion', ['hermandad' => $hermandad->nombre]);
+        } catch (\Exception $e) {
+            Log::error('Error al contratar la banda: ' . $e->getMessage());
+
+            return redirect()->back()->withErrors(['error' => 'Ha ocurrido un error al contratar la banda.']);
+        }
     }
 
     public function gestionHermanos(REQUEST $request) {
-        $hermandad = Hermandade::where('id_usuario', Auth::user()->id)->first();
-        $cambio_hermanos = $request->input('cambio_hermanos');
+        try {
+            $hermandad = Hermandade::where('id_usuario', Auth::user()->id)->first();
+            $cambio_hermanos = $request->input('cambio_hermanos');
 
-        if ($request->has('enviar_nuevos_hermanos')) {
-            $hermanos = $hermandad->hermanos + $cambio_hermanos;
-        } else {
-            $hermanos = $hermandad->hermanos - $cambio_hermanos;
+            if ($request->has('enviar_nuevos_hermanos')) {
+                $hermanos = $hermandad->hermanos + $cambio_hermanos;
+            } else {
+                $hermanos = $hermandad->hermanos - $cambio_hermanos;
+            }
+
+            DB::table('hermandades')->where('id', $hermandad->id)->update(['hermanos' => $hermanos]);
+
+            return redirect()->route('hermandad.administracion', ['hermandad' => $hermandad->nombre]);
+        } catch (\Exception $e) {
+            Log::error('Error al gestionar los hermanos: ' . $e->getMessage());
+
+            return redirect()->back()->withErrors(['error' => 'Ha ocurrido un error al gestionar los hermanos.']);
         }
-
-        DB::table('hermandades')->where('id', $hermandad->id)->update(['hermanos' => $hermanos]);
-
-        return redirect()->route('hermandad.administracion', ['hermandad' => $hermandad->nombre]);
     }
 
     public function gestionCuota(REQUEST $request) {
-        $hermandad = Hermandade::where('id_usuario', Auth::user()->id)->first();
-        $nueva_cuota = $request->input('cuota');
+        try {
+            $hermandad = Hermandade::where('id_usuario', Auth::user()->id)->first();
+            $nueva_cuota = $request->input('cuota');
 
-        DB::table('hermandades')->where('id', $hermandad->id)->update(['cuota' => $nueva_cuota]);
+            DB::table('hermandades')->where('id', $hermandad->id)->update(['cuota' => $nueva_cuota]);
 
-        return redirect()->route('hermandad.administracion', ['hermandad' => $hermandad->nombre]);
+            return redirect()->route('hermandad.administracion', ['hermandad' => $hermandad->nombre]);
+        } catch (\Exception $e) {
+            Log::error('Error al gestionar la cuota: ' . $e->getMessage());
+
+            return redirect()->back()->withErrors(['error' => 'Ha ocurrido un error al gestionar la cuota.']);
+        }
     }
 
     public function cambiarFotos(REQUEST $request) {
-        $hermandad = Hermandade::where('id_usuario', Auth::user()->id)->first();
+        try {
+            $hermandad = Hermandade::where('id_usuario', Auth::user()->id)->first();
 
-        if ($request->has('enviar_header')) {
-            $imagen = $request->file('header');
+            if ($request->has('enviar_header')) {
+                $imagen = $request->file('header');
 
-            if ($imagen) {
-                if (File::exists(public_path('img/' . $hermandad->header))) {
-                    File::delete(public_path('img/' . $hermandad->header));
+                if ($imagen) {
+                    if (File::exists(public_path('img/' . $hermandad->header))) {
+                        File::delete(public_path('img/' . $hermandad->header));
+                    }
                 }
+                
+                
+                $nombreImagen = $imagen->getClientOriginalName();
+                $extension = substr($nombreImagen, strrpos($nombreImagen, "."));
+
+                $nombreSinEspacios = str_replace([' ', '!', '"', '#', '$', '%', '&', "'", '(', ')', '*', '+', ',', '/', ':', ';', '<', '=', '>', '?', '@', '[', '\\', ']', '^', '`', '{', '|', '}', '~'], '_', $hermandad->nombre);
+                $nombreSinEspacios = str_replace(['á', 'é', 'í', 'ó', 'ú', 'Á', 'É', 'Í', 'Ó', 'Ú'], ['a', 'e', 'i', 'o', 'u', 'A', 'E', 'I', 'O', 'U'], $nombreSinEspacios);
+                $nombreImagenNuevo =  'Header_'.$nombreSinEspacios.''.$extension;
+                $imagen->move(public_path('img'), $nombreImagenNuevo);
+                
+                DB::table('hermandades')->where('id', $hermandad->id)->update(['header' => $nombreImagenNuevo]);
+            } else {
+                $titular = Titulare::findOrFail($request->input('id_titular_imagen_antiguo'));
+                $imagen = $request->file('imagen_' . $titular->id);
+
+                if (File::exists(public_path('img/' . $titular->imagen))) {
+                    File::delete(public_path('img/' . $titular->imagen));
+                }
+
+                $nombreImagen = $imagen->getClientOriginalName();
+                $extension = substr($nombreImagen, strrpos($nombreImagen, "."));
+
+                $nombreTitularSinEspacios = str_replace([' ', '!', '"', '#', '$', '%', '&', "'", '(', ')', '*', '+', ',', '/', ':', ';', '<', '=', '>', '?', '@', '[', '\\', ']', '^', '`', '{', '|', '}', '~'], '_', $titular->nombre_corto);
+                $nombreTitularSinEspacios = str_replace(['á', 'é', 'í', 'ó', 'ú', 'Á', 'É', 'Í', 'Ó', 'Ú'], ['a', 'e', 'i', 'o', 'u', 'A', 'E', 'I', 'O', 'U'], $nombreTitularSinEspacios);
+                $nombreSinEspacios = str_replace([' ', '!', '"', '#', '$', '%', '&', "'", '(', ')', '*', '+', ',', '/', ':', ';', '<', '=', '>', '?', '@', '[', '\\', ']', '^', '`', '{', '|', '}', '~'], '_', $hermandad->nombre);
+                $nombreSinEspacios = str_replace(['á', 'é', 'í', 'ó', 'ú', 'Á', 'É', 'Í', 'Ó', 'Ú'], ['a', 'e', 'i', 'o', 'u', 'A', 'E', 'I', 'O', 'U'], $nombreSinEspacios);
+                $nombreImagenNuevo =  'Header_'.$nombreSinEspacios.''.$extension;
+                $nombreImagenNuevo =  'Carrusel_'.$nombreTitularSinEspacios.''.$nombreSinEspacios.''.$extension;
+                $imagen->move(public_path('img'), $nombreImagenNuevo);
+
+                DB::table('titulares')->where('id', $titular->id)->update(['imagen' => $nombreImagenNuevo]);
             }
-            
-            
-            $nombreImagen = $imagen->getClientOriginalName();
-            $extension = substr($nombreImagen, strrpos($nombreImagen, "."));
 
-            $nombreSinEspacios = str_replace([' ', '!', '"', '#', '$', '%', '&', "'", '(', ')', '*', '+', ',', '/', ':', ';', '<', '=', '>', '?', '@', '[', '\\', ']', '^', '`', '{', '|', '}', '~'], '_', $hermandad->nombre);
-            $nombreSinEspacios = str_replace(['á', 'é', 'í', 'ó', 'ú', 'Á', 'É', 'Í', 'Ó', 'Ú'], ['a', 'e', 'i', 'o', 'u', 'A', 'E', 'I', 'O', 'U'], $nombreSinEspacios);
-            $nombreImagenNuevo =  'Header_'.$nombreSinEspacios.''.$extension;
-            $imagen->move(public_path('img'), $nombreImagenNuevo);
-            
-            DB::table('hermandades')->where('id', $hermandad->id)->update(['header' => $nombreImagenNuevo]);
-        } else {
-            $titular = Titulare::findOrFail($request->input('id_titular_imagen_antiguo'));
-            $imagen = $request->file('imagen_' . $titular->id);
+            return redirect()->route('hermandad.administracion', ['hermandad' => $hermandad->nombre]);
+        } catch (\Exception $e) {
+            Log::error('Error al cambiar las fotos: ' . $e->getMessage());
 
-            if (File::exists(public_path('img/' . $titular->imagen))) {
-                File::delete(public_path('img/' . $titular->imagen));
-            }
-
-            $nombreImagen = $imagen->getClientOriginalName();
-            $extension = substr($nombreImagen, strrpos($nombreImagen, "."));
-
-            $nombreTitularSinEspacios = str_replace([' ', '!', '"', '#', '$', '%', '&', "'", '(', ')', '*', '+', ',', '/', ':', ';', '<', '=', '>', '?', '@', '[', '\\', ']', '^', '`', '{', '|', '}', '~'], '_', $titular->nombre_corto);
-            $nombreTitularSinEspacios = str_replace(['á', 'é', 'í', 'ó', 'ú', 'Á', 'É', 'Í', 'Ó', 'Ú'], ['a', 'e', 'i', 'o', 'u', 'A', 'E', 'I', 'O', 'U'], $nombreTitularSinEspacios);
-            $nombreSinEspacios = str_replace([' ', '!', '"', '#', '$', '%', '&', "'", '(', ')', '*', '+', ',', '/', ':', ';', '<', '=', '>', '?', '@', '[', '\\', ']', '^', '`', '{', '|', '}', '~'], '_', $hermandad->nombre);
-            $nombreSinEspacios = str_replace(['á', 'é', 'í', 'ó', 'ú', 'Á', 'É', 'Í', 'Ó', 'Ú'], ['a', 'e', 'i', 'o', 'u', 'A', 'E', 'I', 'O', 'U'], $nombreSinEspacios);
-            $nombreImagenNuevo =  'Header_'.$nombreSinEspacios.''.$extension;
-            $nombreImagenNuevo =  'Carrusel_'.$nombreTitularSinEspacios.''.$nombreSinEspacios.''.$extension;
-            $imagen->move(public_path('img'), $nombreImagenNuevo);
-
-            DB::table('titulares')->where('id', $titular->id)->update(['imagen' => $nombreImagenNuevo]);
+            return redirect()->back()->withErrors(['error' => 'Ha ocurrido un error al cambiar las fotos.']);
         }
-
-        return redirect()->route('hermandad.administracion', ['hermandad' => $hermandad->nombre]);
     }
 }
