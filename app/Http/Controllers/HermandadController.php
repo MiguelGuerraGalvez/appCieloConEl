@@ -87,7 +87,13 @@ class HermandadController extends Controller
         return redirect()->route('hermandad.administracion', ['hermandad' => $hermandad->nombre]);
     }
 
-    public function eliminarItinerario(REQUEST $request) {
+    public function confirmarEliminarItinerario(REQUEST $request) {
+        $itinerario = Itinerario::findOrFail($request->input('itinerario_eliminar'));
+
+        return view('hermandad.confirmarEliminarItinerario', compact('itinerario'));
+    }
+
+    public function deleteItinerario(REQUEST $request) {
         $hermandad = Hermandade::where('id_usuario', Auth::user()->id)->first();
         $id_itinerario = $request->input('itinerario_eliminar');
 

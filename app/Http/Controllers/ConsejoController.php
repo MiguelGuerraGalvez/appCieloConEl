@@ -192,7 +192,13 @@ class ConsejoController extends Controller
         return redirect()->route('consejo.administracion');
     }
 
-    public function eliminarPregones(REQUEST $request) {
+    public function confirmarEliminarPregones(REQUEST $request) {
+        $pregon = Pregone::findOrFail($request->input('pregon'));
+
+        return view('consejo.confirmarEliminarPregones', compact('pregon'));
+    }
+
+    public function deletePregones(REQUEST $request) {
         $id_pregon = $request->input('pregon');
 
         Pregone::eliminar($id_pregon);
@@ -200,6 +206,7 @@ class ConsejoController extends Controller
         Log::info("Redirigiendo a consejo.administracion.");
         return redirect()->route('consejo.administracion');
     }
+
 
     public function modificarPregones(REQUEST $request) {
         $pregon = Pregone::findOrFail($request->input('pregon'));

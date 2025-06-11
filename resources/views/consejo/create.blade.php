@@ -138,7 +138,7 @@
                     </td>
 
                     <td>
-                        <form action="{{ route('consejo.eliminarPregones') }}" method="post">
+                        <form action="{{ route('consejo.confirmarEliminarPregones') }}" method="post">
                             @csrf
                             <input type="hidden" name="pregon" id="pregon" value="{{ $pregon->id }}">
                             <input type="submit" name="pregon_eliminar" id="pregon_eliminar" value="ELIMINAR">

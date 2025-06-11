@@ -66,7 +66,7 @@
             
             @foreach ($itinerarios_aceptados as $itinerario)
                 <div>
-                    <form action="{{ route('hermandad.eliminarItinerario') }}" method="post">
+                    <form action="{{ route('hermandad.confirmarEliminarItinerario') }}" method="post">
                         @csrf
                         <h4>{{$itinerario->dia}}</h4>
                         <p>{{$itinerario->recorrido}}</p>
@@ -91,7 +91,7 @@
             
             @foreach ($itinerarios_no_aceptados as $itinerario)
                 <div>
-                    <form action="{{ route('hermandad.eliminarItinerario') }}" method="post">
+                    <form action="{{ route('hermandad.confirmarEliminarItinerario') }}" method="post">
                         @csrf
                         <h4>{{$itinerario->dia}}</h4>
                         <p>{{$itinerario->recorrido}}</p>

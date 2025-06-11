@@ -42,7 +42,8 @@ Route::middleware(['auth', CheckRole::class.':consejo'])->group(function () {
     Route::post('administracion/modificarCarteles', [ConsejoController::class, 'modificarCarteles'])->name('consejo.modificarCarteles');
     Route::post('administracion/updateCarteles', [ConsejoController::class, 'updateCarteles'])->name('consejo.updateCarteles');
     Route::post('administracion/insertarCarteles', [ConsejoController::class, 'insertarCarteles'])->name('consejo.insertarCarteles');
-    Route::post('administracion/eliminarPregones', [ConsejoController::class, 'eliminarPregones'])->name('consejo.eliminarPregones');
+    Route::post('administracion/confirmarEliminarPregones', [ConsejoController::class, 'confirmarEliminarPregones'])->name('consejo.confirmarEliminarPregones');
+    Route::post('administracion/deletePregones', [ConsejoController::class, 'deletePregones'])->name('consejo.deletePregones');
     Route::post('administracion/modificarPregones', [ConsejoController::class, 'modificarPregones'])->name('consejo.modificarPregones');
     Route::post('administracion/updatePregones', [ConsejoController::class, 'updatePregones'])->name('consejo.updatePregones');
     Route::post('administracion/insertarPregones', [ConsejoController::class, 'insertarPregones'])->name('consejo.insertarPregones');
@@ -51,7 +52,8 @@ Route::middleware(['auth', CheckRole::class.':consejo'])->group(function () {
 Route::middleware(['auth', CheckRole::class.':hermandad'])->group(function () {
     Route::get('administracion/{hermandad}', [HermandadController::class, 'create'])->name('hermandad.administracion');
     Route::post('administracion/nuevoItinerario', [HermandadController::class, 'nuevoItinerario'])->name('hermandad.nuevoItinerario');
-    Route::post('administracion/eliminarItinerario', [HermandadController::class, 'eliminarItinerario'])->name('hermandad.eliminarItinerario');
+    Route::post('administracion/confirmarEliminarItinerario', [HermandadController::class, 'confirmarEliminarItinerario'])->name('hermandad.confirmarEliminarItinerario');
+    Route::post('administracion/deleteItinerario', [HermandadController::class, 'deleteItinerario'])->name('hermandad.deleteItinerario');
     Route::post('administracion/contratarBanda', [HermandadController::class, 'contratarBanda'])->name('hermandad.contratarBanda');
     Route::post('administracion/gestionHermanos', [HermandadController::class, 'gestionHermanos'])->name('hermandad.gestionHermanos');
     Route::post('administracion/gestionCuota', [HermandadController::class, 'gestionCuota'])->name('hermandad.gestionCuota');

@@ -17,7 +17,6 @@
     </form>
     <form action="{{ route('consejo.administracion') }}" method="get">
         @csrf
-        <input type="hidden" name="cartel" id="cartel" value="{{ $cartel->id }}">
         <input type="submit" name="no" id="no" value="DECLINAR">
     </form>
 </body>
