@@ -49,14 +49,19 @@ class PrincipalController extends Controller
         if ($request->has('modificar_usuario_icono') && $request->file('modificar_usuario_icono')->isValid()) {
             $icono = $request->file('modificar_usuario_icono');
             
-            if (File::exists(public_path('img/' . $usuario->icon))) {
+            if (File::exists(public_path('img/' . $usuario->icon)) && $usuario->icon != 'Usuario_Default.png') {
                 File::delete(public_path('img/' . $usuario->icon));
             }
             
             $nombreIcono = $icono->getClientOriginalName();
-            $icono->move(public_path('img'), $nombreIcono);
+            $extension = substr($nombreIcono, strrpos($nombreIcono, "."));
+
+            $iconoSinEspacios = str_replace([' ', '!', '"', '#', '$', '%', '&', "'", '(', ')', '*', '+', ',', '/', ':', ';', '<', '=', '>', '?', '@', '[', '\\', ']', '^', '`', '{', '|', '}', '~'], '_', $usuario->name);
+            $iconoSinEspacios = str_replace(['á', 'é', 'í', 'ó', 'ú', 'Á', 'É', 'Í', 'Ó', 'Ú'], ['a', 'e', 'i', 'o', 'u', 'A', 'E', 'I', 'O', 'U'], $iconoSinEspacios);
+            $nombreIconoNuevo =  'Carrusel_'.$iconoSinEspacios.''.$extension;
+            $icono->move(public_path('img'), $nombreIconoNuevo);
             
-            User::where('id', $id_usuario)->update(['icon' => $nombreIcono, 'name' => $nombre_usuario]);
+            User::where('id', $id_usuario)->update(['icon' => $nombreIconoNuevo, 'name' => $nombre_usuario]);
         } else {
             User::where('id', $id_usuario)->update(['name' => $nombre_usuario]);
         }

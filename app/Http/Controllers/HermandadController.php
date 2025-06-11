@@ -164,9 +164,14 @@ class HermandadController extends Controller
             
             
             $nombreImagen = $imagen->getClientOriginalName();
-            $imagen->move(public_path('img'), $nombreImagen);
+            $extension = substr($nombreImagen, strrpos($nombreImagen, "."));
+
+            $nombreSinEspacios = str_replace([' ', '!', '"', '#', '$', '%', '&', "'", '(', ')', '*', '+', ',', '/', ':', ';', '<', '=', '>', '?', '@', '[', '\\', ']', '^', '`', '{', '|', '}', '~'], '_', $hermandad->nombre);
+            $nombreSinEspacios = str_replace(['á', 'é', 'í', 'ó', 'ú', 'Á', 'É', 'Í', 'Ó', 'Ú'], ['a', 'e', 'i', 'o', 'u', 'A', 'E', 'I', 'O', 'U'], $nombreSinEspacios);
+            $nombreImagenNuevo =  'Header_'.$nombreSinEspacios.''.$extension;
+            $imagen->move(public_path('img'), $nombreImagenNuevo);
             
-            DB::table('hermandades')->where('id', $hermandad->id)->update(['header' => $nombreImagen]);
+            DB::table('hermandades')->where('id', $hermandad->id)->update(['header' => $nombreImagenNuevo]);
         } else {
             $titular = Titulare::findOrFail($request->input('id_titular_imagen_antiguo'));
             $imagen = $request->file('imagen_' . $titular->id);
@@ -176,7 +181,17 @@ class HermandadController extends Controller
             }
 
             $nombreImagen = $imagen->getClientOriginalName();
-            $imagen->move(public_path('img'), $nombreImagen);
+            $extension = substr($nombreImagen, strrpos($nombreImagen, "."));
+
+            $nombreTitularSinEspacios = str_replace([' ', '!', '"', '#', '$', '%', '&', "'", '(', ')', '*', '+', ',', '/', ':', ';', '<', '=', '>', '?', '@', '[', '\\', ']', '^', '`', '{', '|', '}', '~'], '_', $titular->nombre_corto);
+            $nombreTitularSinEspacios = str_replace(['á', 'é', 'í', 'ó', 'ú', 'Á', 'É', 'Í', 'Ó', 'Ú'], ['a', 'e', 'i', 'o', 'u', 'A', 'E', 'I', 'O', 'U'], $nombreTitularSinEspacios);
+            $nombreSinEspacios = str_replace([' ', '!', '"', '#', '$', '%', '&', "'", '(', ')', '*', '+', ',', '/', ':', ';', '<', '=', '>', '?', '@', '[', '\\', ']', '^', '`', '{', '|', '}', '~'], '_', $hermandad->nombre);
+            $nombreSinEspacios = str_replace(['á', 'é', 'í', 'ó', 'ú', 'Á', 'É', 'Í', 'Ó', 'Ú'], ['a', 'e', 'i', 'o', 'u', 'A', 'E', 'I', 'O', 'U'], $nombreSinEspacios);
+            $nombreImagenNuevo =  'Header_'.$nombreSinEspacios.''.$extension;
+            $nombreImagenNuevo =  'Carrusel_'.$nombreTitularSinEspacios.''.$nombreSinEspacios.''.$extension;
+            $imagen->move(public_path('img'), $nombreImagenNuevo);
+
+            DB::table('titulares')->where('id', $titular->id)->update(['imagen' => $nombreImagenNuevo]);
         }
 
         return redirect()->route('hermandad.administracion', ['hermandad' => $hermandad->nombre]);
