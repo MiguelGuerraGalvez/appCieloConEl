@@ -11,7 +11,16 @@
 <body>
     <section>
         <h1>ADMINISTRACIÓN DE ITINERARIOS</h1>
-
+        @if ($errors->any())
+            <div style="color: red;">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+        
         <div>
             @foreach ($itinerariosNoAceptados as $itinerario)
                 <article>

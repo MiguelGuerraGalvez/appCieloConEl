@@ -133,12 +133,18 @@ class ConsejoController extends Controller
     }
     
     public function deleteCarteles(REQUEST $request) {
-        $id_cartel = $request->input('cartel');
-        
-        Cartele::eliminar($id_cartel);
-        
-        Log::info("Redirigiendo a consejo.administracion.");
-        return redirect()->route('consejo.administracion');
+        try{
+            $id_cartel = $request->input('cartel');
+            
+            Cartele::eliminar($id_cartel);
+            
+            Log::info("Redirigiendo a consejo.administracion.");
+            return redirect()->route('consejo.administracion')->with('success', 'Cartel borrado correctamente.');
+        } catch (\Exception $e) {
+            Log::error('Error al borrar cartel: ' . $e->getMessage());
+
+            return redirect()->back()->withErrors(['error' => 'Ha ocurrido un error al borrar el cartel.']);
+        }
     }
 
     public function confirmarEliminarCarteles(REQUEST $request) {
@@ -154,42 +160,58 @@ class ConsejoController extends Controller
     }
 
     public function updateCarteles(REQUEST $request) {
-        $id_cartel = $request->input('modificar_cartel_id');
-        $cartel = Cartele::findOrFail($id_cartel);
-        $autor = $request->input('modificar_cartel_autor');
-        $anio = $request->input('modificar_cartel_anio');
+        try{
+            $id_cartel = $request->input('modificar_cartel_id');
+            $cartel = Cartele::findOrFail($id_cartel);
+            $autor = $request->input('modificar_cartel_autor');
+            $anio = $request->input('modificar_cartel_anio');
 
-        if ($request->has('modificar_cartel_imagen') && $request->file('modificar_cartel_imagen')->isValid()) {
-            $imagen = $request->file('modificar_cartel_imagen');
-            
-            if (File::exists(public_path('img/' . $cartel->imagen))) {
-                File::delete(public_path('img/' . $cartel->imagen));
+            if ($request->has('modificar_cartel_imagen') && $request->file('modificar_cartel_imagen')->isValid()) {
+                $imagen = $request->file('modificar_cartel_imagen');
+                
+                if (File::exists(public_path('img/' . $cartel->imagen))) {
+                    File::delete(public_path('img/' . $cartel->imagen));
+                }
+                
+                $nombreImagen = $imagen->getClientOriginalName();
+                $imagen->move(public_path('img'), $nombreImagen);
+                
+                Cartele::where('id', $id_cartel)->update(['imagen' => $nombreImagen, 'autor' => $autor, 'anio' => $anio]);
+            } else {
+                Cartele::where('id', $id_cartel)->update(['autor' => $autor, 'anio' => $anio]);
             }
-            
-            $nombreImagen = $imagen->getClientOriginalName();
-            $imagen->move(public_path('img'), $nombreImagen);
-            
-            Cartele::where('id', $id_cartel)->update(['imagen' => $nombreImagen, 'autor' => $autor, 'anio' => $anio]);
-        } else {
-            Cartele::where('id', $id_cartel)->update(['autor' => $autor, 'anio' => $anio]);
-        }
 
-        return redirect()->route('consejo.administracion');
+            return redirect()->route('consejo.administracion')->with('success', 'Cartel modificado correctamente.');
+        } catch (\Exception $e) {
+            Log::error('Error al modificar cartel: ' . $e->getMessage());
+
+            return redirect()->back()->withErrors(['error' => 'Ha ocurrido un error al modificar el cartel.']);
+        }
     }
 
     public function insertarCarteles(REQUEST $request) {
-        $id_consejo = $request->input('nuevo_cartel_id_consejo');
-        $imagen = $request->file('nuevo_cartel_imagen');
-        
-        $nombreImagen = $imagen->getClientOriginalName();
-        $imagen->move(public_path('img'), $nombreImagen);
+        try{
+            $id_consejo = $request->input('nuevo_cartel_id_consejo');
+            $imagen = $request->file('nuevo_cartel_imagen');
 
-        $autor = $request->input('nuevo_cartel_autor');
-        $anio = $request->input('nuevo_cartel_anio');
+            if (!$imagen || !$imagen->isValid()) {
+                return redirect()->back()->withErrors(['imagen' => 'La imagen no es válida.']);
+            }
 
-        Cartele::insert(['id_consejo' => $id_consejo, 'imagen' => $nombreImagen, 'autor' => $autor, 'anio' => $anio]);
+            $nombreImagen = $imagen->getClientOriginalName();
+            $imagen->move(public_path('img'), $nombreImagen);
 
-        return redirect()->route('consejo.administracion');
+            $autor = $request->input('nuevo_cartel_autor');
+            $anio = $request->input('nuevo_cartel_anio');
+
+            Cartele::insert(['id_consejo' => $id_consejo, 'imagen' => $nombreImagen, 'autor' => $autor, 'anio' => $anio]);
+
+            return redirect()->route('consejo.administracion')->with('success', 'Cartel insertado correctamente.');
+        } catch (\Exception $e) {
+            Log::error('Error al insertar cartel: ' . $e->getMessage());
+
+            return redirect()->back()->withErrors(['error' => 'Ha ocurrido un error al insertar el cartel.']);
+        }
     }
 
     public function confirmarEliminarPregones(REQUEST $request) {
@@ -199,12 +221,18 @@ class ConsejoController extends Controller
     }
 
     public function deletePregones(REQUEST $request) {
+        try{
         $id_pregon = $request->input('pregon');
 
         Pregone::eliminar($id_pregon);
 
         Log::info("Redirigiendo a consejo.administracion.");
-        return redirect()->route('consejo.administracion');
+        return redirect()->route('consejo.administracion')->with('success', 'Pregon borrado correctamente.');
+        } catch (\Exception $e) {
+            Log::error('Error al borrar pregon: ' . $e->getMessage());
+
+            return redirect()->back()->withErrors(['error' => 'Ha ocurrido un error al borrar el pregon.']);
+        }
     }
 
 
@@ -215,16 +243,23 @@ class ConsejoController extends Controller
     }
 
     public function updatePregones(REQUEST $request) {
+        try{
         $id_pregon = $request->input('modificar_pregon_id');
         $pregonero = $request->input('modificar_pregon_pregonero');
         $anio = $request->input('modificar_pregon_anio');
 
         Pregone::where('id', $id_pregon)->update(['pregonero' => $pregonero, 'anio' => $anio]);
 
-        return redirect()->route('consejo.administracion');
+        return redirect()->route('consejo.administracion')->with('success', 'Pregon modificado correctamente.');
+        } catch (\Exception $e) {
+            Log::error('Error al modificar pregon: ' . $e->getMessage());
+
+            return redirect()->back()->withErrors(['error' => 'Ha ocurrido un error al modificar el pregon.']);
+        }
     }
 
     public function insertarPregones(REQUEST $request) {
+        try{
         $id_consejo = $request->input('nuevo_pregon_id_consejo');
 
         $pregonero = $request->input('nuevo_pregon_pregonero');
@@ -232,6 +267,11 @@ class ConsejoController extends Controller
 
         Pregone::insert(['id_consejo' => $id_consejo, 'pregonero' => $pregonero, 'anio' => $anio]);
 
-        return redirect()->route('consejo.administracion');
+        return redirect()->route('consejo.administracion')->with('success', 'Pregon insertado correctamente.');
+        } catch (\Exception $e) {
+            Log::error('Error al insertar cartel: ' . $e->getMessage());
+
+            return redirect()->back()->withErrors(['error' => 'Ha ocurrido un error al insertar el pregon.']);
+        }
     }
 }
