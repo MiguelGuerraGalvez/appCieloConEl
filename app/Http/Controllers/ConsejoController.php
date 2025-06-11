@@ -132,13 +132,19 @@ class ConsejoController extends Controller
         return redirect()->route('consejo.administracion');
     }
     
-    public function eliminarCarteles(REQUEST $request) {
+    public function deleteCarteles(REQUEST $request) {
         $id_cartel = $request->input('cartel');
         
         Cartele::eliminar($id_cartel);
         
         Log::info("Redirigiendo a consejo.administracion.");
         return redirect()->route('consejo.administracion');
+    }
+
+    public function confirmarEliminarCarteles(REQUEST $request) {
+        $cartel = Cartele::findOrFail($request->input('cartel'));
+
+        return view('consejo.confirmarEliminarCarteles', compact('cartel'));
     }
 
     public function modificarCarteles(REQUEST $request) {

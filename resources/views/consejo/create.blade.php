@@ -91,7 +91,7 @@
                     </td>
 
                     <td>
-                        <form action="{{ route('consejo.eliminarCarteles') }}" method="post">
+                        <form action="{{ route('consejo.confirmarEliminarCarteles') }}" method="post">
                             @csrf
                             <input type="hidden" name="cartel" id="cartel" value="{{ $cartel->id }}">
                             <input type="submit" name="cartel_eliminar" id="cartel_eliminar" value="ELIMINAR">
