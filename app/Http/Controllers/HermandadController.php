@@ -59,6 +59,7 @@ class HermandadController extends Controller
     }
 
     public function nuevoItinerario(REQUEST $request) {
+        try{
         $hermandad = Hermandade::where('id_usuario', Auth::user()->id)->first();
         $id_dia = $request->input('dia_itinerario_nuevo');
         $dia = Dia::findOrFail($id_dia);
@@ -84,7 +85,12 @@ class HermandadController extends Controller
             }
         }
 
-        return redirect()->route('hermandad.administracion', ['hermandad' => $hermandad->nombre]);
+        return redirect()->route('hermandad.administracion', ['hermandad' => $hermandad->nombre])->with('success', 'Itinerario insertado correctamente.');
+        } catch (\Exception $e) {
+            Log::error('Error al insertar itinerario: ' . $e->getMessage());
+
+            return redirect()->back()->withErrors(['error' => 'Ha ocurrido un error al insertar el itinerario.']);
+        }
     }
 
     public function confirmarEliminarItinerario(REQUEST $request) {
@@ -94,12 +100,18 @@ class HermandadController extends Controller
     }
 
     public function deleteItinerario(REQUEST $request) {
+        try{
         $hermandad = Hermandade::where('id_usuario', Auth::user()->id)->first();
         $id_itinerario = $request->input('itinerario_eliminar');
 
         Itinerario::eliminar($id_itinerario);
 
-        return redirect()->route('hermandad.administracion', ['hermandad' => $hermandad->nombre]);
+        return redirect()->route('hermandad.administracion', ['hermandad' => $hermandad->nombre])->with('success', 'Itinerario borrado correctamente.');
+        } catch (\Exception $e) {
+            Log::error('Error al borrar itinerario: ' . $e->getMessage());
+
+            return redirect()->back()->withErrors(['error' => 'Ha ocurrido un error al borrar el itinerario.']);
+        }
     }
 
     public function contratarBanda(REQUEST $request) {
