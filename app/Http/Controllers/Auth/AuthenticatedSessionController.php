@@ -24,11 +24,17 @@ class AuthenticatedSessionController extends Controller
      */
     public function store(LoginRequest $request): RedirectResponse
     {
-        $request->authenticate();
+        $remember = $request->filled('remember');
 
-        $request->session()->regenerate();
+        if (Auth::attempt($request->only('email', 'password'), $remember)) {
+            $request->session()->regenerate();
 
-        return redirect()->intended('/principal');    
+            return redirect()->intended('/principal');
+        }
+
+        return back()->withErrors([
+            'email' => __('Las credenciales no coinciden con nuestros registros.'),
+        ])->onlyInput('email');
     }
 
     /**
