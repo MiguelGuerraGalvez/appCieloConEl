@@ -1,4 +1,6 @@
-<x-guest-layout>
+<title>Recuperar Contraseña</title>
+
+<x-guest-layout bodyClass="bg-center" bodyStyle="background-image: url('/img/FONDO_INICIO_SESION.jpg');">
     <form method="POST" action="{{ route('password.store') }}">
         @csrf
 

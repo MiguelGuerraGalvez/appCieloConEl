@@ -1,3 +1,5 @@
+<title>Inicio Sesion</title>
+
 <x-guest-layout bodyClass="bg-center" bodyStyle="background-image: url('/img/FONDO_INICIO_SESION.jpg');">
     <!-- Session Status -->
     <x-auth-session-status class="mb-4" :status="session('status')" />
