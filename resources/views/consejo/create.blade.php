@@ -9,16 +9,17 @@
     <title>Administración Consejo</title>
 </head>
 <body class="bg-[#EBEBEB] flex justify-center md:pt-8">
-    @if ($errors->any())
-        <div style="color: red;">
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-    @endif
     <div class="w-[80vw] mt-8">
+        @if ($errors->any())
+            <div style="color: red;">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+        
         <section class="mt-8 mb-8 flex flex-col justify-center items-center gap-6">
             <h1 class="text-3xl md:text-4xl text-center font-bold">ADMINISTRACIÓN DE ITINERARIOS</h1>
             

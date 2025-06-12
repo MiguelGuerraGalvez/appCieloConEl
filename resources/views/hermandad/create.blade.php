@@ -9,17 +9,17 @@
     <title>Administración {{Auth::user()->name}}</title>
 </head>
 <body class="bg-[#EBEBEB] flex justify-center md:pt-8">
-    @if ($errors->any())
-        <div class="bg-red-600">
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-    @endif
-
     <div class="w-[80vw] mt-8">
+        @if ($errors->any())
+            <div class="bg-red-600">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+
         <section class="flex flex-col items-center gap-6" id="crear_itinerario">
             <h1 class="text-3xl md:text-4xl text-center font-bold">CREA EL ITINERARIO</h1>
 
