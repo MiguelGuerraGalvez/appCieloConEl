@@ -43,12 +43,12 @@
                 </div>
 
                 <div class="flex flex-row gap-4 flex-wrap">
-                    <div class="w-[60vw] text-left">
+                    <div class="w-full text-left">
                         <label for="nazarenos_itinerario_nuevo" class="text-xl">Ropa de nazareno:</label>
                         <input class="w-full px-3 py-2 border border-gray-300 rounded mt-1" type="text" name="nazarenos_itinerario_nuevo" id="nazarenos_itinerario_nuevo" required>
                 </div>
 
-                <div class="flex flex-row gap-4 items-end">
+                <div class="flex flex-row gap-4 items-end w-full">
                     <div class="w-[30vw] flex-1 text-left">
                         <label for="hora_salida_itinerario_nuevo" class="text-xl">Hora de salida:</label>
                         <input class="w-full px-3 py-2 border border-gray-300 rounded mt-1" type="time" name="hora_salida_itinerario_nuevo" id="hora_salida_itinerario_nuevo" required>
@@ -201,29 +201,39 @@
         <section class="mt-8 mb-8 flex flex-col items-center justify-center gap-6">
             <h1 class="text-3xl md:text-4xl text-center font-bold">IMÁGENES</h1>
 
-            <form class="grid grid-cols-2 gap-4 w-full max-w-full border border-solid border-black rounded-lg" action="{{ route('hermandad.cambiarFotos') }}" method="post" enctype="multipart/form-data">
-                @csrf
-                <figure class="w-[10rem]">
-                    <img class="w-full" src="../img/{{ $hermandad->header }}" alt="Imagen de cabecera">
-                </figure>
-                <label for="header">Imagen de cabecera</label>
-                <input type="file" name="header" id="header" required>
-                <input type="hidden" name="header_antiguo" id="header_antiguo" value="{{ $hermandad->header }}">
-                <input type="submit" name="enviar_header" id="enviar_header" value="ENVIAR">
-            </form>
-
-            @foreach ($titulares as $titular)    
-                <form class="grid grid-cols-2 gap-4 w-full max-w-full border border-solid border-black rounded-lg" action="{{ route('hermandad.cambiarFotos') }}" method="post" enctype="multipart/form-data">
+            <div class="grid lg:grid-cols-2 gap-32">
+                <form class="flex flex-col items-center justify-evenly gap-4 w-full max-w-full rounded-lg" action="{{ route('hermandad.cambiarFotos') }}" method="post" enctype="multipart/form-data">
                     @csrf
-                    <figure class="w-[100px] col-span-1">
-                        <img class="w-full" src="../img/{{ $titular->imagen }}" alt="Imagen de {{$titular->nombre_completo}}">
+                    <label class="col-span-full text-center text-lg md:text-2xl" for="header">Imagen de cabecera</label>
+                    
+                    <figure class="col-span-full w-[10rem]">
+                        <img class="w-full" src="../img/{{ $hermandad->header }}" alt="Imagen de cabecera">
                     </figure>
-                    <label for="imagen_{{ $titular->id }}">Imagen de {{$titular->nombre_completo}}</label>
-                    <input type="file" name="imagen_{{ $titular->id }}" id="imagen_{{ $titular->id }}" required>
-                    <input type="hidden" name="id_titular_imagen_antiguo" id="id_titular_imagen_antiguo" value="{{ $titular->id }}">
-                    <input type="submit" name="enviar_imagen_{{ $titular->id }}" id="enviar_imagen_{{ $titular->id }}" value="ENVIAR">
+
+                    <div class="flex items-center justify-center gap-4">
+                        <input type="file" name="header" id="header" required>
+                        <input type="hidden" name="header_antiguo" id="header_antiguo" value="{{ $hermandad->header }}">
+                        <input class="text-lg md:text-xl lg:text-2xl bg-[#FFC060] text-black font-semibold px-12 py-4 rounded hover:bg-[#F9D193] cursor-pointer" type="submit" name="enviar_itinerario_nuevo" type="submit" name="enviar_header" id="enviar_header" value="ENVIAR">
+                    </div>
                 </form>
-            @endforeach
+
+                @foreach ($titulares as $titular)    
+                    <form class="flex flex-col items-center justify-evenly gap-4 w-full max-w-full rounded-lg" action="{{ route('hermandad.cambiarFotos') }}" method="post" enctype="multipart/form-data">
+                        @csrf
+                        <label class="col-span-full md:text-xl" for="imagen_{{ $titular->id }}">Imagen de {{$titular->nombre_completo}}</label>
+                        
+                        <figure class="col-span-full w-[100px]">
+                            <img class="w-full" src="../img/{{ $titular->imagen }}" alt="Imagen de {{$titular->nombre_completo}}">
+                        </figure>
+
+                        <div class="flex items-center justify-center gap-4">
+                            <input type="file" name="imagen_{{ $titular->id }}" id="imagen_{{ $titular->id }}" required>
+                            <input type="hidden" name="id_titular_imagen_antiguo" id="id_titular_imagen_antiguo" value="{{ $titular->id }}">
+                            <input class="text-lg md:text-xl lg:text-2xl bg-[#FFC060] text-black font-semibold px-12 py-4 rounded hover:bg-[#F9D193] cursor-pointer" type="submit" name="enviar_itinerario_nuevo" type="submit" name="enviar_imagen_{{ $titular->id }}" id="enviar_imagen_{{ $titular->id }}" value="ENVIAR">
+                        </div>
+                    </form>
+                @endforeach
+            </div>
         </section>
 
         <div class="flex items-center justify-center pb-8">
