@@ -71,14 +71,14 @@
     
     @yield('image4')
     
-<footer class="bg-[#8C52FF] flex flex-col items-center justify-center py-8">
-    <section class="w-full flex flex-col items-center">         
-                <iframe src="https://www.google.com/maps/embed?pb=!1m16!1m12!1m3!1d25429.95099026055!2d-5.793657512088047!3d37.1825573742897!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!2m1!1sIglesia%20Cat%C3%B3lica%20Utrera!5e0!3m2!1ses!2ses!4v1746618945552!5m2!1ses!2ses" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" class="w-[125px] h-[75px] md:w-[400px] md:h-[200px]"></iframe>
-        <p class="text-white text-center mt-4 text-sm md:text-base">
-            &copy; Todos los derechos reservados
-        </p>
-    </section>
-</footer>
+    <footer class="bg-[#8C52FF] flex flex-col items-center justify-center py-8">
+        <section class="w-full flex flex-col items-center">         
+            <iframe src="https://www.google.com/maps/embed?pb=!1m16!1m12!1m3!1d25429.95099026055!2d-5.793657512088047!3d37.1825573742897!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!2m1!1sIglesia%20Cat%C3%B3lica%20Utrera!5e0!3m2!1ses!2ses!4v1746618945552!5m2!1ses!2ses" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" class="w-[125px] h-[75px] md:w-[400px] md:h-[200px]"></iframe>
+            <p class="text-white text-center mt-4 text-sm md:text-base">
+                &copy; Todos los derechos reservados
+            </p>
+        </section>
+    </footer>
 </body>
 <script src="https://code.jquery.com/ui/1.14.1/jquery-ui.js" integrity="sha256-9zljDKpE/mQxmaR4V2cGVaQ7arF3CcXxarvgr7Sj8Uc=" crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
