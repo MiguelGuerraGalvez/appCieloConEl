@@ -17,8 +17,15 @@
 @endsection
 
 @section('content')
-    <h3 class="text-[FFC060] text-2xl mb-4">INTRODUCCIÓN</h3>
-    <p>Bienvenido a App Cielo Con Él, una aplicación que te permitirá poder visualizar todo lo relacionado a las hermandades de la Semana Santa de tu localidad. Además, si eres una hermandad o el consejo, te permitirá administrar fácilmente varios aspectos de la corporación.</p>
+    <div>
+        <h3 class="text-[FFC060] text-3xl mb-4 text-center">INTRODUCCIÓN</h3>
+        
+        <div class="flex flex-col gap-2">
+            <p>Bienvenido a App Cielo Con Él, una aplicación que te permitirá visualizar todo lo relacionado con las hermandades de la Semana Santa de tu localidad. Podrás mirar todas las hermandades que tenemos disponibles, además de buscar hermandades especificas con nuestro buscador integrado. Dentro de las hermandades podrás ver sus itinerarios y fotos de sus titulares.</p>
+            <p>También podrás ver todos los carteles, pregones e itinerarios de todos los años disponibles en el consejo.</p>
+            <p>Además, si eres una hermandad o el consejo, te permitirá administrar fácilmente varios aspectos de la corporación, como crear, modificar y eliminar itinerarios, carteles y pregones, contratar bandas, cambiar las imágenes de las cabeceras, entre otros.</p>
+        </div>
+    </div>
 @endsection
 
 @section('image2')

@@ -18,7 +18,7 @@
             </figure>
         </a>
         @if (Route::currentRouteName() !== 'welcome')
-        <figure class="w-[10rem] h-[10rem] rounded-full overflow-hidden">
+        <figure class="w-[8rem] h-[8rem] rounded-full overflow-hidden">
             <button id="openModal" class="focus:outline-none">
                 <img class="w-full h-full object-cover" src="@yield('logo')img/{{ Auth::user()->icon }}" alt="Usuario">
             </button>

@@ -10,7 +10,7 @@
 </head>
 <body class="bg-[#EBEBEB] flex justify-center md:pt-8">
     @if ($errors->any())
-        <div style="color: red;">
+        <div class="bg-red-600">
             <ul>
                 @foreach ($errors->all() as $error)
                     <li>{{ $error }}</li>
@@ -19,13 +19,13 @@
         </div>
     @endif
     <div class="w-[80vw] mt-8">
-        <section id="crear_itinerario" class="flex flex-col items-center gap-6 text-center">
-            <h1 class="text-4xl font-bold">CREA EL ITINERARIO</h1>
+        <section class="flex flex-col items-center gap-6" id="crear_itinerario">
+            <h1 class="text-4xl text-center font-bold">CREA EL ITINERARIO</h1>
 
-            <form id="itinerarioForm" action="{{ route('hermandad.nuevoItinerario') }}" method="post" enctype="multipart/form-data" class="flex flex-col items-center gap-4 w-full max-w-md">
+            <form class="flex flex-col items-center gap-4 w-full max-w-md" id="itinerarioForm" action="{{ route('hermandad.nuevoItinerario') }}" method="post" enctype="multipart/form-data">
                 @csrf
 
-                <select name="dia_itinerario_nuevo" id="dia_itinerario_nuevo" required class="w-[60vw] px-3 py-2 border border-gray-300 text-xl rounded">
+                <select class="w-[60vw] px-3 py-2 border border-gray-300 text-xl rounded cursor-pointer" name="dia_itinerario_nuevo" id="dia_itinerario_nuevo" required>
                     <option class="w-full font-bold text-left" value="">--SELECCIONE EL DÍA DE SALIDA--</option>
                     @foreach ($dias as $dia)
                         <option value="{{ $dia->id }}">{{ $dia->dia }}</option>
@@ -62,7 +62,7 @@
 
                 <textarea name="itinerario_nuevo" id="itinerario_nuevo" cols="30" rows="6" placeholder="Escriba aquí el itinerario..." required class="text-xl w-full p-3 border border-gray-300 rounded"></textarea>
                 <div class="w-full flex justify-end">
-                    <input type="submit" name="enviar_itinerario_nuevo" id="enviar_itinerario_nuevo" value="ENVIAR" class="text-2xl bg-[#FFC060] text-black font-semibold px-12 py-4 rounded hover:bg-[#F9D193] cursor-pointer">
+                    <input class="text-2xl bg-[#FFC060] text-black font-semibold px-12 py-4 rounded hover:bg-[#F9D193] cursor-pointer" type="submit" name="enviar_itinerario_nuevo" id="enviar_itinerario_nuevo" value="ENVIAR">
                 </div>
             </form>
         </section>
@@ -70,64 +70,74 @@
 
         <div class="bg-[#8C52FF] h-4 max-w-full"></div>
 
-        <section>
-            <h1>ITINERARIOS ACEPTADOS</h1>
+        <section class="mt-8 mb-8 flex flex-col items-center gap-6">
+            <h1 class="text-4xl text-center font-bold mb-4">ITINERARIOS ACEPTADOS</h1>
             
-            @foreach ($itinerarios_aceptados as $itinerario)
-                <div>
-                    <form action="{{ route('hermandad.confirmarEliminarItinerario') }}" method="post">
-                        @csrf
-                        <h4>{{$itinerario->dia}}</h4>
-                        <p>{{$itinerario->recorrido}}</p>
+            <div class="grid items-stretch grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                @foreach ($itinerarios_aceptados as $itinerario)
+                    <div class="bg-white rounded-md p-4 flex flex-col h-full">
+                        <form class="flex flex-col flex-1 h-full" action="{{ route('hermandad.confirmarEliminarItinerario') }}" method="post">
+                            @csrf
+                            <h4 class="text-2xl text-center">{{$itinerario->dia}}</h4>
+                            <p>{{$itinerario->recorrido}}</p>
+    
+                            <input type="hidden" name="itinerario_eliminar" value="{{ $itinerario->id }}">
 
-                        <input type="hidden" name="itinerario_eliminar" value="{{ $itinerario->id }}">
-                        <input type="submit" value="ELIMINAR">
-                    </form>
-                </div>
-            @endforeach
+                            <div class="w-full flex justify-center mt-auto">
+                                <input class="text-2xl bg-[#FFC060] text-black font-semibold px-12 py-4 rounded hover:bg-[#F9D193] cursor-pointer" type="submit" value="ELIMINAR">
+                            </div>
+                        </form>
+                    </div>
+                @endforeach
+            </div>
 
             @if (count($itinerarios_aceptados) == 0)
                 <div>
-                    <p>No hay itinerarios aceptatos</p>
+                    <p class="text-2xl text-center font-bold">No hay itinerarios aceptatos</p>
                 </div>
             @endif
         </section>
 
         <div class="bg-[#8C52FF] h-4 max-w-full"></div>
 
-        <section>
-            <h1>ITINERARIOS NO ACEPTADOS</h1>
+        <section class="mt-8 mb-8 flex flex-col items-center gap-6">
+            <h1 class="text-4xl text-center font-bold">ITINERARIOS NO ACEPTADOS</h1>
             
-            @foreach ($itinerarios_no_aceptados as $itinerario)
-                <div>
-                    <form action="{{ route('hermandad.confirmarEliminarItinerario') }}" method="post">
-                        @csrf
-                        <h4>{{$itinerario->dia}}</h4>
-                        <p>{{$itinerario->recorrido}}</p>
+            <div class="grid items-stretch grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                @foreach ($itinerarios_no_aceptados as $itinerario)
+                    <div class="bg-white rounded-md p-4 flex flex-col h-full">
+                        <form class="flex flex-col flex-1 h-full" action="{{ route('hermandad.confirmarEliminarItinerario') }}" method="post">
+                            @csrf
+                            <h4 class="text-2xl text-center">{{$itinerario->dia}}</h4>
+                            <p>{{$itinerario->recorrido}}</p>
 
-                        <input type="hidden" name="itinerario_eliminar" value="{{ $itinerario->id }}">
-                        <input type="submit" value="ELIMINAR">
-                    </form>
-                </div>
+                            <input type="hidden" name="itinerario_eliminar" value="{{ $itinerario->id }}">
 
-            @endforeach
+                            <div class="w-full flex justify-center mt-auto">
+                                <input class="text-2xl bg-[#FFC060] text-black font-semibold px-12 py-4 rounded hover:bg-[#F9D193] cursor-pointer" type="submit" value="ELIMINAR">
+                            </div>
+                        </form>
+                    </div>
+
+                @endforeach
+            </div>
 
             @if (count($itinerarios_no_aceptados) == 0)
                 <div>
-                    <p>No hay itinerarios sin aceptar</p>
+                    <p class="text-2xl text-center font-bold">No hay itinerarios sin aceptar</p>
                 </div>
             @endif
         </section>
 
         <div class="bg-[#8C52FF] h-4 max-w-full"></div>
 
-        <section>
-            <h1>CONTRATA A LA BANDA</h1>
+        <section class="mt-8 mb-8 flex flex-col items-center gap-6" flex flex-col items-center gap-6>
+            <h1 class="text-4xl text-center font-bold">CONTRATA A LA BANDA</h1>
             
-            <form action="{{ route('hermandad.contratarBanda') }}" method="post">
+            <form class="grid grid-cols-2 gap-4 w-full" action="{{ route('hermandad.contratarBanda') }}" method="post">
                 @csrf
                 
-                <select name="titular_banda" id="titular_banda" required>
+                <select class="col-span-full px-3 py-2 border border-gray-300 text-xl rounded cursor-pointer" name="titular_banda" id="titular_banda" required>
                     <option class="font-bold" value="">--SELECCIONE EL TITULAR--</option>
 
                     @foreach ($titulares as $titular)
@@ -135,7 +145,7 @@
                     @endforeach
                 </select>
 
-                <select name="formacion_banda" id="formacion_banda" required>
+                <select class="col-span-full lg:col-span-1 py-2 border border-gray-300 text-xl rounded cursor-pointer" name="formacion_banda" id="formacion_banda" required>
                     <option class="font-bold" value="">--SELECCIONE LA FORMACIÓN MUSICAL--</option>
 
                     @foreach ($formaciones as $formacion)
@@ -143,53 +153,57 @@
                     @endforeach
                 </select>
 
-                <input type="text" name="banda" id="banda" placeholder="Escriba aquí el nombre de la banda...">
+                <input class="col-span-full lg:col-span-1 py-2 border border-gray-300 text-xl rounded" type="text" name="banda" id="banda" placeholder="Escriba aquí el nombre de la banda...">
 
-                <input type="submit" name="enviar_banda" id="enviar_banda" value="ENVIAR">
+                <div class="col-span-full w-full flex justify-end">
+                    <input class="w-full md:w-auto text-2xl bg-[#FFC060] text-black font-semibold px-12 py-4 rounded hover:bg-[#F9D193] cursor-pointer" type="submit" name="enviar_banda" id="enviar_banda" value="ENVIAR">
+                </div>
             </form>
         </section>
 
         <div class="bg-[#8C52FF] h-4 max-w-full"></div>
 
-        <section>
-            <h1>ADMINISTRACIÓN DE HERMANOS</h1>
-            <h3>{{ $hermandad->hermanos }} HERMANOS</h3>
+        <section class="mt-8 mb-8 flex flex-col items-center gap-6">
+            <h1 class="text-4xl text-center font-bold">ADMINISTRACIÓN DE HERMANOS</h1>
+            <h3 class="text-3xl">{{ $hermandad->hermanos }} HERMANOS</h3>
 
-            <form action="{{ route('hermandad.gestionHermanos') }}" method="post">
-                @csrf
-                <input type="number" name="cambio_hermanos" id="cambio_hermanos" min="1" placeholder="Nº de nuevos hermanos" required>
-                <input type="submit" name="enviar_nuevos_hermanos" id="enviar_nuevos_hermanos" value="ALTA">
-            </form>
+            <div class="flex flex-col md:flex-row gap-4 justify-between items-center w-full max-w-full">
+                <form class="flex justify-evenly gap-4" action="{{ route('hermandad.gestionHermanos') }}" method="post">
+                    @csrf
+                    <input class="px-3 py-2 border border-gray-300 text-xl rounded" type="number" name="cambio_hermanos" id="cambio_hermanos" min="1" placeholder="Nº de nuevos hermanos" required>
+                    <input class="md:w-auto text-2xl bg-[#FFC060] text-black font-semibold px-8 py-2 rounded hover:bg-[#F9D193] cursor-pointer" type="submit" name="enviar_nuevos_hermanos" id="enviar_nuevos_hermanos" value="ALTA">
+                </form>
+    
+                <form class="flex justify-evenly gap-4" action="{{ route('hermandad.gestionHermanos') }}" method="post">
+                    @csrf
+                    <input class="px-3 py-2 border border-gray-300 text-xl rounded" type="number" name="cambio_hermanos" id="cambio_hermanos" min="1" placeholder="Nº de antiguos hermanos" required>
+                    <input class="md:w-auto text-2xl bg-[#FFC060] text-black font-semibold px-8 py-2 rounded hover:bg-[#F9D193] cursor-pointer" type="submit" name="enviar_antiguos_hermanos" id="enviar_antiguos_hermanos" value="BAJA">
+                </form>
+            </div>
+        </section>
 
-            <form action="{{ route('hermandad.gestionHermanos') }}" method="post">
+        <div class="bg-[#8C52FF] h-4 max-w-full"></div>
+
+        <section class="mt-8 mb-8 flex flex-col items-center gap-6">
+            <h1 class="text-4xl text-center font-bold">ADMINISTRACIÓN DE LA CUOTA</h1>
+            <h3 class="text-3xl">{{ $hermandad->cuota }}€</h3>
+
+            <form class="flex justify-evenly items-center gap-4 w-full max-w-full" action="{{ route('hermandad.gestionCuota') }}" method="post">
                 @csrf
-                <input type="number" name="cambio_hermanos" id="cambio_hermanos" min="1" placeholder="Nº de antiguos hermanos" required>
-                <input type="submit" name="enviar_antiguos_hermanos" id="enviar_antiguos_hermanos" value="BAJA">
+                <input class="w-full max-w-full px-3 py-2 border border-gray-300 text-xl rounded" type="number" name="cuota" id="cuota" min="0" step="0.01" placeholder="Introduce la nueva cuota de hermano...">
+                <input class="w-full max-w-full md:w-auto text-2xl bg-[#FFC060] text-black font-semibold px-8 py-2 rounded hover:bg-[#F9D193] cursor-pointer" type="submit" name="enviar_cuota" id="enviar_cuota" value="MODIFICAR">
             </form>
         </section>
 
         <div class="bg-[#8C52FF] h-4 max-w-full"></div>
 
-        <section>
-            <h1>ADMINISTRACIÓN DE LA CUOTA</h1>
-            <h3>{{ $hermandad->cuota }}€</h3>
+        <section class="mt-8 mb-8 flex flex-col items-center justify-center gap-6">
+            <h1 class="text-4xl text-center font-bold">IMÁGENES</h1>
 
-            <form action="{{ route('hermandad.gestionCuota') }}" method="post">
+            <form class="grid grid-cols-2 gap-4 w-full max-w-full border border-solid border-black rounded-lg" action="{{ route('hermandad.cambiarFotos') }}" method="post" enctype="multipart/form-data">
                 @csrf
-                <input type="number" name="cuota" id="cuota" min="0" step="0.01" placeholder="Introduce la nueva cuota de hermano...">
-                <input type="submit" name="enviar_cuota" id="enviar_cuota" value="MODIFICAR">
-            </form>
-        </section>
-
-        <div class="bg-[#8C52FF] h-4 max-w-full"></div>
-
-        <section>
-            <h1>IMÁGENES</h1>
-
-            <form action="{{ route('hermandad.cambiarFotos') }}" method="post" enctype="multipart/form-data">
-                @csrf
-                <figure>
-                    <img src="../img/{{ $hermandad->header }}" alt="Imagen de cabecera">
+                <figure class="w-[10rem]">
+                    <img class="w-full" src="../img/{{ $hermandad->header }}" alt="Imagen de cabecera">
                 </figure>
                 <label for="header">Imagen de cabecera</label>
                 <input type="file" name="header" id="header" required>
@@ -198,10 +212,10 @@
             </form>
 
             @foreach ($titulares as $titular)    
-                <form action="{{ route('hermandad.cambiarFotos') }}" method="post" enctype="multipart/form-data">
+                <form class="grid grid-cols-2 gap-4 w-full max-w-full border border-solid border-black rounded-lg" action="{{ route('hermandad.cambiarFotos') }}" method="post" enctype="multipart/form-data">
                     @csrf
-                    <figure>
-                        <img src="../img/{{ $titular->imagen }}" alt="Imagen de {{$titular->nombre_completo}}">
+                    <figure class="w-[100px] col-span-1">
+                        <img class="w-full" src="../img/{{ $titular->imagen }}" alt="Imagen de {{$titular->nombre_completo}}">
                     </figure>
                     <label for="imagen_{{ $titular->id }}">Imagen de {{$titular->nombre_completo}}</label>
                     <input type="file" name="imagen_{{ $titular->id }}" id="imagen_{{ $titular->id }}" required>
@@ -211,7 +225,9 @@
             @endforeach
         </section>
 
-        <a href="{{ route('principal') }}">VOLVER ATRÁS</a>
+        <div class="flex items-center justify-center pb-8">
+            <a class="text-4xl underline" href="{{ route('principal') }}">VOLVER ATRÁS</a>
+        </div>
     </div>
     
 </body>
