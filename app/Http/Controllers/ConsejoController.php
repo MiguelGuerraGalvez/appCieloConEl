@@ -78,6 +78,12 @@ class ConsejoController extends Controller
     public function create(){
         $usuario = Auth::user();
         $itinerariosNoAceptados = Itinerario::where('aceptado', 0)->get();
+        $hermandadesItinerarios = [];
+
+        foreach ($itinerariosNoAceptados as $itinerario) {
+            $hermandadesItinerarios [] = Hermandade::where('id', $itinerario->id_hermandad)->first();
+        }
+        
         $usuariosNuevaHermandad = User::where('rol', 'nuevaHermandad')->get();
         $nuevasHermandades = [];
 
@@ -88,7 +94,7 @@ class ConsejoController extends Controller
         $carteles = Cartele::all();
         $pregones = Pregone::all();
         
-        return view('consejo.create', compact('itinerariosNoAceptados', 'nuevasHermandades', 'carteles', 'pregones'));
+        return view('consejo.create', compact('itinerariosNoAceptados', 'hermandadesItinerarios', 'nuevasHermandades', 'carteles', 'pregones'));
     }
 
     public function aceptarItinerario(REQUEST $request) {
