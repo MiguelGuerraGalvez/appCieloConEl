@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Confirmar Eliminar Carteles</title>
+    <link rel="icon" type="image/png" href="{{ asset('img/LOGO.png') }}">
 </head>
 <body>
     <h2>¿ESTAS SEGUR@ DE QUE QUIERE BORRAR ESTE CARTEL?</h2>

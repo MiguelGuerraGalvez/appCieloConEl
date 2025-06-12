@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Modificar Pregon</title>
+    <link rel="icon" type="image/png" href="{{ asset('img/LOGO.png') }}">
 </head>
 <body class="bg-[#EBEBEB] h-full w-full flex items-center justify-center">
     <section class="w-[80vw]">

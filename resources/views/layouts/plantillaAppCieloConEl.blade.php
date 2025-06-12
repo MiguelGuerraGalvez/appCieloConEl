@@ -7,8 +7,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>@yield('title')</title>
+    <link rel="icon" type="image/png" href="{{ asset('img/LOGO.png') }}">
     <!-- Font Awesome -->
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 <body class="bg-[#EBEBEB]">
     <header class="bg-[#8C52FF] flex items-center justify-between w-full py-[2rem] lg:py-[2rem] px-[2rem] md:px-[4rem] lg:px-[8rem]">

@@ -1,4 +1,5 @@
 <title>Inicio Sesion</title>
+<link rel="icon" type="image/png" href="{{ asset('img/LOGO.png') }}">
 
 <x-guest-layout bodyClass="bg-center" bodyStyle="background-image: url('/img/FONDO_INICIO_SESION.jpg');">
     <!-- Session Status -->

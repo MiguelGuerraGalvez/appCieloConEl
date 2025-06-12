@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Administración {{Auth::user()->name}}</title>
+    <link rel="icon" type="image/png" href="{{ asset('img/LOGO.png') }}">
 </head>
 <body class="bg-[#EBEBEB] flex justify-center md:pt-8">
     <div class="w-[80vw] mt-8">

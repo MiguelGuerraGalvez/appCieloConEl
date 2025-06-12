@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Modificar Usuario</title>
+    <link rel="icon" type="image/png" href="{{ asset('img/LOGO.png') }}">
 </head>
 <body>
     <form action="{{ route('principal.updateUsuario') }}" method="post" enctype="multipart/form-data">

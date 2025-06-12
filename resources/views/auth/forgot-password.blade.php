@@ -1,4 +1,5 @@
 <title>Contraseña Olvidada</title>
+<link rel="icon" type="image/png" href="{{ asset('img/LOGO.png') }}">
 
 <x-guest-layout>
     <div class="mb-4 text-sm text-gray-600 dark:text-gray-400">
