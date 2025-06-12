@@ -168,42 +168,5 @@ class ItinerarioSeeder extends Seeder
         $i13->aceptado = true;
 
         $i13->save();
-
-        $i14 = new Itinerario();
-
-        $i14->id_hermandad = 11;
-        $i14->dia = 'Ej';
-        $i14->nazarenos = 'Túnica negra de cola, ceñida a la cintura con cinturón de abacá amarillo y recogida sobre el brazo, antifaz y sandalias negras';
-        $i14->hora_salida = '00:00:00';
-        $i14->recorrido = 'SALIDA (Parroquia de Santa María 22:30), Padre Miguel Román, Menéndez Pelayo, Mota de Santa María, Rodrigo Caro; La Plaza, Catalina de Perea, Ponce de León, Parroquia de Santiago (23:45), Ruiz Gijón, Sevilla, Álvarez Quintero, AYUNTAMIENTO, Canalejas, Rueda, Clemente de la Cuadra, CARRERA OFICIAL (00:50), La Plaza, Menéndez Pelayo, RECOGIDA (Parroquia de Santa María 01:30)';
-        $i14->imagen = 'Itinerario_Milagros.jpg';
-        $i14->aceptado = false;
-
-        $i14->save();
-
-        $i15 = new Itinerario();
-
-        $i15->id_hermandad = 12;
-        $i15->dia = 'Ej2';
-        $i15->nazarenos = 'Túnica negra de cola, ceñida a la cintura con cinturón de abacá amarillo y recogida sobre el brazo, antifaz y sandalias negras';
-        $i15->hora_salida = '00:00:00';
-        $i15->recorrido = 'SALIDA (Parroquia de Santa María 22:30), Padre Miguel Román, Menéndez Pelayo, Mota de Santa María, Rodrigo Caro; La Plaza, Catalina de Perea, Ponce de León, Parroquia de Santiago (23:45), Ruiz Gijón, Sevilla, Álvarez Quintero, AYUNTAMIENTO, Canalejas, Rueda, Clemente de la Cuadra, CARRERA OFICIAL (00:50), La Plaza, Menéndez Pelayo, RECOGIDA (Parroquia de Santa María 01:30)';
-        $i15->imagen = 'Itinerario_Milagros.jpg';
-        $i15->aceptado = false;
-
-        $i15->save();
-
-
-        $i16 = new Itinerario();
-
-        $i16->id_hermandad = 13;
-        $i16->dia = 'Ej2';
-        $i16->nazarenos = 'Túnica negra de cola, ceñida a la cintura con cinturón de abacá amarillo y recogida sobre el brazo, antifaz y sandalias negras';
-        $i16->hora_salida = '00:00:00';
-        $i16->recorrido = 'SALIDA (Parroquia de Santa María 22:30), Padre Miguel Román, Menéndez Pelayo, Mota de Santa María, Rodrigo Caro; La Plaza, Catalina de Perea, Ponce de León, Parroquia de Santiago (23:45), Ruiz Gijón, Sevilla, Álvarez Quintero, AYUNTAMIENTO, Canalejas, Rueda, Clemente de la Cuadra, CARRERA OFICIAL (00:50), La Plaza, Menéndez Pelayo, RECOGIDA (Parroquia de Santa María 01:30)';
-        $i16->imagen = 'Itinerario_Milagros.jpg';
-        $i16->aceptado = false;
-
-        $i16->save();
     }
 }
