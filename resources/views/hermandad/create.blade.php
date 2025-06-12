@@ -202,11 +202,11 @@
             <h1 class="text-3xl md:text-4xl text-center font-bold">IMÁGENES</h1>
 
             <div class="grid lg:grid-cols-2 gap-32">
-                <form class="flex flex-col items-center justify-evenly gap-4 w-full max-w-full rounded-lg" action="{{ route('hermandad.cambiarFotos') }}" method="post" enctype="multipart/form-data">
+                <form class="flex flex-col items-center justify-evenly gap-4 w-full max-w-full" action="{{ route('hermandad.cambiarFotos') }}" method="post" enctype="multipart/form-data">
                     @csrf
-                    <label class="col-span-full text-center text-lg md:text-2xl" for="header">Imagen de cabecera</label>
+                    <label class="text-center text-lg md:text-2xl" for="header">Imagen de cabecera</label>
                     
-                    <figure class="col-span-full w-[10rem]">
+                    <figure class="w-[10rem]">
                         <img class="w-full" src="../img/{{ $hermandad->header }}" alt="Imagen de cabecera">
                     </figure>
 
@@ -218,7 +218,7 @@
                 </form>
 
                 @foreach ($titulares as $titular)    
-                    <form class="flex flex-col items-center justify-evenly gap-4 w-full max-w-full rounded-lg" action="{{ route('hermandad.cambiarFotos') }}" method="post" enctype="multipart/form-data">
+                    <form class="flex flex-col items-center justify-evenly gap-4 w-full max-w-full" action="{{ route('hermandad.cambiarFotos') }}" method="post" enctype="multipart/form-data">
                         @csrf
                         <label class="col-span-full md:text-xl" for="imagen_{{ $titular->id }}">Imagen de {{$titular->nombre_completo}}</label>
                         
@@ -237,7 +237,7 @@
         </section>
 
         <div class="flex items-center justify-center pb-8">
-            <a class="text-4xl underline" href="{{ route('principal') }}">VOLVER ATRÁS</a>
+            <a class="text-3xl md:text-4xl underline" href="{{ route('principal') }}">VOLVER ATRÁS</a>
         </div>
     </div>
     
