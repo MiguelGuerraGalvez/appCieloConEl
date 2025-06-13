@@ -127,6 +127,7 @@ class ConsejoController extends Controller
             }
 
             Itinerario::eliminar($id_itinerario);
+            Titulares_itinerario::eliminarPorItinerario($id_itinerario);
 
             Log::info("Redirigiendo a consejo.administracion con: ");
             return redirect()->route('consejo.administracion');

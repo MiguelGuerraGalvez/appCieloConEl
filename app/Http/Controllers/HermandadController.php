@@ -105,6 +105,7 @@ class HermandadController extends Controller
             $id_itinerario = $request->input('itinerario_eliminar');
 
             Itinerario::eliminar($id_itinerario);
+            Titulares_itinerario::eliminarPorItinerario($id_itinerario);
 
             return redirect()->route('hermandad.administracion', ['hermandad' => $hermandad->nombre])->with('success', 'Itinerario borrado correctamente.');
         } catch (\Exception $e) {

@@ -12,7 +12,7 @@
 <body class="bg-[#EBEBEB] flex justify-center">
     <div class="w-[80vw] mt-8">
         @if ($errors->any())
-            <div class="bg-red-600">
+            <div class="text-[#d83c3c] text-3xl">
                 <ul>
                     @foreach ($errors->all() as $error)
                         <li>{{ $error }}</li>
