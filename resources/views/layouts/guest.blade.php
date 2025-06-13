@@ -21,6 +21,9 @@
             <div>
                 <a href="/">
                     <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
+                    {{-- <figure class="w-[14rem]">
+                        <img class="max-w-full h-auto" src="../img/LOGO.png" alt="Logo">
+                    </figure> --}}
                 </a>
             </div>
 

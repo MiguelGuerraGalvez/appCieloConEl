@@ -3,5 +3,5 @@
 </svg> --}}
 
  <figure class="w-[14rem]">
-    <img class="max-w-full h-auto" src="img/LOGO.png" alt="Logo">
+    <img class="max-w-full h-auto" src="../img/LOGO.png" alt="Logo">
 </figure>

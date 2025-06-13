@@ -1,5 +1,5 @@
 <title>Confirmar Contraseña</title>
-<link rel="icon" type="image/png" href="{{ asset('img/LOGO.png') }}">
+<link rel="icon" type="image/png" href="{{ asset('../img/LOGO.png') }}">
 
 <x-guest-layout bodyClass="bg-[position:0_17%]" bodyStyle="background-image: url('/img/FONDO_REGISTRO.jpg');">
     <form method="POST" action="{{ route('password.confirm') }}">
