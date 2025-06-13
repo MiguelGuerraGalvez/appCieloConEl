@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Illuminate\View\View;
+use Illuminate\Support\Facades\Log;
 
 class RegisteredUserController extends Controller
 {
@@ -47,25 +48,40 @@ class RegisteredUserController extends Controller
                 'rol' => 'nuevaHermandad',
                 'icon' => 'Usuario_Default.png',
             ]);
+
+            event(new Registered($user));
+
             $ultimo_usuario = User::orderBy('created_at', 'desc')->first();
-            $hermadad = Hermandade::create([
-                'id_usuario' => $ultimo_usuario->id,
+
+            // Hermandade::insert(['id_usuario' => $ultimo_usuario->id, 'nombre_completo' => $request->nombre_completo, 'nombre' => $ultimo_usuario->name, 'escudo' => $ultimo_usuario->icon, 'header' => '', 'hermanos' => 0, 'cuota' => 0]);
+            Hermandade::create([
+                'id_usuario'      => $ultimo_usuario->id,
                 'nombre_completo' => $request->nombre_completo,
-                'nombre' => $ultimo_usuario->name,
-                'escudo' => $ultimo_usuario->icon,
+                'nombre'          => $ultimo_usuario->name,
+                'escudo'          => $ultimo_usuario->icon,
+                'header'          => '',
+                'hermanos'        => 0,
+                'cuota'           => 0
             ]);
+
             $ultima_hermandad = Hermandade::orderBy('created_at', 'desc')->first();
+
+            Log::info($ultima_hermandad);
+
             $titular_corto = $request->input('titular_corto');
+
             $titular_completo = $request->input('titular_completo');
+            
             for ($i=0; $i<count($titular_corto)-1; $i++){
                 $titular = Titulare::create([
                     'id_hermandad' => $ultima_hermandad->id,
                     'nombre_completo' => $titular_completo[$i],
                     'nombre_corto' => $titular_corto[$i],
+                    'banda' => '',
+                    'imagen' => ''
                 ]);
             }
         }else{
-
             $user = User::create([
                 'name' => $request->name,
                 'email' => $request->email,
@@ -74,9 +90,10 @@ class RegisteredUserController extends Controller
                 'rol' => 'user', // AÑADIDO
                 'icon' => 'Usuario_Default.png',
             ]);
+
+            event(new Registered($user));
         }
 
-        event(new Registered($user));
         Auth::login($user);
 
         return redirect()->intended('/principal');

@@ -86,15 +86,20 @@ class ConsejoController extends Controller
         
         $usuariosNuevaHermandad = User::where('rol', 'nuevaHermandad')->get();
         $nuevasHermandades = [];
+        $nuevosTitulares = [];
 
         foreach ($usuariosNuevaHermandad as $usuario) {
-            $nuevasHermandades [] = Hermandade::where('id_usuario', $usuario->id)->get();
+            $nuevasHermandades [] = Hermandade::where('id_usuario', $usuario->id)->first();
+        }
+
+        foreach ($nuevasHermandades as $hermandad) {
+            $nuevosTitulares [] = Titulare::where('id_hermandad', $hermandad->id)->get();
         }
         
         $carteles = Cartele::all();
         $pregones = Pregone::all();
         
-        return view('consejo.create', compact('itinerariosNoAceptados', 'hermandadesItinerarios', 'nuevasHermandades', 'carteles', 'pregones'));
+        return view('consejo.create', compact('itinerariosNoAceptados', 'hermandadesItinerarios', 'nuevasHermandades', 'nuevosTitulares', 'carteles', 'pregones'));
     }
 
     public function aceptarItinerario(REQUEST $request) {
@@ -151,7 +156,16 @@ class ConsejoController extends Controller
         try{
             $id_hermandad = $request->input('hermandad');
 
-            User::eliminar($id_hermandad);
+            $hermandad = Hermandade::findOrFail($id_hermandad);
+            $usuario = User::findOrFail($hermandad->id_usuario);
+            $titulares = Titulare::where('id_hermandad', $id_hermandad)->get();
+
+            User::eliminar($usuario->id);
+            Hermandade::eliminar($id_hermandad);
+
+            foreach ($titulares as $titular) {
+                Titulare::eliminar($titular->id);
+            }
 
             Log::info("Redirigiendo a consejo.administracion.");
             return redirect()->route('consejo.administracion');

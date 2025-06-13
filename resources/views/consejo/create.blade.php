@@ -64,29 +64,37 @@
             <h1 class="text-3xl md:text-4xl text-center font-bold">ADMINISTRACIÓN DE NUEVAS HERMANDADES</h2>
 
             <div class="grid items-stretch grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                @foreach ($nuevasHermandades as $hermandad)
-                    <article class="bg-white rounded-md p-4 flex flex-col h-full gap-2">
-                        <h2 class="text-2xl text-center">{{ $hermandad }}</h3>
-                        {{-- <h3 class="text-2xl md:text-3xl text-center">{{ $hermandad->nombre_completo }}</h4> --}}
-                        <figure>
-                            {{-- <img src="../img/{{ $hermandad->escudo }}" alt="Escudo Hermandad Nueva {{ $hermandad->nombre }}"> --}}
+                @for ($i = 0; $i < count($nuevasHermandades); $i++)
+                    <article class="bg-white rounded-md p-4 flex flex-col items-center h-full gap-2">
+                        <h2 class="text-2xl md:text-3xl text-center">{{ $nuevasHermandades[$i]->nombre }}</h3>
+                        <h3 class="text-xl md:text-2xl text-center">{{ $nuevasHermandades[$i]->nombre_completo }}</h4>
+
+                        <figure class="flex flex-col items-center w-[10rem]">
+                            <img class="max-w-full h-auto" src="../img/{{ $nuevasHermandades[$i]->escudo }}" alt="Escudo Hermandad Nueva {{ $nuevasHermandades[$i]->nombre }}">
                         </figure>
 
-                        <div class="flex justify-between mt-2">
+                        <div class="w-full">
+                            <h3 class="text-xl md:text-2xl">Titulares</h3>
+                            @foreach ($nuevosTitulares[$i] as $titular)
+                                <p>{{$titular->nombre_completo}}</p>
+                            @endforeach
+                        </div>
+
+                        <div class="flex justify-between mt-2 w-full">
                             <form action="{{ route('consejo.aceptarHermandad') }}" method="post">
                                 @csrf
-                                {{-- <input type="hidden" name="hermandad" id="hermandad" value="{{ $hermandad->id }}"> --}}
+                                <input type="hidden" name="hermandad" id="hermandad" value="{{ $nuevasHermandades[$i]->id }}">
                                 <input class="text-lg md:text-xl lg:text-2xl bg-[#FFC060] text-black font-semibold px-4 py-2 rounded hover:bg-[#F9D193] cursor-pointer" type="submit" name="hermandad_aceptar" id="hermandad_aceptar" value="ACEPTAR">
                             </form>
 
                             <form action="{{ route('consejo.declinarHermandad') }}" method="post">
                                 @csrf
-                                {{-- <input type="hidden" name="hermandad" id="hermandad" value="{{ $hermandad->id }}"> --}}
+                                <input type="hidden" name="hermandad" id="hermandad" value="{{ $nuevasHermandades[$i]->id }}">
                                 <input class="text-lg md:text-xl lg:text-2xl bg-[#FFC060] text-black font-semibold px-4 py-2 rounded hover:bg-[#F9D193] cursor-pointer" type="submit" name="hermandad_declinar" id="hermandad_declinar" value="DECLINAR">
                             </form>
                         </div>
                     </article>
-                @endforeach
+                @endfor
             </div>
 
             @if (count($nuevasHermandades) == 0)
