@@ -63,34 +63,5 @@
         @endforeach
     </div>
 
-    {{-- <div class="bg-white p-4 md:p-8 w-full">
-        <article class="flex flex-col gap-4 md:gap-8">
-            <h1 class="text-3xl md:text-4xl text-center">{{$itinerarios[1][0]->dia}}</h1>
-            <h2 class="text-2xl md:text-2xl text-center">Nombre Hermandad y Escudo</h2><img>
-            <div>
-                <h3 class="font-bold text-xs md:text-base">PASOS</h3>
-                <p class="text-xs md:text-base"></p>
-            </div>
-            <div>
-                <h3 class="font-bold text-xs md:text-base">MÚSICA</h3>
-                <p class="text-xs md:text-base"></p>
-            </div>
-
-            <div>
-                <h3 class="font-bold text-xs md:text-base">¿NAZARENOS?</h3>
-                <p class="text-xs md:text-base"></p>
-            </div>
-
-            <div>
-                <h3 class="font-bold text-xs md:text-base">ITINERARIO Y HORAS</h3>
-                <p class="text-xs md:text-base">{{$itinerarios[1][0]->recorrido}}</p>
-            </div>
-        </article>
-        
-        <article class="flex justify-center mt-8 md:mt-16">
-            <figure class="w-[40rem]">
-                <img src="../img/{{$itinerarios[7][0]->imagen}}" alt="Imagen Itinerario">
-            </figure>
-        </article>
-    </div> --}}
+    <a class="mt-8 lg:mt-24 text-3xl underline" href="{{ route('consejo') }}">VOLVER ATRÁS</a>
 @endsection
