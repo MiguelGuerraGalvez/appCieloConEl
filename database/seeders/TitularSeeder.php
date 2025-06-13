@@ -79,7 +79,7 @@ class TitularSeeder extends Seeder
         $t7->nombre_completo = 'Nuestro Padre Jesús en su Entrada Triunfal en Jerusalén';
         $t7->nombre_corto = 'Borriquita';
         $t7->banda = 'Banda de Cornetas y Tambores Presentación al Pueblo de Dos Hermanas';
-        $t7->imagen = 'Carrusel_Borriquita.jpg';
+        $t7->imagen = 'Carrusel_Borriquita.jpeg';
         
         $t7->save();
 

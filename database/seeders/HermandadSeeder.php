@@ -55,7 +55,7 @@ class HermandadSeeder extends Seeder
         $h4->nombre = "Cautivo";
         $h4->nombre_completo = "Pontificia e Ilustre Hdad. Sacramental de la Inmaculada Concepción y Ánimas Benditas, y Cofradía de Nazarenos del Stmo. Cristo de Santiago, Ntro Padre Jesús Redentor Cautivo y Ntra Sra de las Lágrimas";
         $h4->escudo = "Escudo_Cautivo.png";
-        $h4->header = "HEADER_CAUTIVO.jpg";
+        $h4->header = "HEADER_CAUTIVO.jpeg";
         $h4->hermanos = 750;
         $h4->cuota = 30;
 
