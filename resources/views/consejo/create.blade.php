@@ -9,7 +9,7 @@
     <title>Administración Consejo</title>
     <link rel="icon" type="image/png" href="{{ asset('img/LOGO.png') }}">
 </head>
-<body class="bg-[#EBEBEB] flex justify-center md:pt-8">
+<body class="bg-[#EBEBEB] flex justify-center">
     <div class="w-[80vw] mt-8">
         @if ($errors->any())
             <div style="color: red;">
@@ -21,7 +21,7 @@
             </div>
         @endif
         
-        <section class="mt-8 mb-8 flex flex-col justify-center items-center gap-6">
+        <section class="flex flex-col justify-center items-center gap-6">
             <h1 class="text-3xl md:text-4xl text-center font-bold">ADMINISTRACIÓN DE ITINERARIOS</h1>
             
             <div class="grid items-stretch grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">

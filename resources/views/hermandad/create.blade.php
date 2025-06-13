@@ -9,7 +9,7 @@
     <title>Administración {{Auth::user()->name}}</title>
     <link rel="icon" type="image/png" href="{{ asset('img/LOGO.png') }}">
 </head>
-<body class="bg-[#EBEBEB] flex justify-center md:pt-8">
+<body class="bg-[#EBEBEB] flex justify-center">
     <div class="w-[80vw] mt-8">
         @if ($errors->any())
             <div class="bg-red-600">
