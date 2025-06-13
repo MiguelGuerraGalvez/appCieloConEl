@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Cartele;
 use App\Models\Consejo;
+use App\Models\Dia;
 use App\Models\Hermandade;
 use App\Models\Itinerario;
 use App\Models\Pregone;
@@ -38,15 +39,9 @@ class ConsejoController extends Controller
         $itinerarios = [];
         $hermandades = [];
 
-        $itinerarios[] = Itinerario::where('dia', 'Domingo de Ramos')->orderBy('hora_salida', 'asc')->get();
-        $itinerarios[] = Itinerario::where('dia', 'Lunes Santo')->orderBy('hora_salida', 'asc')->get();
-        $itinerarios[] = Itinerario::where('dia', 'Martes Santo')->orderBy('hora_salida', 'asc')->get();
-        $itinerarios[] = Itinerario::where('dia', 'Miércoles Santo')->orderBy('hora_salida', 'asc')->get();
-        $itinerarios[] = Itinerario::where('dia', 'Jueves Santo')->orderBy('hora_salida', 'asc')->get();
-        $itinerarios[] = Itinerario::where('dia', 'Madrugá')->orderBy('hora_salida', 'asc')->get();
-        $itinerarios[] = Itinerario::where('dia', 'Viernes Santo')->orderBy('hora_salida', 'asc')->get();
-        $itinerarios[] = Itinerario::where('dia', 'Sábado Santo')->orderBy('hora_salida', 'asc')->get();
-        $itinerarios[] = Itinerario::where('dia', 'Domingo de Resurrección')->orderBy('hora_salida', 'asc')->get();
+        $dias = Dia::all();
+
+        $itinerarios = Itinerario::with('titulares')->join('dias', 'itinerarios.dia', '=', 'dias.dia')->orderBy('dias.id')->orderBy('itinerarios.hora_salida')->select('itinerarios.*')->get()->groupBy('dia');
 
         $hermandades = Hermandade::all();
 

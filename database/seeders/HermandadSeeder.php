@@ -27,11 +27,11 @@ class HermandadSeeder extends Seeder
 
         $h2 = new Hermandade();
 
-        $h2->id_usuario = 0;
+        $h2->id_usuario = 5;
         $h2->nombre = "Jesús Nazareno";
         $h2->nombre_completo = "Real e Ilustre Hermandad de Ntro Padre Jesús Nazareno, Sta Cruz de Jerusalén, Sagrada Oración de Ntro. Señor Jesucristo en el Huerto y Ntra. Sra de las Angustias";
         $h2->escudo = "Escudo_Jesus_Nazareno.png";
-        $h2->header = "HEADER_.jpg";
+        $h2->header = "HEADER_JESUS.jpg";
         $h2->hermanos = 750;
         $h2->cuota = 30;
 

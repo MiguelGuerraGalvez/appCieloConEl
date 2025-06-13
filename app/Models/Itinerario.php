@@ -12,6 +12,13 @@ class Itinerario extends Model
 
     protected $fillable = ['id_hermandad', 'dia', 'nazarenos', 'hora_salida', 'recorrido', 'imagen', 'aceptado'];
 
+    public function titulares() {
+        return $this->belongsToMany(Titulare::class, 'titulares_itinerarios', 'id_itinerario', 'id_titular');
+    }
+
+    public function dia() {
+        return $this->belongsTo(Dia::class, 'dia', 'nombre');
+    }
 
     public static function insertar($id_hermandad, $dia, $nazarenos, $hora_salida, $recorrido, $imagen = '', $aceptado = 0) {
         return self::create([
