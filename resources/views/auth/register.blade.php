@@ -22,7 +22,7 @@
         <!-- Phone Number -->
         <div class="mt-4">
             <x-input-label for="tel_number" :value="__('Teléfono')" />
-            <x-text-input id="tel_number" class="block mt-1 w-full" type="tel" pattern="[0-9]{3}\s+[0-9]{2}\s+[0-9]{2}\s+[0-9]{2}" name="tel_number" :value="old('tel_number')" required autofocus autocomplete="tel_number" />
+            <x-text-input id="tel_number" class="block mt-1 w-full" type="tel" name="tel_number" :value="old('tel_number')" required autofocus autocomplete="tel_number" />
             <x-input-error :messages="$errors->get('tel_number')" class="mt-2" />
         </div>
 

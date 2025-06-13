@@ -35,7 +35,7 @@ class RegisteredUserController extends Controller
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
-            'tel_number' => 'required|regex:/^[0-9]{3}\s[0-9]{2}\s[0-9]{2}\s[0-9]{2}$/',
+            'tel_number' => ['required'],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
@@ -65,8 +65,6 @@ class RegisteredUserController extends Controller
             ]);
 
             $ultima_hermandad = Hermandade::orderBy('created_at', 'desc')->first();
-
-            Log::info($ultima_hermandad);
 
             $titular_corto = $request->input('titular_corto');
 

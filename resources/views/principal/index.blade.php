@@ -66,7 +66,7 @@
                         `;
                     });
                 } else {
-                    html = '<p>No se encontraron resultados.</p>';
+                    html = '<p class="col-span-full text-center">No se encontraron resultados.</p>';
                 }
                 document.getElementById('resultados').innerHTML = html;
             })

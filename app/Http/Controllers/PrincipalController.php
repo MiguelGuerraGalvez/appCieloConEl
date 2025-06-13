@@ -13,7 +13,9 @@ class PrincipalController extends Controller
 {
     public function index(){
         $consejos = Consejo::all();
-        $hermandades = Hermandade::all();
+        $hermandades = Hermandade::whereHas('usuario', function ($query) {
+            $query->where('rol', 'hermandad');
+        })->get();
 
         return view('principal.index', compact('consejos', 'hermandades'));
     }
@@ -22,9 +24,13 @@ class PrincipalController extends Controller
         $busqueda = $request->get('buscar');
 
         if ($busqueda) {
-            $hermandades = Hermandade::where('nombre', 'LIKE', "%$busqueda%")->get();
+            $hermandades = Hermandade::where('nombre', 'LIKE', "%$busqueda%")->whereHas('usuario', function ($query) {
+                $query->where('rol', 'hermandad');
+            })->get();
         } else {
-            $hermandades = Hermandade::all();
+            $hermandades = Hermandade::whereHas('usuario', function ($query) {
+                $query->where('rol', 'hermandad');
+            })->get();
         }
 
         $hermandades->each(function ($hermandad) {

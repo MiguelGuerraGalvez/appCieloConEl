@@ -21,7 +21,7 @@
             </div>
         @endif
         
-        <section class="flex flex-col justify-center items-center gap-6">
+        <section class="mb-8 flex flex-col justify-center items-center gap-6">
             <h1 class="text-3xl md:text-4xl text-center font-bold">ADMINISTRACIÓN DE ITINERARIOS</h1>
             
             <div class="grid items-stretch grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">

@@ -51,6 +51,11 @@ class User extends Authenticatable
         ];
     }
 
+    public function hermandad() {
+        return $this->hasOne(Hermandade::class, 'id_usuario');
+    }
+
+
     public static function eliminar($id) {
         $registro = parent::findOrFail($id);
         if (File::exists(public_path('img/' . $registro->icon)) && $registro->icon != 'Usuario_Default.png') {

@@ -11,6 +11,11 @@ class Hermandade extends Model
     use HasFactory;
 
     protected $fillable = ['id_usuario', 'nombre_completo', 'nombre', 'escudo', 'header', 'hermanos', 'cuota'];
+
+    public function usuario() {
+        return $this->belongsTo(User::class, 'id_usuario');
+    }
+
     
     public static function aceptar($id) {
         $registro = parent::findOrFail($id);
