@@ -20,7 +20,7 @@
         </form>
         <form action="{{ route('consejo.administracion') }}" method="get">
             @csrf
-            <input class="text-lg md:text-xl lg:text-2xl bg-[#8b8b8b] text-black font-semibold px-4 py-2 rounded hover:bg-[#555555] cursor-pointer" type="submit" name="no" id="no" value="DECLINAR">
+            <input class="text-lg md:text-xl lg:text-2xl bg-[#8b8b8b] text-black font-semibold px-4 py-2 rounded hover:bg-[#555555] cursor-pointer" type="submit" name="no" id="no" value="CANCELAR">
         </form>
     </section>
 </body>

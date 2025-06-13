@@ -16,11 +16,11 @@
         <form action="{{ route('hermandad.deleteItinerario') }}" method="post">
             @csrf
             <input type="hidden" name="itinerario_eliminar" value="{{ $itinerario->id }}">
-            <input class="text-lg md:text-xl lg:text-2xl bg-[#FFC060] text-black font-semibold px-4 py-2 rounded hover:bg-[#F9D193] cursor-pointer" type="submit" name="si" id="si" value="ELIMINAR">
+            <input class="text-lg md:text-xl lg:text-2xl bg-[#d83c3c] text-white font-semibold px-4 py-2 rounded hover:bg-[#a12b2b] cursor-pointer" type="submit" name="si" id="si" value="ELIMINAR">
         </form>
         <form action="{{ route('hermandad.administracion', ['hermandad' => Auth::user()->name]) }}" method="get">
             @csrf
-            <input class="text-lg md:text-xl lg:text-2xl bg-[#FFC060] text-black font-semibold px-4 py-2 rounded hover:bg-[#F9D193] cursor-pointer" type="submit" name="no" id="no" value="DECLINAR">
+            <input class="text-lg md:text-xl lg:text-2xl bg-[#8b8b8b] text-black font-semibold px-4 py-2 rounded hover:bg-[#555555] cursor-pointer" type="submit" name="no" id="no" value="CANCELAR">
         </form>
     </section>
 </body>
