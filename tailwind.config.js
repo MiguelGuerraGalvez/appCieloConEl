@@ -8,7 +8,7 @@ export default {
         '/var/www/html/storage/framework/views/*.php',
         '/var/www/html/resources/views/**/*.blade.php',
         '/var/www/html/resources/js/**/*.js',
-        // './resources/css/**/*.css',
+        './resources/css/**/*.css',
     ],
 
     theme: {
