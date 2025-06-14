@@ -2,7 +2,8 @@
     "private": true,
     "type": "module",
     "scripts": {
-        "build": "vite build",
+        "postcss": "postcss resources/css/app.css -o public/build/assets/app-processed.css",
+        "build": "npm run postcss && vite build",
         "dev": "vite"
     },
     "devDependencies": {
@@ -13,6 +14,7 @@
         "concurrently": "^9.0.1",
         "laravel-vite-plugin": "^1.2.0",
         "postcss": "^8.5.3",
+        "postcss-cli": "^11.0.1",
         "tailwindcss": "^3.4.17",
         "vite": "^6.2.4"
     }
