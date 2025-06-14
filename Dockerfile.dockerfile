@@ -1,5 +1,5 @@
 # Usa la imagen oficial de PHP con Apache
-FROM php:8.2-apache
+FROM php:8.2-apache-bullseye
 
 # Variables de entorno
 ENV APP_ENV=production
