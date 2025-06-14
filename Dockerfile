@@ -39,4 +39,7 @@ RUN a2enmod rewrite
 
 RUN sed -i 's|DocumentRoot /var/www/html|DocumentRoot /var/www/html/public|' /etc/apache2/sites-available/000-default.conf
 
+RUN php artisan config:clear
+RUN php artisan cache:clear
+
 EXPOSE 80
