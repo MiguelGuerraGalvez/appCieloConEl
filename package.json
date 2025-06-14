@@ -2,7 +2,7 @@
     "private": true,
     "type": "module",
     "scripts": {
-        "postcss": "postcss resources/css/app.css -o public/build/assets/app-processed.css",
+        "postcss": "postcss resources/css/app.css -o public/build/assets/app-processed.css --verbose",
         "build": "npm run postcss && vite build",
         "dev": "vite"
     },
