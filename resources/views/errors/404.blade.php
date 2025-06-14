@@ -2,7 +2,7 @@
 <html>
 <head>
     <title>Página no encontrada - 404</title>
-    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,700" rel="stylesheet">
+    <link href="{{ asset('https://fonts.googleapis.com/css?family=Roboto:300,400,700') }}" rel="stylesheet">
     <style>
         body {
             background-color: #f2f2f2;
