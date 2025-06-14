@@ -1,5 +1,3 @@
-@vite('resources/css/app.css')
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Modificar Usuario</title>
     <link rel="icon" type="image/png" href="{{ asset('img/LOGO.png') }}">
+    @vite('resources/css/app.css')
 </head>
 <body>
     <form action="{{ route('principal.updateUsuario') }}" method="post" enctype="multipart/form-data">

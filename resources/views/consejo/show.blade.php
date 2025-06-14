@@ -1,5 +1,3 @@
-@vite('resources/css/app.css')
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Itinerario</title>
+    @vite('resources/css/app.css')
 </head>
 <body class="flex items-center justify-center">
     <section class="flex flex-col items-center justify-between w-full py-[2rem] p-[2rem] md:p-[4rem] text-lg max-w-[100rem]">

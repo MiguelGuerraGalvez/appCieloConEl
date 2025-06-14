@@ -1,5 +1,3 @@
-@vite('resources/css/app.css')
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Confirmar Eliminar Carteles</title>
     <link rel="icon" type="image/png" href="{{ asset('img/LOGO.png') }}">
+    @vite('resources/css/app.css')
 </head>
 <body class="bg-[#EBEBEB] flex flex-col items-center justify-center gap-32 h-full w-full">
     <h1 class="text-3xl md:text-4xl text-center font-bold mb-4">¿ESTAS SEGUR@ DE QUE QUIERE BORRAR ESTE CARTEL?</h1>
