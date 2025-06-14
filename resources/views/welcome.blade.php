@@ -1,6 +1,6 @@
 @vite('resources/css/app.css')
 
-@extends('layouts.plantillaAppCieloConEL')
+@extends('layouts.plantillaAppCieloConEl')
 
 @section('title', 'Inicio')
 

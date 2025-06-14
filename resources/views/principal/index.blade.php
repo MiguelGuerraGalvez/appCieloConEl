@@ -1,4 +1,4 @@
-@extends('layouts.plantillaAppCieloConEL')
+@extends('layouts.plantillaAppCieloConEl')
 
 @section('title', 'Principal')
 
