@@ -1,6 +1,5 @@
 <?php
 
 return [
-    App\Providers\AppServiceProvider::class,
-    App\Providers\CustomPostgresProvider::class,
+App\Providers\AppServiceProvider::class,
 ];
