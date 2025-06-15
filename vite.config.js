@@ -1,5 +1,8 @@
 import { defineConfig } from 'vite';
 import laravel from 'laravel-vite-plugin';
+import tailwindcss from 'tailwindcss'; // Importa tailwindcss
+import autoprefixer from 'autoprefixer'; // Importa autoprefixer
+import cssnano from 'cssnano';         // Importa cssnano
 
 export default defineConfig({
     plugins: [
@@ -11,12 +14,10 @@ export default defineConfig({
 
     css: {
         postcss: {
-            // CAMBIO IMPORTANTE AQUÍ: 'plugins' debe ser un array
             plugins: [
-                require('tailwindcss'), // Asegúrate de que esto está ahí
-                require('autoprefixer'), // Asegúrate de que esto está ahí
-                // Configura cssnano si lo necesitas, pero como un plugin en el array
-                require('cssnano')({
+                tailwindcss(), // Llama a tailwindcss como una función
+                autoprefixer(), // Llama a autoprefixer como una función
+                cssnano({       // Llama a cssnano como una función
                     preset: ['default', {
                         reduceIdents: false, // <-- Esto es clave para las clases
                         discardComments: { removeAll: true },
