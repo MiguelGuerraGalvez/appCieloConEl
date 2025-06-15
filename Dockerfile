@@ -6,13 +6,8 @@ WORKDIR /var/www/html
 COPY package*.json ./
 RUN npm install
 
-# --- CAMBIO IMPORTANTE AQUÍ: Copiar TODO el proyecto Laravel ---
-COPY . .  # Copia todo el contenido del directorio actual (tu proyecto) al WORKDIR
-# --- FIN CAMBIO IMPORTANTE ---
-
-# Eliminamos estas líneas ya que 'COPY . .' ya las incluye y no son necesarias individualmente
-# COPY vite.config.js ./
-# COPY resources ./resources
+COPY vite.config.js ./
+COPY resources ./resources
 
 # (Si usas webpack.mix.js) Si no, solo resources y vite.config.js bastan
 
