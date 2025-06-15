@@ -6,13 +6,12 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>@yield('title')</title>
     <link rel="icon" type="image/png" href="{{ asset('img/LOGO.png') }}">
-    <!-- Font Awesome -->
     <link rel="stylesheet" href="{{ asset('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css') }}">
     @vite('resources/css/app.css')
 </head>
 <body class="bg-[#EBEBEB]">
     <header class="bg-[#8C52FF] flex items-center justify-between w-full py-[2rem] lg:py-[2rem] px-[2rem] md:px-[4rem] lg:px-[8rem]">
-        <a href="{{ route('principal') }}"> <!-- Llevaría a la página principal -->
+        <a href="{{ route('principal') }}">
             <figure class="flex flex-col items-center w-[10rem]">
                 <img class="max-w-full h-auto" src="@yield('logo')img/LOGO.png" alt="Logo">
             </figure>
@@ -23,7 +22,6 @@
                 <img class="w-full h-full object-cover" src="@yield('logo')img/{{ Auth::user()->icon }}" alt="Usuario">
             </button>
         </figure>
-            <!-- MODAL -->
             <div id="plantillaModal" class="fixed inset-0 bg-black/50 flex items-center justify-center z-50 hidden">
                 <div class="bg-[#8C52FF] flex flex-col items-center text-center text-white p-8 rounded-lg max-w-lg w-[90%] relative">
                     <button id="closeModal" class="absolute top-2 right-2 text-white hover:text-gray-300 text-xl">&times;</button>
@@ -79,12 +77,10 @@
             </p>
         </section>
     </footer>
-</body>
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script src="https://code.jquery.com/ui/1.14.1/jquery-ui.js" integrity="sha256-9zljDKpE/mQxmaR4V2cGVaQ7arF3CcXxarvgr7Sj8Uc=" crossorigin="anonymous"></script>
-    <!-- SCRIPTS -->
+    
     <script>
-        // Modal
         const openModal = document.getElementById('openModal');
         const closeModal = document.getElementById('closeModal');
         const modal = document.getElementById('plantillaModal');
@@ -103,4 +99,5 @@
             }
         });
     </script>
+</body>
 </html>

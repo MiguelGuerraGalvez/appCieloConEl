@@ -11,9 +11,7 @@
 
 @section('content')
 
-    <!-- ESCUDO -->
     <div class="w-full flex flex-col lg:flex-row items-center justify-evenly text-center gap-4 mb-32">
-        <!-- Botón que activa el modal -->
         <button id="openModal2" class="w-40 h-40 lg:w-60 lg:h-60 focus:outline-none">
             <img class="w-full h-[10rem] lg:h-[15rem] object-contain" src="../img/{{$her->escudo}}" alt="Escudo Hermandad {{$her->nombre}}">
         </button>
@@ -21,7 +19,6 @@
         <p class="w-[90%] lg:text-3xl">{{$her->nombre_completo}}</p>
     </div>
 
-    <!-- CAROUSEL -->
     <div id="carousel" class="relative overflow-hidden w-full h-[500px] reveal mb-32">
         <div id="slides" class="relative w-full h-full">
             <?php for ($i = 0; $i < count($titul); $i++): ?>
@@ -51,7 +48,6 @@
         </button>    
     </div>
 
-    <!-- ITINERARIOS -->
     <div>
         <h3 class="text-[FFC060] text-2xl text-center mb-8">ITINERARIOS</h3>
         <?php foreach ($itin as $itinerario): ?>
@@ -59,7 +55,6 @@
         <?php endforeach; ?>
     </div>
 
-    <!-- MODAL -->
     <div id="escudoModal" class="fixed inset-0 bg-black/50 flex items-center justify-center z-50 hidden">
         <div class="bg-[#8C52FF] text-white p-8 rounded-lg max-w-lg w-[90%] relative">
             <button id="closeModal2" class="absolute top-2 right-2 text-white hover:text-gray-300 text-xl">&times;</button>
@@ -71,9 +66,7 @@
         </div>
     </div>
 
-    <!-- SCRIPTS -->
     <script>
-        // Modal
         const openModal2 = document.getElementById('openModal2');
         const closeModal2 = document.getElementById('closeModal2');
         const modal2 = document.getElementById('escudoModal');
@@ -92,7 +85,6 @@
             }
         });
 
-        // Carousel
         const slides = document.querySelectorAll("#slides > div");
         const indicators = document.querySelectorAll(".indicator");
         const nextBtn = document.getElementById("nextBtn");

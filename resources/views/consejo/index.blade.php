@@ -17,7 +17,6 @@
 
         <h1 class="lg:text-3xl">{{$consejo->nombre_completo}}</h1>
     </div>
-    <!-- MODAL -->
     <div id="consejoModal" class="fixed inset-0 bg-black/50 flex items-center justify-center z-50 hidden">
             <div class="bg-[#8C52FF] text-white p-8 rounded-lg max-w-lg w-[90%] relative">
             <button id="closeModal2" class="absolute top-2 right-2 text-white hover:text-gray-300 text-xl">&times;</button>
@@ -25,9 +24,7 @@
         </div>
     </div>
 
-    <!-- SCRIPTS -->
     <script>
-        // Modal
         const openModal2 = document.getElementById('openModal2');
         const closeModal2 = document.getElementById('closeModal2');
         const modal2 = document.getElementById('consejoModal');
