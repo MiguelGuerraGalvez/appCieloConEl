@@ -52,7 +52,7 @@ RUN apk add --no-cache \
     && rm -rf /var/lib/apt/lists/* # Limpia caché si usas Debian/Ubuntu, no Alpine
 
 # Composer: Copia Composer desde la imagen oficial
-COPY --from=composer:2.5 /usr/bin/composer /usr/local/bin/composer
+COPY --from=composer:latest /usr/bin/composer /usr/local/bin/composer
 
 # Define el directorio de trabajo para esta etapa
 WORKDIR /var/www/html
