@@ -71,7 +71,7 @@
     
     <footer class="bg-[#8C52FF] flex flex-col items-center justify-center py-8">
         <section class="w-full flex flex-col items-center">         
-            <iframe src="https://www.google.com/maps/embed?pb=!1m16!1m12!1m3!1d25429.95099026055!2d-5.793657512088047!3d37.1825573742897!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!2m1!1sIglesia%20Cat%C3%B3lica%20Utrera!5e0!3m2!1ses!2ses!4v1746618945552!5m2!1ses!2ses" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" class="w-[125px] h-[75px] md:w-[400px] md:h-[200px]"></iframe>
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d25428.37596911147!2d-5.8004329227507165!3d37.187235256439834!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd127f0ec1c94487%3A0x6a1c6276d4cb02c0!2s41710%20Utrera%2C%20Sevilla!5e0!3m2!1ses!2ses!4v1749977527844!5m2!1ses!2ses" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
             <p class="text-white text-center mt-4 text-sm md:text-base">
                 &copy; Todos los derechos reservados
             </p>
