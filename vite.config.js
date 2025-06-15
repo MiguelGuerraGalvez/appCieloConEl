@@ -11,20 +11,21 @@ export default defineConfig({
 
     css: {
         postcss: {
-            plugins: {
-                // Asegúrate de que cssnano no ofusque los identificadores de CSS
-                cssnano: {
+            // CAMBIO IMPORTANTE AQUÍ: 'plugins' debe ser un array
+            plugins: [
+                require('tailwindcss'), // Asegúrate de que esto está ahí
+                require('autoprefixer'), // Asegúrate de que esto está ahí
+                // Configura cssnano si lo necesitas, pero como un plugin en el array
+                require('cssnano')({
                     preset: ['default', {
-                        reduceIdents: false, // <-- Esto es clave
-                        discardComments: { removeAll: true }, // Puedes mantener esto si quieres eliminar comentarios
+                        reduceIdents: false, // <-- Esto es clave para las clases
+                        discardComments: { removeAll: true },
                     }],
-                },
-            },
+                }),
+            ],
         },
     },
     build: {
-        // Desactiva la ofuscación de nombres de clases en el proceso de optimización de Vite
-        // Esto es más un comodín si lo anterior no funciona
         cssCodeSplit: true,
         rollupOptions: {
             output: {
@@ -34,7 +35,5 @@ export default defineConfig({
                 manualChunks: undefined,
             },
         },
-        // Deshabilitar minificación o simplificación excesiva de CSS si es el caso
-        // cssMinify: false, // No es una opción directa, pero se controla via css.postcss
     },
 });
