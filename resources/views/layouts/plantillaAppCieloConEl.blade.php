@@ -85,19 +85,21 @@
         const closeModal = document.getElementById('closeModal');
         const modal = document.getElementById('plantillaModal');
 
-        openModal.addEventListener('click', () => {
-            modal.classList.remove('hidden');
-        });
+        if (openModal && closeModal && modal) {
+            openModal.addEventListener('click', () => {
+                modal.classList.remove('hidden');
+            });
 
-        closeModal.addEventListener('click', () => {
-            modal.classList.add('hidden');
-        });
-
-        window.addEventListener('click', (e) => {
-            if (e.target === modal) {
+            closeModal.addEventListener('click', () => {
                 modal.classList.add('hidden');
-            }
-        });
+            });
+
+            window.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    modal.classList.add('hidden');
+                }
+            });
+        }
     </script>
 </body>
 </html>
